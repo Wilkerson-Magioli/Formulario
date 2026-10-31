@@ -4,6 +4,14 @@ const contribution = document.querySelector('#contribuindo');
 const fields = document.querySelector('#contribution-fields');
 document.querySelector('#pix-code').value = PIX;
 contribution.addEventListener('change', () => { fields.hidden = !contribution.checked; fields.disabled = !contribution.checked; });
+const transferBankDetails = document.querySelector('#transfer-bank-details');
+function updateTransferBankDetails() {
+  transferBankDetails.hidden = !contribution.checked || form.elements.metodo.value !== 'Transferência';
+}
+form.addEventListener('change', event => {
+  if (event.target.name === 'metodo' || event.target.name === 'contribuindo') updateTransferBankDetails();
+});
+updateTransferBankDetails();
 form.elements.cep.addEventListener('input', e => { const n=e.target.value.replace(/\D/g,'').slice(0,8); e.target.value=n.length>5 ? n.slice(0,5)+'-'+n.slice(5) : n; });
 form.elements.whatsapp.addEventListener('input', e => {
   const n = e.target.value.replace(/\D/g, '').slice(0, 11);

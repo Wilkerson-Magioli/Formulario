@@ -40,6 +40,10 @@
         <fieldset id="contribution-fields" hidden disabled><legend>Sua contribuição</legend>
           <div class="field-title">Como será sua oferta? *</div><div class="radio-row"><label><input type="radio" name="frequencia" value="Oferta mensal" required> Oferta mensal</label><label><input type="radio" name="frequencia" value="Oferta pontual"> Oferta pontual</label></div>
           <div class="field-title">Como vou contribuir *</div><div class="radio-row"><label><input type="radio" name="metodo" value="Pix" required> Pix</label><label><input type="radio" name="metodo" value="Transferência"> Transferência</label></div>
+          <div id="transfer-bank-details" class="transfer-bank-details" role="status" aria-live="polite" hidden>
+            <strong>BANCO BRADESCO</strong>
+            <div><span>Ag. <b>2276-4</b></span><span>C/C <b>15152-1</b></span></div>
+          </div>
           <label>Valor da oferta (R$) *<input name="valor" type="number" min="0.01" max="9999999" step="0.01" required inputmode="decimal" placeholder="0,00"></label>
           <p class="help">A oferta mensal é uma intenção de apoio. Este formulário não realiza cobranças automáticas.</p>
         </fieldset>

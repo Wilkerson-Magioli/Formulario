@@ -30,5 +30,9 @@
 .donation-landing .receipt{background:#fce6d9}
 .donation-landing .closing>span{color:#b74d23}
 .donation-landing footer{border-top:3px solid var(--orange)}
+.transfer-bank-details{margin:-7px 0 22px;padding:12px 15px;background:#fff7f2;border-left:2px solid #d36a38;border-radius:0 6px 6px 0;font-size:12px;color:#675447}
+.transfer-bank-details>strong{display:block;font-size:10px;font-weight:700;letter-spacing:.7px;color:#83513b;margin-bottom:5px}
+.transfer-bank-details>div{display:flex;flex-wrap:wrap;gap:8px 24px}
+.transfer-bank-details b{font-weight:600;color:#4b3a30}
 @media(max-width:800px){.donation-landing .hero-copy{padding:32px 28px}.donation-landing .hero{grid-template-columns:1.2fr 1fr}.landing-photo{min-height:420px}}
 @media(max-width:540px){.donation-landing .hero{display:block}.donation-landing .hero-copy{padding:30px 25px}.landing-photo{min-height:220px;height:220px}.landing-photo img{object-position:50% 20%}}
