@@ -42,8 +42,8 @@ form.addEventListener('submit', e => {
     sections.push(`🎁 *CONTRIBUIÇÃO*\n*Frequência:* ${data.get('frequencia')}\n*Forma:* ${data.get('metodo')}\n*Valor: ${amount}*`);
   }
   sections.push('✅ *AUTORIZAÇÃO*\nAutorizo o contato do Ministério Pão Vivo sobre minha participação.');
-  const message = sections.join('\n\n');
-  const url=`https://wa.me/5551993463773?text=${encodeURIComponent(message)}`;
+  const message = (document.body.dataset.testMode === 'true' ? '*TESTE DO FORMULÁRIO*\n\n' : '') + sections.join('\n\n');
+  const url=`https://wa.me/5551985220218?text=${encodeURIComponent(message)}`;
   document.querySelector('#registration-whatsapp').href = url;
   const summary = contribution.checked
     ? `${data.get('nome').trim()}, você escolheu participar ${modes.toLowerCase()}, com ${data.get('frequencia').toLowerCase()} de ${Number(data.get('valor')).toLocaleString('pt-BR', {style:'currency',currency:'BRL'})}. Informe esse valor no aplicativo do banco.`
