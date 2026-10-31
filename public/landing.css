@@ -1,0 +1,34 @@
+.donation-landing{--orange:#d36a38;--cream:#fff4ef;background:#fff;border-top:6px solid var(--orange)}
+.donation-landing .header-link{color:#a74520;border-color:#e0a184}
+.donation-landing .hero{background:var(--orange);border:0;grid-template-columns:1.15fr 1fr;border-radius:20px}
+.donation-landing .hero-copy{padding:46px 42px;color:#2d1c14}
+.donation-landing .hero-copy h1{color:#2d1c14}
+.donation-landing .hero-copy h1 em{color:#fff}
+.donation-landing .hero-copy>.eyebrow{color:#2d1c14}
+.donation-landing .hero-copy>.eyebrow span{background:#fff}
+.donation-landing .hero-copy>p{color:#2d1c14}
+.donation-landing .hero-copy .dark{background:#2d1c14;color:#fff}
+.donation-landing .hero-copy .dark:hover{background:#493025}
+.donation-landing .hero-note,.donation-landing .hero-note>span{color:#2d1c14}
+.landing-photo{position:relative;overflow:hidden;min-height:450px}
+.landing-photo img{position:absolute;inset:0;width:100%;height:calc(100% + 90px);object-fit:cover;object-position:52% 20%}
+.landing-photo:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#5a281918,transparent 45%)}
+.donation-landing .section-intro .eyebrow{color:#ae4922}
+.donation-landing .form-card{border-top:3px solid var(--orange)}
+.donation-landing .step{border-color:#efc3ae;background:#fff4ef;color:#a4431f}
+.donation-landing input[type=checkbox],.donation-landing input[type=radio]{accent-color:#b74d23}
+.donation-landing .choice:has(:checked){border-color:var(--orange);background:#fff4ef}
+.donation-landing input:focus-visible{outline-color:#b74d23}
+.donation-landing .journey{background:#fff4ef;border-color:#efcdbd;border-top-color:var(--orange)}
+.donation-landing .journey>.eyebrow,.donation-landing .journey li,.donation-landing .choice-icon{color:#a4431f}
+.donation-landing .submit,.donation-landing #registration-whatsapp{background:#b74d23;color:#fff}
+.donation-landing .submit:hover,.donation-landing #registration-whatsapp:hover{background:#963c19}
+.donation-landing .donation-card{background:#fff7f2;border-color:#efcdbd;border-top:4px solid var(--orange)}
+.donation-landing .copy{background:#d36a38;color:#24170f}
+.donation-landing .copy:hover{background:#e17b49}
+.donation-landing .qr-block{border-color:#efcdbd}
+.donation-landing .receipt{background:#fce6d9}
+.donation-landing .closing>span{color:#b74d23}
+.donation-landing footer{border-top:3px solid var(--orange)}
+@media(max-width:800px){.donation-landing .hero-copy{padding:32px 28px}.donation-landing .hero{grid-template-columns:1.2fr 1fr}.landing-photo{min-height:420px}}
+@media(max-width:540px){.donation-landing .hero{display:block}.donation-landing .hero-copy{padding:30px 25px}.landing-photo{min-height:220px;height:220px}.landing-photo img{object-position:50% 20%}}
