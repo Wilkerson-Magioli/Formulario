@@ -52,3 +52,8 @@ O QR Code de acesso usa o logotipo, moldura dourada e fundo creme, sem o título
 
 
 A página `/acesso` usa fundo branco, logotipo oficial centralizado, fotografia da comunidade do site oficial e o laranja `#D36A38` da referência fornecida. Não possui botões de navegação nem o parágrafo de instruções removido. O QR Code em si também é um link acessível ao formulário. A arte para divulgação é regenerada com esses mesmos recursos pelo script.
+
+
+## Teste temporário de WhatsApp
+
+O formulário publicado está em modo de teste. Os links de cadastro e comprovante e as instruções de compartilhamento usam **(51) 98522-0218** (`5551985220218`). A mensagem e a ficha recebem uma indicação de teste. O Pix e os dados bancários continuam sendo os da instituição. Para restaurar a versão do cliente, trocar as referências de telefone no HTML e no app para **(51) 99346-3773** (`5551993463773`), remover o aviso `.test-mode-notice`, retirar `data-test-mode` do body e republicar.

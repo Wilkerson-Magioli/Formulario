@@ -77,6 +77,7 @@
     });
     text('Ficha de participação', 540, 239, 43, ink, 800, 'center');
     text('Uma obra de amor. Uma parte sua.', 540, 282, 23, muted, 500, 'center');
+    if (document.body.dataset.testMode === 'true') text('MODO DE TESTE', 540, 319, 17, orange, 800, 'center');
     sectionTitle('01', 'DADOS DO PARTICIPANTE', 356);
     let y = 412;
     const participantBox = operations.length;
