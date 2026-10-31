@@ -54,9 +54,9 @@ O QR Code de acesso usa o logotipo, moldura dourada e fundo creme, sem o título
 A página `/acesso` usa fundo branco, logotipo oficial centralizado, fotografia da comunidade do site oficial e o laranja `#D36A38` da referência fornecida. Não possui botões de navegação nem o parágrafo de instruções removido. O QR Code em si também é um link acessível ao formulário. A arte para divulgação é regenerada com esses mesmos recursos pelo script.
 
 
-## Teste temporário de WhatsApp
+## Contato oficial de WhatsApp
 
-O formulário publicado está em modo de teste. O link de comprovante usa **(51) 98522-0218** (`5551985220218`). A ficha recebe uma indicação de teste. O Pix e os dados bancários continuam sendo os da instituição. Para restaurar a versão do cliente, trocar as referências de telefone no HTML e no app para **(51) 99346-3773** (`5551993463773`), remover o aviso `.test-mode-notice`, retirar `data-test-mode` do body e republicar.
+Modo de teste encerrado. O cadastro e o envio de comprovantes usam **(51) 99346-3773** (`5551993463773`). Não há indicação de teste na página, na mensagem ou na ficha. O texto é preparado automaticamente, mas o doador confirma o envio no WhatsApp. A ficha em imagem fica somente para download pelo doador.
 
 
 O valor da oferta usa máscara monetária brasileira com centavos automáticos: digitar `100` exibe `1,00`, e digitar `123456` exibe `1.234,56`. O valor é convertido para número antes de gerar a ficha. A validação exige valor maior que zero e de até R$ 9.999.999,00.

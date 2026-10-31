@@ -53,8 +53,8 @@ form.addEventListener('submit', e => {
   ];
   if (contribution.checked) sections.push(`🎁 *CONTRIBUIÇÃO*\n*Frequência:* ${data.get('frequencia')}\n*Forma:* ${data.get('metodo')}\n*Valor: ${amount.toLocaleString('pt-BR', {style:'currency',currency:'BRL'})}*`);
   sections.push('✅ *AUTORIZAÇÃO*\nAutorizo o contato do Ministério Pão Vivo sobre minha participação.');
-  const message = (document.body.dataset.testMode === 'true' ? '*TESTE DO FORMULÁRIO*\n\n' : '') + sections.join('\n\n');
-  const whatsappUrl = `https://wa.me/5551985220218?text=${encodeURIComponent(message)}`;
+  const message = sections.join('\n\n');
+  const whatsappUrl = `https://wa.me/5551993463773?text=${encodeURIComponent(message)}`;
   document.querySelector('#registration-whatsapp').href = whatsappUrl;
   submittedWithContribution = contribution.checked;
   document.querySelector('#finish-donation').hidden = !submittedWithContribution;
