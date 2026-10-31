@@ -47,3 +47,6 @@ O QR Code 1 leva ao formulário público. O QR Code 2 é o Pix original e aparec
 
 
 O QR Code de acesso usa o logotipo, moldura dourada e fundo creme, sem o título "Ministério Pão Vivo - Doações" e sem o cabeçalho "QR CODE 1 — ACESSO AO FORMULÁRIO". Os módulos usam o marrom escuro `#523F1B` e preservam margem branca de quatro módulos. A arte pode ser regenerada por `scripts/style-access-qr.py` com Pillow e ReportLab. O QR Code Pix original não foi alterado.
+
+
+A página `/acesso` usa fundo branco, logotipo oficial centralizado, fotografia da comunidade do site oficial e o laranja `#D36A38` da referência fornecida. Não possui botões de navegação nem o parágrafo de instruções removido. O QR Code em si também é um link acessível ao formulário. A arte para divulgação é regenerada com esses mesmos recursos pelo script.
