@@ -34,5 +34,14 @@
 .transfer-bank-details>strong{display:block;font-size:10px;font-weight:700;letter-spacing:.7px;color:#83513b;margin-bottom:5px}
 .transfer-bank-details>div{display:flex;flex-wrap:wrap;gap:8px 24px}
 .transfer-bank-details b{font-weight:600;color:#4b3a30}
+.participation-card-section{margin:0 0 32px;border:1px solid #eddfd7;border-top:3px solid #d36a38;border-radius:14px;padding:26px;background:#fff}
+.participation-card-section h2{font-size:23px;line-height:1.35;letter-spacing:-.7px;margin:10px 0}
+.participation-card-section>p{font-size:13px}
+.participation-card-section>p.help{font-size:11px}
+.participation-card-preview{display:block;width:100%;max-width:450px;height:auto;border:1px solid #eee5df;border-radius:8px;margin:20px auto}
+.card-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.card-actions .dark{background:#b74d23;color:#fff}
+.card-actions button:disabled{opacity:.55;cursor:wait}
+@media(max-width:540px){.participation-card-section{padding:20px 16px}.card-actions .button{width:100%;justify-content:center}}
 @media(max-width:800px){.donation-landing .hero-copy{padding:32px 28px}.donation-landing .hero{grid-template-columns:1.2fr 1fr}.landing-photo{min-height:420px}}
 @media(max-width:540px){.donation-landing .hero{display:block}.donation-landing .hero-copy{padding:30px 25px}.landing-photo{min-height:220px;height:220px}.landing-photo img{object-position:50% 20%}}

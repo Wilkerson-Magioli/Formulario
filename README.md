@@ -1,5 +1,7 @@
 # Ministério Pão Vivo — formulário de participação
 
+Ao finalizar, o navegador gera uma ficha PNG com as respostas, identidade visual do Ministério e autorização de contato. A ficha é criada localmente, não é enviada ao servidor e pode ser baixada. O compartilhamento nativo de arquivos aparece quando suportado pelo dispositivo; o visitante escolhe o WhatsApp e o destinatário. A ficha não é um comprovante bancário. A mensagem de texto continua disponível como alternativa.
+
 Projeto local em português (Brasil), com HTML, CSS e JavaScript, sem instalação de dependências.
 
 ## Executar

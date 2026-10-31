@@ -3,5 +3,5 @@
   "version": "1.0.0",
   "private": true,
   "description": "Formulário de participação e doação do Ministério Pão Vivo",
-  "scripts": { "dev": "node server.mjs", "start": "node server.mjs", "check": "node --check public/app.js", "build": "node scripts/build.mjs" }
+  "scripts": { "dev": "node server.mjs", "start": "node server.mjs", "check": "node --check public/app.js && node --check public/participation-card.js", "build": "node scripts/build.mjs" }
 }

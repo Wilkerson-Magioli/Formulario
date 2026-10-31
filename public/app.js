@@ -54,10 +54,17 @@ form.addEventListener('submit', e => {
   document.querySelector('#payment-view').hidden = false;
   window.scrollTo({top: 0, behavior: 'instant'});
   document.querySelector('#payment-heading').focus({preventScroll:true});
+  window.participationCard.generate({
+    nome: data.get('nome').trim(), endereco: data.get('endereco').trim(),
+    cep: data.get('cep'), email: data.get('email').trim(), whatsapp: data.get('whatsapp'),
+    orando: data.has('orando'), contribuindo: contribution.checked,
+    frequencia: data.get('frequencia'), metodo: data.get('metodo'), valor: data.get('valor'),
+  });
 });
 document.querySelector('#edit-form').addEventListener('click', () => {
   document.querySelector('#payment-view').hidden = true;
   document.querySelector('#form-view').hidden = false;
   document.querySelector('#registration-whatsapp').removeAttribute('href');
+  window.participationCard.clear();
   document.querySelector('#participar').scrollIntoView();
 });
