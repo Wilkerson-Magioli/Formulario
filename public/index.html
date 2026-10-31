@@ -51,21 +51,20 @@
       </section>
       <div class="submit-area"><label class="consent"><input type="checkbox" name="consentimento" required><span>Autorizo o envio dos meus dados ao Ministério Pão Vivo pelo WhatsApp para contato sobre minha participação. *</span></label>
       <button class="button dark submit" type="submit">Finalizar formulário <span aria-hidden="true">↗</span></button>
-      <p class="help center">Na próxima etapa, você verá as orientações para participar.</p></div>
+      <p class="help center">Ao finalizar, o WhatsApp será aberto com seu cadastro em texto. Toque em Enviar e depois retorne a esta página.</p></div>
 
     </form>
 
   </div>
 </div>
 <section id="payment-view" class="payment-view" aria-labelledby="payment-heading" hidden>
-  <div class="payment-intro"><div class="eyebrow">OBRIGADO POR PARTICIPAR</div><h1 id="payment-heading" tabindex="-1">Sua participação faz a diferença.</h1><p id="participation-summary"></p><button id="edit-form" class="back-button" type="button">← Voltar e editar meus dados</button></div>
+  <div class="payment-intro"><div class="eyebrow">OBRIGADO POR PARTICIPAR</div><h1 id="payment-heading" tabindex="-1">Sua participação faz a diferença.</h1><p id="participation-summary"></p><p class="help">Envie seu cadastro no WhatsApp de teste <strong>(51) 98522-0218</strong> e volte aqui para continuar. Se a conversa não abriu, use o botão abaixo.</p><a id="registration-whatsapp" class="button dark registration-whatsapp" target="_blank" rel="noopener noreferrer">Abrir cadastro no WhatsApp ↗</a><button id="edit-form" class="back-button" type="button">← Voltar e editar meus dados</button></div>
   <section id="participation-card-section" class="participation-card-section" aria-labelledby="card-heading" hidden>
-    <div class="eyebrow">SUA PARTICIPAÇÃO EM UMA IMAGEM</div>
-    <h2 id="card-heading">Sua ficha está pronta para compartilhar.</h2>
-    <p>Confira a imagem com suas respostas. Você pode baixá-la ou compartilhá-la pelo celular.</p>
+    <div class="eyebrow">UMA CÓPIA PARA VOCÊ</div>
+    <h2 id="card-heading">Guarde sua ficha de participação.</h2>
+    <p>Baixe a imagem com suas respostas para guardar com você.</p>
     <p id="card-status" class="help" role="status" aria-live="polite"></p>
     <img id="participation-card-image" class="participation-card-preview" alt="Ficha de participação com as respostas preenchidas no formulário" hidden>
-    <div class="card-actions"><button id="share-card" class="button copy" type="button" hidden disabled>Compartilhar imagem ↗</button></div>
     <p class="help card-receipt-note">O comprovante bancário deve ser enviado separadamente após a doação.</p>
     <button id="download-card" class="button card-download" type="button" disabled>Baixar ficha em imagem ↓</button>
   </section>
@@ -74,8 +73,29 @@
       <div class="bank"><h3>Transferência ou depósito</h3><p>Se preferir, contribua diretamente na conta da instituição.</p><dl><div><dt>Banco</dt><dd>BANCO BRADESCO</dd></div><div><dt>Agência</dt><dd>2276-4</dd></div><div><dt>Conta corrente</dt><dd>15152-1</dd></div><div><dt>Pix · CNPJ</dt><dd>08.145.713/0001-55</dd></div></dl><p class="bank-name">Ministério Pão Vivo</p></div>
       <div class="receipt"><span aria-hidden="true">↗</span><div><strong>Já fez sua contribuição?</strong><p>Envie o comprovante para<br>(51) 98522-0218.</p><a href="https://wa.me/5551985220218" target="_blank" rel="noopener noreferrer">Enviar pelo WhatsApp ↗</a><small>Na conversa, anexe seu comprovante.</small></div></div>
     </section><p class="help center payment-help">Após realizar sua doação, envie o comprovante pelo WhatsApp (51) 98522-0218. Confira o favorecido no aplicativo do banco antes de confirmar.</p></div>
+  <section id="finish-donation" class="finish-actions" aria-labelledby="finish-donation-heading" hidden>
+    <h2 id="finish-donation-heading">Tudo pronto para finalizar?</h2>
+    <label class="consent"><input type="checkbox" id="confirm-donation"><span>Confirmo que enviei meu cadastro, fiz a contribuição e enviei o comprovante pelo WhatsApp.</span></label>
+    <button id="complete-donation" class="button dark" type="button" disabled>Finalizar participação ↗</button>
+  </section>
+  <section id="finish-prayer" class="finish-actions" hidden>
+    <button id="complete-prayer" class="button dark" type="button">Já enviei meu cadastro. Finalizar ↗</button>
+  </section>
 </section>
-  <section class="closing"><span aria-hidden="true">✦</span><h2>Obrigado por caminhar com a gente.</h2><p>Sua oração e sua generosidade fazem parte desta história.</p></section>
+<section id="completion-view" class="finish-view" aria-labelledby="completion-title" hidden>
+  <span class="finish-icon" aria-hidden="true">✓</span>
+  <h1 id="completion-title" tabindex="-1">Doação Realizada com sucesso</h1>
+  <p id="completion-detail"></p>
+  <p>Clique no botão abaixo para sair.</p>
+  <button id="exit-flow" class="button dark" type="button">Sair ↗</button>
+</section>
+<section id="farewell-view" class="finish-view" aria-labelledby="farewell-title" hidden>
+  <span class="finish-icon" aria-hidden="true">♥</span>
+  <h1 id="farewell-title" tabindex="-1">Obrigado por fazer parte desta obra.</h1>
+  <p>Sua oração e sua generosidade fazem parte desta história. Que Deus abençoe você e sua família!</p>
+  <p class="help">Ministério Pão Vivo · Fé que alimenta. Amor que alcança.</p>
+</section>
+  <section class="closing" id="closing-message"><span aria-hidden="true">✦</span><h2>Obrigado por caminhar com a gente.</h2><p>Sua oração e sua generosidade fazem parte desta história.</p></section>
 </main>
 <footer class="wrap"><img class="logo" src="assets/logo.png" alt="Ministério Pão Vivo"><p>Fé que alimenta. Amor que alcança.</p><a href="https://www.ministeriopaovivo.com.br/" target="_blank" rel="noopener noreferrer">Conheça o ministério ↗</a></footer>
 </body></html>

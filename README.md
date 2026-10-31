@@ -1,6 +1,6 @@
 # Ministério Pão Vivo — formulário de participação
 
-Ao finalizar, o navegador gera uma ficha PNG com as respostas, identidade visual do Ministério e autorização de contato. A ficha é criada localmente, não é enviada ao servidor e pode ser baixada. O compartilhamento nativo de arquivos aparece quando suportado pelo dispositivo; o visitante escolhe o WhatsApp e o destinatário. A ficha não é um comprovante bancário. O cadastro é compartilhado somente em imagem; não há mais mensagem de texto com as respostas.
+Ao finalizar, o navegador gera uma ficha PNG com as respostas, identidade visual do Ministério e autorização de contato. A ficha é criada localmente, não é enviada ao servidor e pode ser baixada. A imagem fica disponível apenas para download pelo doador. A ficha não é um comprovante bancário. Ao finalizar, o navegador abre o WhatsApp com o cadastro em texto; o doador precisa confirmar o envio no WhatsApp. Há um link alternativo se a abertura for bloqueada.
 
 Projeto local em português (Brasil), com HTML, CSS e JavaScript, sem instalação de dependências.
 
@@ -24,7 +24,7 @@ Abra http://127.0.0.1:5173. Para editar no VS Code, abra esta pasta ou execute `
 
 ## Funcionamento
 
-O formulário valida os campos e mostra uma etapa final com as orientações. Quem contribui vê o QR Code Pix, o valor de referência e os dados bancários. A ficha PNG pode ser compartilhada pelo menu do dispositivo ou baixada para anexar manualmente no WhatsApp. O destinatário é escolhido pelo visitante; o envio não é automático. O comprovante deve ser anexado manualmente na conversa. Não há banco de dados, upload, cobrança ou confirmação bancária nesta versão. Os dados não são guardados pelo projeto nem em localStorage.
+O formulário valida os campos e mostra uma etapa final com as orientações. Quem contribui vê o QR Code Pix, o valor de referência e os dados bancários. O cadastro em texto é preparado para o número de teste. O envio no WhatsApp exige confirmação do doador. A ficha PNG fica somente para download e uso pessoal do doador. O comprovante deve ser anexado manualmente na conversa. Não há banco de dados, upload, cobrança ou confirmação bancária nesta versão. Os dados não são guardados pelo projeto nem em localStorage.
 
 Quem escolhe apenas oração não precisa preencher os campos financeiros. Oração e contribuição podem ser selecionadas juntas. A oferta mensal não cadastra débito ou recorrência automática.
 
@@ -60,3 +60,8 @@ O formulário publicado está em modo de teste. O link de comprovante usa **(51)
 
 
 O valor da oferta usa máscara monetária brasileira com centavos automáticos: digitar `100` exibe `1,00`, e digitar `123456` exibe `1.234,56`. O valor é convertido para número antes de gerar a ficha. A validação exige valor maior que zero e de até R$ 9.999.999,00.
+
+
+## Finalização
+
+Depois de enviar o cadastro, contribuir e enviar o comprovante, o doador marca uma confirmação e pode finalizar. A tela de sucesso registra somente essa declaração; não há verificação automática de pagamento ou entrega de mensagens. Quem participa apenas em oração possui finalização própria, sem mensagem de doação. O botão Sair exibe agradecimento, limpa o formulário e remove a ficha gerada da memória da página.

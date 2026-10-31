@@ -50,6 +50,17 @@
 .card-download:hover{background:#fbe7db}
 .card-download:disabled{opacity:.55;cursor:wait}
 .card-receipt-note{margin-top:16px}
+.donation-landing .registration-whatsapp,.donation-landing .finish-actions .dark,.donation-landing .finish-view .dark{background:#b74d23;color:#fff}
+.finish-actions{margin:28px 0 0;padding:24px;border:1px solid #eddfd7;border-radius:12px;background:#fff7f2}
+.finish-actions h2{font-size:20px;letter-spacing:-.5px;margin:0 0 16px}
+.finish-actions .button{margin-top:20px}
+.finish-actions button:disabled{opacity:.5;cursor:not-allowed}
+.finish-view{max-width:760px;min-height:420px;margin:50px auto;text-align:center;padding:42px 24px;border:1px solid #eddfd7;border-top:4px solid #d36a38;border-radius:16px;background:#fff}
+.finish-view h1{font-size:36px;letter-spacing:-1.2px;line-height:1.25;margin:24px 0 18px}
+.finish-view p{max-width:530px;margin:14px auto;font-size:14px}
+.finish-view .button{margin-top:20px;min-width:140px}
+.finish-icon{display:inline-grid;place-items:center;width:68px;height:68px;background:#fff0e7;border-radius:50%;font-size:32px;color:#b74d23}
+@media(max-width:540px){.finish-view{margin:28px auto;padding:32px 20px}.finish-view h1{font-size:28px}.finish-actions{padding:20px}.finish-actions .button{width:100%;justify-content:center}}
 .card-actions button:disabled{opacity:.55;cursor:wait}
 @media(max-width:540px){.participation-card-section{padding:20px 16px}.card-actions .button{width:100%;justify-content:center}}
 @media(max-width:600px){.donation-landing footer.wrap{flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center}.donation-landing footer p{order:0;width:100%;text-align:center}.card-actions{flex-direction:column}.card-actions .button{width:100%;justify-content:center}}
