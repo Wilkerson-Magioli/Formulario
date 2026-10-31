@@ -1,67 +1,362 @@
-.donation-landing{--orange:#d36a38;--cream:#fff4ef;background:#fff;border-top:6px solid var(--orange)}
-.donation-landing .header-link{color:#a74520;border-color:#e0a184}
-.donation-landing .hero{background:var(--orange);border:0;grid-template-columns:1.15fr 1fr;border-radius:20px}
-.donation-landing .hero-copy{padding:46px 42px;color:#2d1c14}
-.donation-landing .hero-copy h1{color:#2d1c14}
-.donation-landing .hero-copy h1 em{color:#fff}
-.donation-landing .hero-copy>.eyebrow{color:#2d1c14}
-.donation-landing .hero-copy>.eyebrow span{background:#fff}
-.donation-landing .hero-copy>p{color:#2d1c14}
-.donation-landing .hero-copy .dark{background:#2d1c14;color:#fff}
-.donation-landing .hero-copy .dark:hover{background:#493025}
-.donation-landing .hero-note,.donation-landing .hero-note>span{color:#2d1c14}
-.landing-photo{position:relative;overflow:hidden;min-height:450px}
-.landing-photo img{position:absolute;inset:0;width:100%;height:calc(100% + 90px);object-fit:cover;object-position:52% 20%}
-.landing-photo:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#5a281918,transparent 45%)}
-.donation-landing .section-intro .eyebrow{color:#ae4922}
-.donation-landing .section-intro{display:block;max-width:760px;margin-inline:auto}
-.donation-landing .section-intro>p{margin:12px 0 0}
-.donation-landing .content-grid{display:block;max-width:760px;margin-inline:auto}
-.donation-landing .form-card{border-top:3px solid var(--orange)}
-.donation-landing .step{border-color:#efc3ae;background:#fff4ef;color:#a4431f}
-.donation-landing input[type=checkbox],.donation-landing input[type=radio]{accent-color:#b74d23}
-.donation-landing .choice:has(:checked){border-color:var(--orange);background:#fff4ef}
-.donation-landing input:focus-visible{outline-color:#b74d23}
-.donation-landing .choice-icon{color:#a4431f}
-.donation-landing .submit{background:#b74d23;color:#fff}
-.donation-landing .submit:hover{background:#963c19}
-.donation-landing .donation-card{background:#fff7f2;border-color:#efcdbd;border-top:4px solid var(--orange)}
-.donation-landing .copy{background:#d36a38;color:#24170f}
-.donation-landing .copy:hover{background:#e17b49}
-.donation-landing .qr-block{border-color:#efcdbd}
-.donation-landing .receipt{background:#fce6d9}
-.donation-landing .closing>span{color:#b74d23}
-.donation-landing footer{border-top:3px solid var(--orange)}
-.transfer-bank-details{margin:-7px 0 22px;padding:12px 15px;background:#fff7f2;border-left:2px solid #d36a38;border-radius:0 6px 6px 0;font-size:12px;color:#675447}
-.transfer-bank-details>strong{display:block;font-size:10px;font-weight:700;letter-spacing:.7px;color:#83513b;margin-bottom:5px}
-.transfer-bank-details>div{display:flex;flex-wrap:wrap;gap:8px 24px}
-.transfer-bank-details b{font-weight:600;color:#4b3a30}
-.participation-card-section{margin:0 0 32px;border:1px solid #eddfd7;border-top:3px solid #d36a38;border-radius:14px;padding:26px;background:#fff}
-.participation-card-section h2{font-size:23px;line-height:1.35;letter-spacing:-.7px;margin:10px 0}
-.participation-card-section>p{font-size:13px}
-.participation-card-section>p.help{font-size:11px}
-.participation-card-preview{display:block;width:100%;max-width:450px;height:auto;border:1px solid #eee5df;border-radius:8px;margin:20px auto}
-.card-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-.donation-landing #share-card{background:#b74d23;color:#fff}
-.donation-landing #share-card:hover{background:#963c19}
-.card-actions:has(>button[hidden]){display:none}
-.card-download{margin-top:2px;padding:7px 11px;font-size:11px;font-weight:500;color:#24170f;background:#fff4ee;border:1px solid #eaded5;border-radius:6px}
-.card-download:hover{background:#fbe7db}
-.card-download:disabled{opacity:.55;cursor:wait}
-.card-receipt-note{margin-top:16px}
-.donation-landing .registration-whatsapp,.donation-landing .finish-actions .dark,.donation-landing .finish-view .dark{background:#b74d23;color:#fff}
-.finish-actions{margin:28px 0 0;padding:24px;border:1px solid #eddfd7;border-radius:12px;background:#fff7f2}
-.finish-actions h2{font-size:20px;letter-spacing:-.5px;margin:0 0 16px}
-.finish-actions .button{margin-top:20px}
-.finish-actions button:disabled{opacity:.5;cursor:not-allowed}
-.finish-view{max-width:760px;min-height:420px;margin:50px auto;text-align:center;padding:42px 24px;border:1px solid #eddfd7;border-top:4px solid #d36a38;border-radius:16px;background:#fff}
-.finish-view h1{font-size:36px;letter-spacing:-1.2px;line-height:1.25;margin:24px 0 18px}
-.finish-view p{max-width:530px;margin:14px auto;font-size:14px}
-.finish-view .button{margin-top:20px;min-width:140px}
-.finish-icon{display:inline-grid;place-items:center;width:68px;height:68px;background:#fff0e7;border-radius:50%;font-size:32px;color:#b74d23}
-@media(max-width:540px){.finish-view{margin:28px auto;padding:32px 20px}.finish-view h1{font-size:28px}.finish-actions{padding:20px}.finish-actions .button{width:100%;justify-content:center}}
-.card-actions button:disabled{opacity:.55;cursor:wait}
-@media(max-width:540px){.participation-card-section{padding:20px 16px}.card-actions .button{width:100%;justify-content:center}}
-@media(max-width:600px){.donation-landing footer.wrap{flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center}.donation-landing footer p{order:0;width:100%;text-align:center}.card-actions{flex-direction:column}.card-actions .button{width:100%;justify-content:center}}
-@media(max-width:800px){.donation-landing .hero-copy{padding:32px 28px}.donation-landing .hero{grid-template-columns:1.2fr 1fr}.landing-photo{min-height:420px}}
-@media(max-width:540px){.donation-landing .hero{display:block}.donation-landing .hero-copy{padding:30px 25px}.landing-photo{min-height:220px;height:220px}.landing-photo img{object-position:50% 20%}}
+.donation-landing {
+  --orange: #d36a38;
+  --cream: #fff4ef;
+  background: #fff;
+  border-top: 6px solid var(--orange);
+}
+.donation-landing .header-link {
+  color: #a74520;
+  border-color: #e0a184;
+}
+.donation-landing .hero {
+  background: var(--orange);
+  border: 0;
+  grid-template-columns: 1.15fr 1fr;
+  border-radius: 20px;
+}
+.donation-landing .hero-copy {
+  padding: 46px 42px;
+  color: #2d1c14;
+}
+.donation-landing .hero-copy h1 {
+  color: #2d1c14;
+}
+.donation-landing .hero-copy h1 em {
+  color: #fff;
+}
+.donation-landing .hero-copy > .eyebrow {
+  color: #2d1c14;
+}
+.donation-landing .hero-copy > .eyebrow span {
+  background: #fff;
+}
+.donation-landing .hero-copy > p {
+  color: #2d1c14;
+}
+.donation-landing .hero-copy .dark {
+  background: #2d1c14;
+  color: #fff;
+}
+.donation-landing .hero-copy .dark:hover {
+  background: #493025;
+}
+.donation-landing .hero-note,
+.donation-landing .hero-note > span {
+  color: #2d1c14;
+}
+.landing-photo {
+  position: relative;
+  overflow: hidden;
+  min-height: 450px;
+}
+.landing-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: calc(100% + 90px);
+  object-fit: cover;
+  object-position: 52% 20%;
+}
+.landing-photo:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #5a281918, transparent 45%);
+}
+.donation-landing .section-intro .eyebrow {
+  color: #ae4922;
+}
+.donation-landing .section-intro {
+  display: block;
+  max-width: 760px;
+  margin-inline: auto;
+}
+.donation-landing .section-intro > p {
+  margin: 12px 0 0;
+}
+.donation-landing .content-grid {
+  display: block;
+  max-width: 760px;
+  margin-inline: auto;
+}
+.donation-landing .form-card {
+  border-top: 3px solid var(--orange);
+}
+.donation-landing .step {
+  border-color: #efc3ae;
+  background: #fff4ef;
+  color: #a4431f;
+}
+.donation-landing input[type="checkbox"],
+.donation-landing input[type="radio"] {
+  accent-color: #b74d23;
+}
+.donation-landing .choice:has(:checked) {
+  border-color: var(--orange);
+  background: #fff4ef;
+}
+.donation-landing input:focus-visible {
+  outline-color: #b74d23;
+}
+.donation-landing .choice-icon {
+  color: #a4431f;
+}
+.donation-landing .submit {
+  background: #b74d23;
+  color: #fff;
+}
+.donation-landing .submit:hover {
+  background: #963c19;
+}
+.donation-landing .donation-card {
+  background: #fff7f2;
+  border-color: #efcdbd;
+  border-top: 4px solid var(--orange);
+}
+.donation-landing .copy {
+  background: #d36a38;
+  color: #24170f;
+}
+.donation-landing .copy:hover {
+  background: #e17b49;
+}
+.donation-landing .qr-block {
+  border-color: #efcdbd;
+}
+.donation-landing .receipt {
+  background: #fce6d9;
+}
+.donation-landing .closing > span {
+  color: #b74d23;
+}
+.donation-landing footer {
+  border-top: 3px solid var(--orange);
+}
+.transfer-bank-details {
+  margin: -7px 0 22px;
+  padding: 12px 15px;
+  background: #fff7f2;
+  border-left: 2px solid #d36a38;
+  border-radius: 0 6px 6px 0;
+  font-size: 12px;
+  color: #675447;
+}
+.transfer-bank-details > strong {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  color: #83513b;
+  margin-bottom: 5px;
+}
+.transfer-bank-details > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+.transfer-bank-details b {
+  font-weight: 600;
+  color: #4b3a30;
+}
+.participation-card-section {
+  margin: 0 0 32px;
+  border: 1px solid #eddfd7;
+  border-top: 3px solid #d36a38;
+  border-radius: 14px;
+  padding: 26px;
+  background: #fff;
+}
+.participation-card-section h2 {
+  font-size: 23px;
+  line-height: 1.35;
+  letter-spacing: -0.7px;
+  margin: 10px 0;
+}
+.participation-card-section > p {
+  font-size: 13px;
+}
+.participation-card-section > p.help {
+  font-size: 11px;
+}
+.participation-card-preview {
+  display: block;
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  border: 1px solid #eee5df;
+  border-radius: 8px;
+  margin: 20px auto;
+}
+.card-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+.donation-landing #share-card {
+  background: #b74d23;
+  color: #fff;
+}
+.donation-landing #share-card:hover {
+  background: #963c19;
+}
+.card-actions:has(> button[hidden]) {
+  display: none;
+}
+.card-download {
+  margin-top: 2px;
+  padding: 7px 11px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #24170f;
+  background: #fff4ee;
+  border: 1px solid #eaded5;
+  border-radius: 6px;
+}
+.card-download:hover {
+  background: #fbe7db;
+}
+.card-download:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+.card-receipt-note {
+  margin-top: 16px;
+}
+.donation-landing .registration-whatsapp,
+.donation-landing .finish-actions .dark,
+.donation-landing .finish-view .dark {
+  background: #b74d23;
+  color: #fff;
+}
+.finish-actions {
+  margin: 28px 0 0;
+  padding: 24px;
+  border: 1px solid #eddfd7;
+  border-radius: 12px;
+  background: #fff7f2;
+}
+.finish-actions h2 {
+  font-size: 20px;
+  letter-spacing: -0.5px;
+  margin: 0 0 16px;
+}
+.finish-actions .button {
+  margin-top: 20px;
+}
+.finish-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.finish-view {
+  max-width: 760px;
+  min-height: 420px;
+  margin: 50px auto;
+  text-align: center;
+  padding: 42px 24px;
+  border: 1px solid #eddfd7;
+  border-top: 4px solid #d36a38;
+  border-radius: 16px;
+  background: #fff;
+}
+.finish-view h1 {
+  font-size: 36px;
+  letter-spacing: -1.2px;
+  line-height: 1.25;
+  margin: 24px 0 18px;
+}
+.finish-view p {
+  max-width: 530px;
+  margin: 14px auto;
+  font-size: 14px;
+}
+.finish-view .button {
+  margin-top: 20px;
+  min-width: 140px;
+}
+.finish-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 68px;
+  height: 68px;
+  background: #fff0e7;
+  border-radius: 50%;
+  font-size: 32px;
+  color: #b74d23;
+}
+@media (max-width: 540px) {
+  .finish-view {
+    margin: 28px auto;
+    padding: 32px 20px;
+  }
+  .finish-view h1 {
+    font-size: 28px;
+  }
+  .finish-actions {
+    padding: 20px;
+  }
+  .finish-actions .button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+.card-actions button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+@media (max-width: 540px) {
+  .participation-card-section {
+    padding: 20px 16px;
+  }
+  .card-actions .button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+@media (max-width: 600px) {
+  .donation-landing footer.wrap {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    text-align: center;
+  }
+  .donation-landing footer p {
+    order: 0;
+    width: 100%;
+    text-align: center;
+  }
+  .card-actions {
+    flex-direction: column;
+  }
+  .card-actions .button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+@media (max-width: 800px) {
+  .donation-landing .hero-copy {
+    padding: 32px 28px;
+  }
+  .donation-landing .hero {
+    grid-template-columns: 1.2fr 1fr;
+  }
+  .landing-photo {
+    min-height: 420px;
+  }
+}
+@media (max-width: 540px) {
+  .donation-landing .hero {
+    display: block;
+  }
+  .donation-landing .hero-copy {
+    padding: 30px 25px;
+  }
+  .landing-photo {
+    min-height: 220px;
+    height: 220px;
+  }
+  .landing-photo img {
+    object-position: 50% 20%;
+  }
+}

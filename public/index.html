@@ -1,100 +1,447 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#d36a38">
-  <meta name="description" content="Participe da obra do Ministério Pão Vivo por meio da oração e da contribuição.">
-  <title>Faça parte desta obra | Ministério Pão Vivo</title>
-  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="landing.css"><script src="participation-card.js" defer></script><script src="app.js" defer></script>
-</head>
-<body class="donation-landing">
-<header class="header wrap">
-  <a href="https://www.ministeriopaovivo.com.br/" aria-label="Site do Ministério Pão Vivo"><img class="logo" src="assets/logo.png" alt="Ministério Pão Vivo"></a>
-  <a class="header-link" href="#participar">Seja parte desta obra <span aria-hidden="true">↗</span></a>
-</header>
-<main class="wrap">
-<div id="form-view">
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-copy"><div class="eyebrow"><span></span> FÉ QUE SE TRANSFORMA EM AÇÃO</div>
-    <h1 id="hero-title">Uma obra de amor.<br><em>Uma parte sua.</em></h1>
-    <p>Na oração ou na contribuição, sua participação ajuda a levar a Palavra de Deus e o cuidado ao próximo.</p>
-    <a class="button dark" href="#participar">Quero fazer parte <span aria-hidden="true">↗</span></a>
-    <div class="hero-note"><span aria-hidden="true">✦</span> Juntos, compartilhamos fé, amor e esperança.</div></div>
-    <div class="landing-photo"><img src="assets/favela.jpg" alt="Comunidade retratada no site do Ministério Pão Vivo" width="1484" height="570"></div>
-  </section>
-  <div class="section-intro" id="participar"><div class="eyebrow">SEU PRÓXIMO PASSO</div><h2>Faça parte desta obra.</h2><p>Preencha seus dados e escolha como participar.<br>É simples, e cada gesto faz a diferença.</p></div>
-  <div class="content-grid">
-    <form id="participation-form" class="form-card">
-      <section><div class="section-heading"><span class="step">01</span><div><h3>Vamos nos conhecer</h3><p>Os campos com * são obrigatórios.</p></div></div>
-        <div class="fields">
-          <label class="full">Nome completo *<input name="nome" autocomplete="name" required maxlength="160" placeholder="Como você se chama?"></label>
-          <label class="full">Endereço completo *<input name="endereco" autocomplete="street-address" required maxlength="300" placeholder="Rua, número, complemento, bairro, cidade e estado"></label>
-          <label>CEP *<input name="cep" autocomplete="postal-code" inputmode="numeric" required pattern="[0-9]{5}-[0-9]{3}" maxlength="9" placeholder="00000-000"></label>
-          <label>E-mail *<input name="email" autocomplete="email" type="email" required maxlength="200" placeholder="voce@exemplo.com"></label>
-          <label class="full">WhatsApp *<input name="whatsapp" autocomplete="tel" type="tel" inputmode="tel" required pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}" maxlength="15" placeholder="(00) 00000-0000"></label>
-        </div>
-      </section>
-      <section class="form-section"><div class="section-heading"><span class="step">02</span><div><h3>Quero participar desta obra</h3><p>Você pode escolher as duas formas de participar.</p></div></div>
-        <div class="choices"><label class="choice"><input type="checkbox" name="orando"><span class="choice-icon" aria-hidden="true">♡</span><span><strong>Orando</strong><small>Minha fé junto a esta missão</small></span></label><label class="choice"><input type="checkbox" name="contribuindo" id="contribuindo"><span class="choice-icon" aria-hidden="true">✦</span><span><strong>Contribuindo</strong><small>Uma oferta que faz a diferença</small></span></label></div>
-        <p id="participation-error" class="error" role="alert" hidden>Escolha orar, contribuir ou as duas opções.</p>
-        <fieldset id="contribution-fields" hidden disabled><legend>Sua contribuição</legend>
-          <div class="field-title">Como será sua oferta? *</div><div class="radio-row"><label><input type="radio" name="frequencia" value="Oferta mensal" required> Oferta mensal</label><label><input type="radio" name="frequencia" value="Oferta pontual"> Oferta pontual</label></div>
-          <div class="field-title">Como vou contribuir *</div><div class="radio-row"><label><input type="radio" name="metodo" value="Pix" required> Pix</label><label><input type="radio" name="metodo" value="Transferência"> Transferência</label></div>
-          <div id="transfer-bank-details" class="transfer-bank-details" role="status" aria-live="polite" hidden>
-            <strong>BANCO BRADESCO</strong>
-            <div><span>Ag. <b>2276-4</b></span><span>C/C <b>15152-1</b></span></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#d36a38" />
+    <meta
+      name="description"
+      content="Participe da obra do Ministério Pão Vivo por meio da oração e da contribuição."
+    />
+    <title>Faça parte desta obra | Ministério Pão Vivo</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="landing.css" />
+    <script src="participation.js" defer></script>
+    <script src="card-renderer.js" defer></script>
+    <script src="participation-card.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body class="donation-landing">
+    <header class="header wrap">
+      <a
+        href="https://www.ministeriopaovivo.com.br/"
+        aria-label="Site do Ministério Pão Vivo"
+        ><img class="logo" src="assets/logo.png" alt="Ministério Pão Vivo"
+      /></a>
+      <a class="header-link" href="#participar"
+        >Seja parte desta obra <span aria-hidden="true">↗</span></a
+      >
+    </header>
+    <main class="wrap">
+      <div id="form-view">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <div class="eyebrow">
+              <span></span> FÉ QUE SE TRANSFORMA EM AÇÃO
+            </div>
+            <h1 id="hero-title">
+              Uma obra de amor.<br /><em>Uma parte sua.</em>
+            </h1>
+            <p>
+              Na oração ou na contribuição, sua participação ajuda a levar a
+              Palavra de Deus e o cuidado ao próximo.
+            </p>
+            <a class="button dark" href="#participar"
+              >Quero fazer parte <span aria-hidden="true">↗</span></a
+            >
+            <div class="hero-note">
+              <span aria-hidden="true">✦</span> Juntos, compartilhamos fé, amor
+              e esperança.
+            </div>
           </div>
-          <label>Valor da oferta (R$) *<input name="valor" type="text" required inputmode="numeric" maxlength="16" placeholder="0,00"></label>
-          <p class="help">A oferta mensal é uma intenção de apoio. Este formulário não realiza cobranças automáticas.</p>
-        </fieldset>
+          <div class="landing-photo">
+            <img
+              src="assets/favela.jpg"
+              alt="Comunidade retratada no site do Ministério Pão Vivo"
+              width="1484"
+              height="570"
+            />
+          </div>
+        </section>
+        <div class="section-intro" id="participar">
+          <div class="eyebrow">SEU PRÓXIMO PASSO</div>
+          <h2>Faça parte desta obra.</h2>
+          <p>
+            Preencha seus dados e escolha como participar.<br />É simples, e
+            cada gesto faz a diferença.
+          </p>
+        </div>
+        <div class="content-grid">
+          <form id="participation-form" class="form-card">
+            <section>
+              <div class="section-heading">
+                <span class="step">01</span>
+                <div>
+                  <h3>Vamos nos conhecer</h3>
+                  <p>Os campos com * são obrigatórios.</p>
+                </div>
+              </div>
+              <div class="fields">
+                <label class="full"
+                  >Nome completo *<input
+                    name="nome"
+                    autocomplete="name"
+                    required
+                    maxlength="160"
+                    placeholder="Como você se chama?"
+                /></label>
+                <label class="full"
+                  >Endereço completo *<input
+                    name="endereco"
+                    autocomplete="street-address"
+                    required
+                    maxlength="300"
+                    placeholder="Rua, número, complemento, bairro, cidade e estado"
+                /></label>
+                <label
+                  >CEP *<input
+                    name="cep"
+                    autocomplete="postal-code"
+                    inputmode="numeric"
+                    required
+                    pattern="[0-9]{5}-[0-9]{3}"
+                    maxlength="9"
+                    placeholder="00000-000"
+                /></label>
+                <label
+                  >E-mail *<input
+                    name="email"
+                    autocomplete="email"
+                    type="email"
+                    required
+                    maxlength="200"
+                    placeholder="voce@exemplo.com"
+                /></label>
+                <label class="full"
+                  >WhatsApp *<input
+                    name="whatsapp"
+                    autocomplete="tel"
+                    type="tel"
+                    inputmode="tel"
+                    required
+                    pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}"
+                    maxlength="15"
+                    placeholder="(00) 00000-0000"
+                /></label>
+              </div>
+            </section>
+            <section class="form-section">
+              <div class="section-heading">
+                <span class="step">02</span>
+                <div>
+                  <h3>Quero participar desta obra</h3>
+                  <p>Você pode escolher as duas formas de participar.</p>
+                </div>
+              </div>
+              <div class="choices">
+                <label class="choice"
+                  ><input type="checkbox" name="orando" /><span
+                    class="choice-icon"
+                    aria-hidden="true"
+                    >♡</span
+                  ><span
+                    ><strong>Orando</strong
+                    ><small>Minha fé junto a esta missão</small></span
+                  ></label
+                ><label class="choice"
+                  ><input
+                    type="checkbox"
+                    name="contribuindo"
+                    id="contribuindo"
+                  /><span class="choice-icon" aria-hidden="true">✦</span
+                  ><span
+                    ><strong>Contribuindo</strong
+                    ><small>Uma oferta que faz a diferença</small></span
+                  ></label
+                >
+              </div>
+              <p id="participation-error" class="error" role="alert" hidden>
+                Escolha orar, contribuir ou as duas opções.
+              </p>
+              <fieldset id="contribution-fields" hidden disabled>
+                <legend>Sua contribuição</legend>
+                <div class="field-title">Como será sua oferta? *</div>
+                <div class="radio-row">
+                  <label
+                    ><input
+                      type="radio"
+                      name="frequencia"
+                      value="Oferta mensal"
+                      required
+                    />
+                    Oferta mensal</label
+                  ><label
+                    ><input
+                      type="radio"
+                      name="frequencia"
+                      value="Oferta pontual"
+                    />
+                    Oferta pontual</label
+                  >
+                </div>
+                <div class="field-title">Como vou contribuir *</div>
+                <div class="radio-row">
+                  <label
+                    ><input type="radio" name="metodo" value="Pix" required />
+                    Pix</label
+                  ><label
+                    ><input type="radio" name="metodo" value="Transferência" />
+                    Transferência</label
+                  >
+                </div>
+                <div
+                  id="transfer-bank-details"
+                  class="transfer-bank-details"
+                  role="status"
+                  aria-live="polite"
+                  hidden
+                >
+                  <strong>BANCO BRADESCO</strong>
+                  <div>
+                    <span>Ag. <b>2276-4</b></span
+                    ><span>C/C <b>15152-1</b></span>
+                  </div>
+                </div>
+                <label
+                  >Valor da oferta (R$) *<input
+                    name="valor"
+                    type="text"
+                    required
+                    inputmode="numeric"
+                    maxlength="16"
+                    placeholder="0,00"
+                /></label>
+                <p class="help">
+                  A oferta mensal é uma intenção de apoio. Este formulário não
+                  realiza cobranças automáticas.
+                </p>
+              </fieldset>
+            </section>
+            <div class="submit-area">
+              <label class="consent"
+                ><input type="checkbox" name="consentimento" required /><span
+                  >Autorizo o envio dos meus dados ao Ministério Pão Vivo pelo
+                  WhatsApp para contato sobre minha participação. *</span
+                ></label
+              >
+              <button class="button dark submit" type="submit">
+                Finalizar formulário <span aria-hidden="true">↗</span>
+              </button>
+              <p class="help center">
+                Ao finalizar, o WhatsApp será aberto com seu cadastro em texto.
+                Toque em Enviar e depois retorne a esta página.
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+      <section
+        id="payment-view"
+        class="payment-view"
+        aria-labelledby="payment-heading"
+        hidden
+      >
+        <div class="payment-intro">
+          <div class="eyebrow">OBRIGADO POR PARTICIPAR</div>
+          <h1 id="payment-heading" tabindex="-1">
+            Sua participação faz a diferença.
+          </h1>
+          <p id="participation-summary"></p>
+          <p class="help">
+            Envie seu cadastro no WhatsApp do Ministério
+            <strong>(51) 99346-3773</strong> e volte aqui para continuar. Se a
+            conversa não abriu, use o botão abaixo.
+          </p>
+          <a
+            id="registration-whatsapp"
+            class="button dark registration-whatsapp"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Abrir cadastro no WhatsApp ↗</a
+          ><button id="edit-form" class="back-button" type="button">
+            ← Voltar e editar meus dados
+          </button>
+        </div>
+        <section
+          id="participation-card-section"
+          class="participation-card-section"
+          aria-labelledby="card-heading"
+          hidden
+        >
+          <div class="eyebrow">UMA CÓPIA PARA VOCÊ</div>
+          <h2 id="card-heading">Guarde sua ficha de participação.</h2>
+          <p>Baixe a imagem com suas respostas para guardar com você.</p>
+          <p id="card-status" class="help" role="status" aria-live="polite"></p>
+          <img
+            id="participation-card-image"
+            class="participation-card-preview"
+            alt="Ficha de participação com as respostas preenchidas no formulário"
+            hidden
+          />
+          <p class="help card-receipt-note">
+            O comprovante bancário deve ser enviado separadamente após a doação.
+          </p>
+          <button
+            id="download-card"
+            class="button card-download"
+            type="button"
+            disabled
+          >
+            Baixar ficha em imagem ↓
+          </button>
+        </section>
+        <div id="payment-options">
+          <section class="donation-card" aria-labelledby="donation-title">
+            <div class="eyebrow">GENEROSIDADE QUE TRANSFORMA</div>
+            <h2 id="donation-title">Sua oferta leva<br />esta obra adiante.</h2>
+            <p>Escolha a forma de contribuir que for melhor para você.</p>
+            <div class="qr-block">
+              <div class="qr-frame">
+                <img
+                  src="assets/pix-original.png"
+                  alt="QR Code Pix de doação do Ministério Pão Vivo"
+                  width="185"
+                  height="186"
+                />
+              </div>
+              <p>
+                Escaneie com o aplicativo do seu banco ou utilize o Pix Copia e
+                Cola.
+              </p>
+              <button id="copy-pix" class="button copy" type="button">
+                Copiar Pix Copia e Cola
+                <span aria-hidden="true">⧉</span></button
+              ><span id="copy-status" role="status" class="copy-status"></span>
+              <details>
+                <summary>Ver código Pix</summary>
+                <textarea
+                  id="pix-code"
+                  readonly
+                  aria-label="Código Pix Copia e Cola"
+                  rows="5"
+                ></textarea>
+              </details>
+            </div>
+            <div class="bank">
+              <h3>Transferência ou depósito</h3>
+              <p>Se preferir, contribua diretamente na conta da instituição.</p>
+              <dl>
+                <div>
+                  <dt>Banco</dt>
+                  <dd>BANCO BRADESCO</dd>
+                </div>
+                <div>
+                  <dt>Agência</dt>
+                  <dd>2276-4</dd>
+                </div>
+                <div>
+                  <dt>Conta corrente</dt>
+                  <dd>15152-1</dd>
+                </div>
+                <div>
+                  <dt>Pix · CNPJ</dt>
+                  <dd>08.145.713/0001-55</dd>
+                </div>
+              </dl>
+              <p class="bank-name">Ministério Pão Vivo</p>
+            </div>
+            <div class="receipt">
+              <span aria-hidden="true">↗</span>
+              <div>
+                <strong>Já fez sua contribuição?</strong>
+                <p>Envie o comprovante para<br />(51) 99346-3773.</p>
+                <a
+                  href="https://wa.me/5551993463773"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Enviar pelo WhatsApp ↗</a
+                ><small>Na conversa, anexe seu comprovante.</small>
+              </div>
+            </div>
+          </section>
+          <p class="help center payment-help">
+            Após realizar sua doação, envie o comprovante pelo WhatsApp (51)
+            99346-3773. Confira o favorecido no aplicativo do banco antes de
+            confirmar.
+          </p>
+        </div>
+        <section
+          id="finish-donation"
+          class="finish-actions"
+          aria-labelledby="finish-donation-heading"
+          hidden
+        >
+          <h2 id="finish-donation-heading">Tudo pronto para finalizar?</h2>
+          <label class="consent"
+            ><input type="checkbox" id="confirm-donation" /><span
+              >Confirmo que enviei meu cadastro, fiz a contribuição e enviei o
+              comprovante pelo WhatsApp.</span
+            ></label
+          >
+          <button
+            id="complete-donation"
+            class="button dark"
+            type="button"
+            disabled
+          >
+            Finalizar participação ↗
+          </button>
+        </section>
+        <section id="finish-prayer" class="finish-actions" hidden>
+          <button id="complete-prayer" class="button dark" type="button">
+            Já enviei meu cadastro. Finalizar ↗
+          </button>
+        </section>
       </section>
-      <div class="submit-area"><label class="consent"><input type="checkbox" name="consentimento" required><span>Autorizo o envio dos meus dados ao Ministério Pão Vivo pelo WhatsApp para contato sobre minha participação. *</span></label>
-      <button class="button dark submit" type="submit">Finalizar formulário <span aria-hidden="true">↗</span></button>
-      <p class="help center">Ao finalizar, o WhatsApp será aberto com seu cadastro em texto. Toque em Enviar e depois retorne a esta página.</p></div>
-
-    </form>
-
-  </div>
-</div>
-<section id="payment-view" class="payment-view" aria-labelledby="payment-heading" hidden>
-  <div class="payment-intro"><div class="eyebrow">OBRIGADO POR PARTICIPAR</div><h1 id="payment-heading" tabindex="-1">Sua participação faz a diferença.</h1><p id="participation-summary"></p><p class="help">Envie seu cadastro no WhatsApp do Ministério <strong>(51) 99346-3773</strong> e volte aqui para continuar. Se a conversa não abriu, use o botão abaixo.</p><a id="registration-whatsapp" class="button dark registration-whatsapp" target="_blank" rel="noopener noreferrer">Abrir cadastro no WhatsApp ↗</a><button id="edit-form" class="back-button" type="button">← Voltar e editar meus dados</button></div>
-  <section id="participation-card-section" class="participation-card-section" aria-labelledby="card-heading" hidden>
-    <div class="eyebrow">UMA CÓPIA PARA VOCÊ</div>
-    <h2 id="card-heading">Guarde sua ficha de participação.</h2>
-    <p>Baixe a imagem com suas respostas para guardar com você.</p>
-    <p id="card-status" class="help" role="status" aria-live="polite"></p>
-    <img id="participation-card-image" class="participation-card-preview" alt="Ficha de participação com as respostas preenchidas no formulário" hidden>
-    <p class="help card-receipt-note">O comprovante bancário deve ser enviado separadamente após a doação.</p>
-    <button id="download-card" class="button card-download" type="button" disabled>Baixar ficha em imagem ↓</button>
-  </section>
-  <div id="payment-options">    <section class="donation-card" aria-labelledby="donation-title"><div class="eyebrow">GENEROSIDADE QUE TRANSFORMA</div><h2 id="donation-title">Sua oferta leva<br>esta obra adiante.</h2><p>Escolha a forma de contribuir que for melhor para você.</p>
-      <div class="qr-block"><div class="qr-frame"><img src="assets/pix-original.png" alt="QR Code Pix de doação do Ministério Pão Vivo" width="185" height="186"></div><p>Escaneie com o aplicativo do seu banco ou utilize o Pix Copia e Cola.</p><button id="copy-pix" class="button copy" type="button">Copiar Pix Copia e Cola <span aria-hidden="true">⧉</span></button><span id="copy-status" role="status" class="copy-status"></span><details><summary>Ver código Pix</summary><textarea id="pix-code" readonly aria-label="Código Pix Copia e Cola" rows="5"></textarea></details></div>
-      <div class="bank"><h3>Transferência ou depósito</h3><p>Se preferir, contribua diretamente na conta da instituição.</p><dl><div><dt>Banco</dt><dd>BANCO BRADESCO</dd></div><div><dt>Agência</dt><dd>2276-4</dd></div><div><dt>Conta corrente</dt><dd>15152-1</dd></div><div><dt>Pix · CNPJ</dt><dd>08.145.713/0001-55</dd></div></dl><p class="bank-name">Ministério Pão Vivo</p></div>
-      <div class="receipt"><span aria-hidden="true">↗</span><div><strong>Já fez sua contribuição?</strong><p>Envie o comprovante para<br>(51) 99346-3773.</p><a href="https://wa.me/5551993463773" target="_blank" rel="noopener noreferrer">Enviar pelo WhatsApp ↗</a><small>Na conversa, anexe seu comprovante.</small></div></div>
-    </section><p class="help center payment-help">Após realizar sua doação, envie o comprovante pelo WhatsApp (51) 99346-3773. Confira o favorecido no aplicativo do banco antes de confirmar.</p></div>
-  <section id="finish-donation" class="finish-actions" aria-labelledby="finish-donation-heading" hidden>
-    <h2 id="finish-donation-heading">Tudo pronto para finalizar?</h2>
-    <label class="consent"><input type="checkbox" id="confirm-donation"><span>Confirmo que enviei meu cadastro, fiz a contribuição e enviei o comprovante pelo WhatsApp.</span></label>
-    <button id="complete-donation" class="button dark" type="button" disabled>Finalizar participação ↗</button>
-  </section>
-  <section id="finish-prayer" class="finish-actions" hidden>
-    <button id="complete-prayer" class="button dark" type="button">Já enviei meu cadastro. Finalizar ↗</button>
-  </section>
-</section>
-<section id="completion-view" class="finish-view" aria-labelledby="completion-title" hidden>
-  <span class="finish-icon" aria-hidden="true">✓</span>
-  <h1 id="completion-title" tabindex="-1">Doação Realizada com sucesso</h1>
-  <p id="completion-detail"></p>
-  <p>Clique no botão abaixo para sair.</p>
-  <button id="exit-flow" class="button dark" type="button">Sair ↗</button>
-</section>
-<section id="farewell-view" class="finish-view" aria-labelledby="farewell-title" hidden>
-  <span class="finish-icon" aria-hidden="true">♥</span>
-  <h1 id="farewell-title" tabindex="-1">Obrigado por fazer parte desta obra.</h1>
-  <p>Sua oração e sua generosidade fazem parte desta história. Que Deus abençoe você e sua família!</p>
-  <p class="help">Ministério Pão Vivo · Plantando igrejas. Transformando Vidas</p>
-</section>
-  <section class="closing" id="closing-message"><span aria-hidden="true">✦</span><h2>Obrigado por caminhar com a gente.</h2><p>Sua oração e sua generosidade fazem parte desta história.</p></section>
-</main>
-<footer class="wrap"><img class="logo" src="assets/logo.png" alt="Ministério Pão Vivo"><p>Fé que alimenta. Amor que alcança.</p><a href="https://www.ministeriopaovivo.com.br/" target="_blank" rel="noopener noreferrer">Conheça o ministério ↗</a></footer>
-</body></html>
+      <section
+        id="completion-view"
+        class="finish-view"
+        aria-labelledby="completion-title"
+        hidden
+      >
+        <span class="finish-icon" aria-hidden="true">✓</span>
+        <h1 id="completion-title" tabindex="-1">
+          Doação Realizada com sucesso
+        </h1>
+        <p id="completion-detail"></p>
+        <p>Clique no botão abaixo para sair.</p>
+        <button id="exit-flow" class="button dark" type="button">
+          Sair ↗
+        </button>
+      </section>
+      <section
+        id="farewell-view"
+        class="finish-view"
+        aria-labelledby="farewell-title"
+        hidden
+      >
+        <span class="finish-icon" aria-hidden="true">♥</span>
+        <h1 id="farewell-title" tabindex="-1">
+          Obrigado por fazer parte desta obra.
+        </h1>
+        <p>
+          Sua oração e sua generosidade fazem parte desta história. Que Deus
+          abençoe você e sua família!
+        </p>
+        <p class="help">
+          Ministério Pão Vivo · Plantando igrejas. Transformando Vidas
+        </p>
+      </section>
+      <section class="closing" id="closing-message">
+        <span aria-hidden="true">✦</span>
+        <h2>Obrigado por caminhar com a gente.</h2>
+        <p>Sua oração e sua generosidade fazem parte desta história.</p>
+      </section>
+    </main>
+    <footer class="wrap">
+      <img class="logo" src="assets/logo.png" alt="Ministério Pão Vivo" />
+      <p>Fé que alimenta. Amor que alcança.</p>
+      <a
+        href="https://www.ministeriopaovivo.com.br/"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Conheça o ministério ↗</a
+      >
+    </footer>
+  </body>
+</html>
