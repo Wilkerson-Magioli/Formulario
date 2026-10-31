@@ -46,4 +46,4 @@ Na entrega, foram verificados no Chrome: visualização em desktop e celular (39
 O QR Code 1 leva ao formulário público. O QR Code 2 é o Pix original e aparece depois do preenchimento para quem escolheu contribuir. O cadastro fica em memória apenas durante o preenchimento e deve ser enviado pelo visitante no WhatsApp. Ainda não há persistência de cadastros ou migração para Next.js nesta versão.
 
 
-O QR Code de acesso inclui o título "Ministério Pão Vivo - Doações", logotipo, moldura dourada e fundo creme. Os módulos usam o marrom escuro `#523F1B` e preservam margem branca de quatro módulos. A arte pode ser regenerada por `scripts/style-access-qr.py` com Pillow e ReportLab. O QR Code Pix original não foi alterado.
+O QR Code de acesso usa o logotipo, moldura dourada e fundo creme, sem o título "Ministério Pão Vivo - Doações" e sem o cabeçalho "QR CODE 1 — ACESSO AO FORMULÁRIO". Os módulos usam o marrom escuro `#523F1B` e preservam margem branca de quatro módulos. A arte pode ser regenerada por `scripts/style-access-qr.py` com Pillow e ReportLab. O QR Code Pix original não foi alterado.

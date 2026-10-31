@@ -18,9 +18,9 @@ for row in range(size):
             x, y = (col + quiet) * scale, (row + quiet) * scale
             draw.rectangle((x, y, x + scale - 1, y + scale - 1), fill=INK)
 
-canvas = Image.new('RGB', (1080, 1410), GOLD)
+canvas = Image.new('RGB', (1080, 1330), GOLD)
 draw = ImageDraw.Draw(canvas)
-draw.rounded_rectangle((22, 22, 1057, 1387), radius=40, fill=CREAM)
+draw.rounded_rectangle((22, 22, 1057, 1307), radius=40, fill=CREAM)
 logo = Image.open(ROOT / 'public/assets/logo.png').convert('RGBA')
 logo = logo.resize((380, round(380 * logo.height / logo.width)), Image.Resampling.LANCZOS)
 canvas.paste(logo, ((1080 - logo.width) // 2, 76), logo)
@@ -32,13 +32,12 @@ def font(size, bold=False):
 def center(text, top, size, color=INK, bold=False):
     draw.text((540, top), text, font=font(size, bold), fill=color, anchor='mt')
 
-center('Ministério Pão Vivo - Doações', 243, 43, bold=True)
-center('FAÇA PARTE DESTA OBRA DE AMOR', 310, 22)
-draw.rounded_rectangle((112, 362, 967, 1217), radius=24, fill='white', outline='#E4D3AF', width=2)
-canvas.paste(code, (135, 385))
-center('Aponte a câmera e abra o formulário', 1240, 29, bold=True)
-center('Participe orando, contribuindo ou das duas formas.', 1291, 23)
-center('pao-vivo-participar.risencrab2.chatgpt.site', 1336, 22)
+center('FAÇA PARTE DESTA OBRA DE AMOR', 230, 22)
+draw.rounded_rectangle((112, 282, 967, 1137), radius=24, fill='white', outline='#E4D3AF', width=2)
+canvas.paste(code, (135, 305))
+center('Aponte a câmera e abra o formulário', 1160, 29, bold=True)
+center('Participe orando, contribuindo ou das duas formas.', 1211, 23)
+center('pao-vivo-participar.risencrab2.chatgpt.site', 1256, 22)
 
 assets = ROOT / 'public/assets'
 canvas.save(assets / 'qr-code-acesso.png', optimize=True)
@@ -46,4 +45,4 @@ output = ROOT / 'output'
 output.mkdir(exist_ok=True)
 canvas.save(output / 'qr-code-acesso-pao-vivo.png', optimize=True)
 canvas.save(output / 'ministerio-pao-vivo-doacoes.png', optimize=True)
-print('QR Code estilizado gerado em 1080 × 1410 px.')
+print('QR Code estilizado gerado em 1080 × 1330 px.')
