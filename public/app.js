@@ -12,6 +12,19 @@ form.addEventListener('change', event => {
   if (event.target.name === 'metodo' || event.target.name === 'contribuindo') updateTransferBankDetails();
 });
 updateTransferBankDetails();
+function parseOfferAmount(value) {
+  return Number(String(value).replace(/\./g, '').replace(',', '.'));
+}
+form.elements.valor.addEventListener('input', event => {
+  const digits = event.target.value.replace(/\D/g, '').slice(0, 12);
+  event.target.value = digits ? (Number(digits) / 100).toLocaleString('pt-BR', {
+    minimumFractionDigits: 2, maximumFractionDigits: 2,
+  }) : '';
+  const amount = parseOfferAmount(event.target.value);
+  event.target.setCustomValidity(digits && amount <= 0
+    ? 'Informe um valor maior que R$ 0,00.'
+    : amount > 9999999 ? 'Informe um valor de até R$ 9.999.999,00.' : '');
+});
 form.elements.cep.addEventListener('input', e => { const n=e.target.value.replace(/\D/g,'').slice(0,8); e.target.value=n.length>5 ? n.slice(0,5)+'-'+n.slice(5) : n; });
 form.elements.whatsapp.addEventListener('input', e => {
   const n = e.target.value.replace(/\D/g, '').slice(0, 11);
@@ -30,23 +43,9 @@ form.addEventListener('submit', e => {
   if (!form.elements.orando.checked && !contribution.checked) { const error=document.querySelector('#participation-error'); error.hidden=false; form.elements.orando.focus(); return; }
   const data=new FormData(form);
   const modes=[data.has('orando')?'Orando':'', data.has('contribuindo')?'Contribuindo':''].filter(Boolean).join(' e ');
-  // O WhatsApp interpreta asteriscos simples como negrito após o envio.
-  const sections = [
-    '🧡 *MINISTÉRIO PÃO VIVO*\n*Ficha de participação*',
-    'Olá! Quero fazer parte desta obra.',
-    `👤 *DADOS DO PARTICIPANTE*\n*Nome:* ${data.get('nome').trim()}\n*Endereço:* ${data.get('endereco').trim()}\n*CEP:* ${data.get('cep')}\n*E-mail:* ${data.get('email').trim()}\n*WhatsApp:* ${data.get('whatsapp')}`,
-    `🤝 *MINHA PARTICIPAÇÃO*\n${modes}`,
-  ];
-  if (contribution.checked) {
-    const amount = Number(data.get('valor')).toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
-    sections.push(`🎁 *CONTRIBUIÇÃO*\n*Frequência:* ${data.get('frequencia')}\n*Forma:* ${data.get('metodo')}\n*Valor: ${amount}*`);
-  }
-  sections.push('✅ *AUTORIZAÇÃO*\nAutorizo o contato do Ministério Pão Vivo sobre minha participação.');
-  const message = (document.body.dataset.testMode === 'true' ? '*TESTE DO FORMULÁRIO*\n\n' : '') + sections.join('\n\n');
-  const url=`https://wa.me/5551985220218?text=${encodeURIComponent(message)}`;
-  document.querySelector('#registration-whatsapp').href = url;
+  const amount = contribution.checked ? parseOfferAmount(data.get('valor')) : null;
   const summary = contribution.checked
-    ? `${data.get('nome').trim()}, você escolheu participar ${modes.toLowerCase()}, com ${data.get('frequencia').toLowerCase()} de ${Number(data.get('valor')).toLocaleString('pt-BR', {style:'currency',currency:'BRL'})}. Informe esse valor no aplicativo do banco.`
+    ? `${data.get('nome').trim()}, você escolheu participar ${modes.toLowerCase()}, com ${data.get('frequencia').toLowerCase()} de ${amount.toLocaleString('pt-BR', {style:'currency',currency:'BRL'})}. Informe esse valor no aplicativo do banco.`
     : `${data.get('nome').trim()}, obrigado por se unir a esta obra em oração!`;
   document.querySelector('#participation-summary').textContent = summary;
   document.querySelector('#payment-options').hidden = !contribution.checked;
@@ -58,13 +57,12 @@ form.addEventListener('submit', e => {
     nome: data.get('nome').trim(), endereco: data.get('endereco').trim(),
     cep: data.get('cep'), email: data.get('email').trim(), whatsapp: data.get('whatsapp'),
     orando: data.has('orando'), contribuindo: contribution.checked,
-    frequencia: data.get('frequencia'), metodo: data.get('metodo'), valor: data.get('valor'),
+    frequencia: data.get('frequencia'), metodo: data.get('metodo'), valor: amount,
   });
 });
 document.querySelector('#edit-form').addEventListener('click', () => {
   document.querySelector('#payment-view').hidden = true;
   document.querySelector('#form-view').hidden = false;
-  document.querySelector('#registration-whatsapp').removeAttribute('href');
   window.participationCard.clear();
   document.querySelector('#participar').scrollIntoView();
 });
