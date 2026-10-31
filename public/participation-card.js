@@ -154,7 +154,7 @@
       shareButton.hidden = !canShare; shareButton.disabled = !canShare;
       status.textContent = 'Imagem pronta. Confira seus dados antes de compartilhar.';
     } catch {
-      if (version === generation) status.textContent = 'Não foi possível gerar a imagem. Você ainda pode enviar seus dados pelo botão de WhatsApp acima ou tentar novamente voltando ao formulário.';
+      if (version === generation) status.textContent = 'Não foi possível gerar a imagem. Volte ao formulário e tente novamente.';
     }
   }
   downloadButton.addEventListener('click', () => {

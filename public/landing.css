@@ -22,8 +22,8 @@
 .donation-landing input:focus-visible{outline-color:#b74d23}
 .donation-landing .journey{background:#fff4ef;border-color:#efcdbd;border-top-color:var(--orange)}
 .donation-landing .journey>.eyebrow,.donation-landing .journey li,.donation-landing .choice-icon{color:#a4431f}
-.donation-landing .submit,.donation-landing #registration-whatsapp{background:#b74d23;color:#fff}
-.donation-landing .submit:hover,.donation-landing #registration-whatsapp:hover{background:#963c19}
+.donation-landing .submit{background:#b74d23;color:#fff}
+.donation-landing .submit:hover{background:#963c19}
 .donation-landing .donation-card{background:#fff7f2;border-color:#efcdbd;border-top:4px solid var(--orange)}
 .donation-landing .copy{background:#d36a38;color:#24170f}
 .donation-landing .copy:hover{background:#e17b49}
@@ -41,7 +41,13 @@
 .participation-card-section>p.help{font-size:11px}
 .participation-card-preview{display:block;width:100%;max-width:450px;height:auto;border:1px solid #eee5df;border-radius:8px;margin:20px auto}
 .card-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-.card-actions .dark{background:#b74d23;color:#fff}
+.donation-landing #share-card{background:#b74d23;color:#fff}
+.donation-landing #share-card:hover{background:#963c19}
+.card-actions:has(>button[hidden]){display:none}
+.card-download{margin-top:2px;padding:7px 11px;font-size:11px;font-weight:500;color:#24170f;background:#fff4ee;border:1px solid #eaded5;border-radius:6px}
+.card-download:hover{background:#fbe7db}
+.card-download:disabled{opacity:.55;cursor:wait}
+.card-receipt-note{margin-top:16px}
 .card-actions button:disabled{opacity:.55;cursor:wait}
 @media(max-width:540px){.participation-card-section{padding:20px 16px}.card-actions .button{width:100%;justify-content:center}}
 @media(max-width:600px){.donation-landing footer.wrap{flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center}.donation-landing footer p{order:0;width:100%;text-align:center}.card-actions{flex-direction:column}.card-actions .button{width:100%;justify-content:center}}

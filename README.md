@@ -1,6 +1,6 @@
 # Ministério Pão Vivo — formulário de participação
 
-Ao finalizar, o navegador gera uma ficha PNG com as respostas, identidade visual do Ministério e autorização de contato. A ficha é criada localmente, não é enviada ao servidor e pode ser baixada. O compartilhamento nativo de arquivos aparece quando suportado pelo dispositivo; o visitante escolhe o WhatsApp e o destinatário. A ficha não é um comprovante bancário. A mensagem de texto continua disponível como alternativa.
+Ao finalizar, o navegador gera uma ficha PNG com as respostas, identidade visual do Ministério e autorização de contato. A ficha é criada localmente, não é enviada ao servidor e pode ser baixada. O compartilhamento nativo de arquivos aparece quando suportado pelo dispositivo; o visitante escolhe o WhatsApp e o destinatário. A ficha não é um comprovante bancário. O cadastro é compartilhado somente em imagem; não há mais mensagem de texto com as respostas.
 
 Projeto local em português (Brasil), com HTML, CSS e JavaScript, sem instalação de dependências.
 
@@ -18,13 +18,13 @@ Abra http://127.0.0.1:5173. Para editar no VS Code, abra esta pasta ou execute `
 
 - `public/index.html`: textos, campos, dados bancários e links.
 - `public/styles.css`: identidade visual e layout responsivo.
-- `public/app.js`: campos condicionais, máscaras, Pix e mensagem do WhatsApp.
+- `public/app.js`: campos condicionais, máscaras, Pix e geração da ficha.
 - `public/assets/`: logotipo e QR Code extraídos do PDF fornecido.
 - `server.mjs`: servidor local usando apenas recursos do Node.js.
 
 ## Funcionamento
 
-O formulário valida os campos e mostra uma etapa final com as orientações. Quem contribui vê o QR Code Pix, o valor de referência e os dados bancários. O botão de cadastro abre uma mensagem para o WhatsApp **(51) 99346-3773**. O visitante precisa tocar em enviar; o envio não é automático. O comprovante deve ser anexado manualmente na conversa. Não há banco de dados, upload, cobrança ou confirmação bancária nesta versão. Os dados não são guardados pelo projeto nem em localStorage.
+O formulário valida os campos e mostra uma etapa final com as orientações. Quem contribui vê o QR Code Pix, o valor de referência e os dados bancários. A ficha PNG pode ser compartilhada pelo menu do dispositivo ou baixada para anexar manualmente no WhatsApp. O destinatário é escolhido pelo visitante; o envio não é automático. O comprovante deve ser anexado manualmente na conversa. Não há banco de dados, upload, cobrança ou confirmação bancária nesta versão. Os dados não são guardados pelo projeto nem em localStorage.
 
 Quem escolhe apenas oração não precisa preencher os campos financeiros. Oração e contribuição podem ser selecionadas juntas. A oferta mensal não cadastra débito ou recorrência automática.
 
@@ -56,4 +56,7 @@ A página `/acesso` usa fundo branco, logotipo oficial centralizado, fotografia 
 
 ## Teste temporário de WhatsApp
 
-O formulário publicado está em modo de teste. Os links de cadastro e comprovante e as instruções de compartilhamento usam **(51) 98522-0218** (`5551985220218`). A mensagem e a ficha recebem uma indicação de teste. O Pix e os dados bancários continuam sendo os da instituição. Para restaurar a versão do cliente, trocar as referências de telefone no HTML e no app para **(51) 99346-3773** (`5551993463773`), remover o aviso `.test-mode-notice`, retirar `data-test-mode` do body e republicar.
+O formulário publicado está em modo de teste. O link de comprovante usa **(51) 98522-0218** (`5551985220218`). A ficha recebe uma indicação de teste. O Pix e os dados bancários continuam sendo os da instituição. Para restaurar a versão do cliente, trocar as referências de telefone no HTML e no app para **(51) 99346-3773** (`5551993463773`), remover o aviso `.test-mode-notice`, retirar `data-test-mode` do body e republicar.
+
+
+O valor da oferta usa máscara monetária brasileira com centavos automáticos: digitar `100` exibe `1,00`, e digitar `123456` exibe `1.234,56`. O valor é convertido para número antes de gerar a ficha. A validação exige valor maior que zero e de até R$ 9.999.999,00.
