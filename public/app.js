@@ -30,9 +30,19 @@ form.addEventListener('submit', e => {
   if (!form.elements.orando.checked && !contribution.checked) { const error=document.querySelector('#participation-error'); error.hidden=false; form.elements.orando.focus(); return; }
   const data=new FormData(form);
   const modes=[data.has('orando')?'Orando':'', data.has('contribuindo')?'Contribuindo':''].filter(Boolean).join(' e ');
-  let message=`Olá! Quero participar da obra do Ministério Pão Vivo.\n\nNome completo: ${data.get('nome').trim()}\nEndereço completo: ${data.get('endereco').trim()}\nCEP: ${data.get('cep')}\nE-mail: ${data.get('email').trim()}\nWhatsApp: ${data.get('whatsapp')}\n\nQuero participar: ${modes}`;
-  if(contribution.checked) message+=`\nOferta: ${data.get('frequencia')}\nComo vou contribuir: ${data.get('metodo')}\nValor: ${Number(data.get('valor')).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}`;
-  message+='\n\nAutorizo o contato do Ministério Pão Vivo sobre minha participação.';
+  // O WhatsApp interpreta asteriscos simples como negrito após o envio.
+  const sections = [
+    '🧡 *MINISTÉRIO PÃO VIVO*\n*Ficha de participação*',
+    'Olá! Quero fazer parte desta obra.',
+    `👤 *DADOS DO PARTICIPANTE*\n*Nome:* ${data.get('nome').trim()}\n*Endereço:* ${data.get('endereco').trim()}\n*CEP:* ${data.get('cep')}\n*E-mail:* ${data.get('email').trim()}\n*WhatsApp:* ${data.get('whatsapp')}`,
+    `🤝 *MINHA PARTICIPAÇÃO*\n${modes}`,
+  ];
+  if (contribution.checked) {
+    const amount = Number(data.get('valor')).toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
+    sections.push(`🎁 *CONTRIBUIÇÃO*\n*Frequência:* ${data.get('frequencia')}\n*Forma:* ${data.get('metodo')}\n*Valor: ${amount}*`);
+  }
+  sections.push('✅ *AUTORIZAÇÃO*\nAutorizo o contato do Ministério Pão Vivo sobre minha participação.');
+  const message = sections.join('\n\n');
   const url=`https://wa.me/5551993463773?text=${encodeURIComponent(message)}`;
   document.querySelector('#registration-whatsapp').href = url;
   const summary = contribution.checked
