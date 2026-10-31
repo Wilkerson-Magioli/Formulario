@@ -43,5 +43,6 @@
 .card-actions .dark{background:#b74d23;color:#fff}
 .card-actions button:disabled{opacity:.55;cursor:wait}
 @media(max-width:540px){.participation-card-section{padding:20px 16px}.card-actions .button{width:100%;justify-content:center}}
+@media(max-width:600px){.donation-landing footer.wrap{flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center}.donation-landing footer p{order:0;width:100%;text-align:center}.card-actions{flex-direction:column}.card-actions .button{width:100%;justify-content:center}}
 @media(max-width:800px){.donation-landing .hero-copy{padding:32px 28px}.donation-landing .hero{grid-template-columns:1.2fr 1fr}.landing-photo{min-height:420px}}
 @media(max-width:540px){.donation-landing .hero{display:block}.donation-landing .hero-copy{padding:30px 25px}.landing-photo{min-height:220px;height:220px}.landing-photo img{object-position:50% 20%}}
