@@ -4,9 +4,7 @@
   const preview = document.querySelector('#participation-card-image');
   const status = document.querySelector('#card-status');
   const downloadButton = document.querySelector('#download-card');
-  const shareButton = document.querySelector('#share-card');
   const filename = 'ficha-participacao-pao-vivo.png';
-  let currentBlob = null;
   let currentUrl = null;
   let generation = 0;
   let logoPromise;
@@ -134,9 +132,9 @@
   function clear() {
     generation++;
     if (currentUrl) URL.revokeObjectURL(currentUrl);
-    currentUrl = null; currentBlob = null;
+    currentUrl = null;
     preview.removeAttribute('src'); preview.hidden = true;
-    downloadButton.disabled = true; shareButton.disabled = true; shareButton.hidden = true;
+    downloadButton.disabled = true;
     status.textContent = ''; section.hidden = true;
   }
   async function generate(data) {
@@ -145,14 +143,10 @@
     try {
       const blob = await render(data);
       if (version !== generation) return;
-      currentBlob = blob; currentUrl = URL.createObjectURL(blob);
+      currentUrl = URL.createObjectURL(blob);
       preview.src = currentUrl; preview.hidden = false;
       downloadButton.disabled = false;
-      const file = new File([blob], filename, {type:'image/png'});
-      let canShare = false;
-      try { canShare = Boolean(navigator.share && navigator.canShare?.({files:[file]})); } catch {}
-      shareButton.hidden = !canShare; shareButton.disabled = !canShare;
-      status.textContent = 'Imagem pronta. Confira seus dados antes de compartilhar.';
+      status.textContent = 'Imagem pronta para baixar e guardar com você.';
     } catch {
       if (version === generation) status.textContent = 'Não foi possível gerar a imagem. Volte ao formulário e tente novamente.';
     }
@@ -161,16 +155,7 @@
     if (!currentUrl) return;
     const link = document.createElement('a');
     link.href = currentUrl; link.download = filename; link.click();
-    status.textContent = 'Ficha pronta para baixar. Anexe a imagem na conversa com o Ministério.';
-  });
-  shareButton.addEventListener('click', async () => {
-    if (!currentBlob) return;
-    try {
-      await navigator.share({files:[new File([currentBlob], filename, {type:'image/png'})]});
-      status.textContent = 'Compartilhamento concluído pelo aplicativo escolhido.';
-    } catch (error) {
-      if (error.name !== 'AbortError') status.textContent = 'Não foi possível compartilhar por aqui. Use “Baixar ficha em imagem” e anexe o arquivo no WhatsApp.';
-    }
+    status.textContent = 'Ficha pronta para baixar. Guarde esta cópia para você.';
   });
   window.participationCard = {generate, clear};
 })();

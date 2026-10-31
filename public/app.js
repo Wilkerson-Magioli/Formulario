@@ -2,6 +2,7 @@ const PIX = '00020126360014BR.GOV.BCB.PIX0114081457130001555204000053039865802BR
 const form = document.querySelector('#participation-form');
 const contribution = document.querySelector('#contribuindo');
 const fields = document.querySelector('#contribution-fields');
+let submittedWithContribution = false;
 document.querySelector('#pix-code').value = PIX;
 contribution.addEventListener('change', () => { fields.hidden = !contribution.checked; fields.disabled = !contribution.checked; });
 const transferBankDetails = document.querySelector('#transfer-bank-details');
@@ -44,6 +45,22 @@ form.addEventListener('submit', e => {
   const data=new FormData(form);
   const modes=[data.has('orando')?'Orando':'', data.has('contribuindo')?'Contribuindo':''].filter(Boolean).join(' e ');
   const amount = contribution.checked ? parseOfferAmount(data.get('valor')) : null;
+  const sections = [
+    '🧡 *MINISTÉRIO PÃO VIVO*\n*Ficha de participação*',
+    'Olá! Quero fazer parte desta obra.',
+    `👤 *DADOS DO PARTICIPANTE*\n*Nome:* ${data.get('nome').trim()}\n*Endereço:* ${data.get('endereco').trim()}\n*CEP:* ${data.get('cep')}\n*E-mail:* ${data.get('email').trim()}\n*WhatsApp:* ${data.get('whatsapp')}`,
+    `🤝 *MINHA PARTICIPAÇÃO*\n${modes}`,
+  ];
+  if (contribution.checked) sections.push(`🎁 *CONTRIBUIÇÃO*\n*Frequência:* ${data.get('frequencia')}\n*Forma:* ${data.get('metodo')}\n*Valor: ${amount.toLocaleString('pt-BR', {style:'currency',currency:'BRL'})}*`);
+  sections.push('✅ *AUTORIZAÇÃO*\nAutorizo o contato do Ministério Pão Vivo sobre minha participação.');
+  const message = (document.body.dataset.testMode === 'true' ? '*TESTE DO FORMULÁRIO*\n\n' : '') + sections.join('\n\n');
+  const whatsappUrl = `https://wa.me/5551985220218?text=${encodeURIComponent(message)}`;
+  document.querySelector('#registration-whatsapp').href = whatsappUrl;
+  submittedWithContribution = contribution.checked;
+  document.querySelector('#finish-donation').hidden = !submittedWithContribution;
+  document.querySelector('#finish-prayer').hidden = submittedWithContribution;
+  document.querySelector('#confirm-donation').checked = false;
+  document.querySelector('#complete-donation').disabled = true;
   const summary = contribution.checked
     ? `${data.get('nome').trim()}, você escolheu participar ${modes.toLowerCase()}, com ${data.get('frequencia').toLowerCase()} de ${amount.toLocaleString('pt-BR', {style:'currency',currency:'BRL'})}. Informe esse valor no aplicativo do banco.`
     : `${data.get('nome').trim()}, obrigado por se unir a esta obra em oração!`;
@@ -59,10 +76,47 @@ form.addEventListener('submit', e => {
     orando: data.has('orando'), contribuindo: contribution.checked,
     frequencia: data.get('frequencia'), metodo: data.get('metodo'), valor: amount,
   });
+  // Abre o texto pronto. O envio permanece sob confirmação do doador no WhatsApp.
+  window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
 });
 document.querySelector('#edit-form').addEventListener('click', () => {
   document.querySelector('#payment-view').hidden = true;
   document.querySelector('#form-view').hidden = false;
   window.participationCard.clear();
+  document.querySelector('#registration-whatsapp').removeAttribute('href');
   document.querySelector('#participar').scrollIntoView();
+});
+
+document.querySelector('#confirm-donation').addEventListener('change', event => {
+  document.querySelector('#complete-donation').disabled = !event.target.checked;
+});
+function showCompletion() {
+  if (submittedWithContribution && !document.querySelector('#confirm-donation').checked) return;
+  document.querySelector('#payment-view').hidden = true;
+  document.querySelector('#closing-message').hidden = true;
+  document.querySelector('.header-link').hidden = true;
+  document.querySelector('#completion-title').textContent = submittedWithContribution
+    ? 'Doação Realizada com sucesso' : 'Participação concluída com sucesso';
+  document.querySelector('#completion-detail').textContent = submittedWithContribution
+    ? 'Conclusão informada por você. O Ministério fará a conferência do pagamento e do comprovante.'
+    : 'Obrigado por se unir a esta obra em oração!';
+  document.querySelector('#completion-view').hidden = false;
+  window.scrollTo({top:0, behavior:'instant'});
+  document.querySelector('#completion-title').focus({preventScroll:true});
+}
+document.querySelector('#complete-donation').addEventListener('click', showCompletion);
+document.querySelector('#complete-prayer').addEventListener('click', showCompletion);
+document.querySelector('#exit-flow').addEventListener('click', () => {
+  window.participationCard.clear();
+  form.reset();
+  form.elements.valor.setCustomValidity('');
+  fields.hidden = true; fields.disabled = true;
+  updateTransferBankDetails();
+  document.querySelector('#registration-whatsapp').removeAttribute('href');
+  document.querySelector('#participation-summary').textContent = '';
+  submittedWithContribution = false;
+  document.querySelector('#completion-view').hidden = true;
+  document.querySelector('#farewell-view').hidden = false;
+  window.scrollTo({top:0, behavior:'instant'});
+  document.querySelector('#farewell-title').focus({preventScroll:true});
 });
