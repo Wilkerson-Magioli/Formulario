@@ -1,5 +1,4 @@
 .donation-landing{--orange:#d36a38;--cream:#fff4ef;background:#fff;border-top:6px solid var(--orange)}
-.test-mode-notice{border:1px solid #edc6b3;background:#fff4ed;color:#754129;border-radius:8px;padding:12px 16px;margin-bottom:20px;font-size:12px}
 .donation-landing .header-link{color:#a74520;border-color:#e0a184}
 .donation-landing .hero{background:var(--orange);border:0;grid-template-columns:1.15fr 1fr;border-radius:20px}
 .donation-landing .hero-copy{padding:46px 42px;color:#2d1c14}
