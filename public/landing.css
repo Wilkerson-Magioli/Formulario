@@ -15,13 +15,15 @@
 .landing-photo img{position:absolute;inset:0;width:100%;height:calc(100% + 90px);object-fit:cover;object-position:52% 20%}
 .landing-photo:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#5a281918,transparent 45%)}
 .donation-landing .section-intro .eyebrow{color:#ae4922}
+.donation-landing .section-intro{display:block;max-width:760px;margin-inline:auto}
+.donation-landing .section-intro>p{margin:12px 0 0}
+.donation-landing .content-grid{display:block;max-width:760px;margin-inline:auto}
 .donation-landing .form-card{border-top:3px solid var(--orange)}
 .donation-landing .step{border-color:#efc3ae;background:#fff4ef;color:#a4431f}
 .donation-landing input[type=checkbox],.donation-landing input[type=radio]{accent-color:#b74d23}
 .donation-landing .choice:has(:checked){border-color:var(--orange);background:#fff4ef}
 .donation-landing input:focus-visible{outline-color:#b74d23}
-.donation-landing .journey{background:#fff4ef;border-color:#efcdbd;border-top-color:var(--orange)}
-.donation-landing .journey>.eyebrow,.donation-landing .journey li,.donation-landing .choice-icon{color:#a4431f}
+.donation-landing .choice-icon{color:#a4431f}
 .donation-landing .submit{background:#b74d23;color:#fff}
 .donation-landing .submit:hover{background:#963c19}
 .donation-landing .donation-card{background:#fff7f2;border-color:#efcdbd;border-top:4px solid var(--orange)}
