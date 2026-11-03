@@ -81,6 +81,6 @@ Os testes cobrem valores, máscaras, conteúdo e destinatário do WhatsApp, ora�
 
 ## QR Code com link clicável
 
-A página `/acesso` oferece o link “Toque aqui para participar e doar” abaixo do QR Code e o download da versão clicável em PDF. O PDF está em `public/assets/qr-code-acesso-clicavel.pdf`; tanto o código quanto o botão abrem o formulário público na seção de participação. Para enviar pelo WhatsApp com os links preservados, anexe o PDF como documento. Uma imagem PNG ou uma captura de tela não preserva links clicáveis.
+A página `/acesso` oferece o link “Toque aqui para participar e doar” abaixo do QR Code e o download da versão clicável em PDF. O PDF está em `public/assets/qr-code-acesso-clicavel.pdf`; tanto o código quanto o botão abrem o início da página inicial. Para enviar pelo WhatsApp com os links preservados, anexe o PDF como documento. Uma imagem PNG ou uma captura de tela não preserva links clicáveis.
 
 Para regenerar o PDF, use `python scripts/create-clickable-qr.py` com ReportLab instalado. A arte-base está em `public/assets/qr-code-divulgacao.png`.

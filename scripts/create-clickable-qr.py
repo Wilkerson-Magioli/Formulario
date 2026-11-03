@@ -12,7 +12,7 @@ from reportlab.pdfgen.canvas import Canvas
 
 ROOT = Path(__file__).resolve().parent.parent
 ASSETS = ROOT / "public" / "assets"
-DESTINATION = "https://pao-vivo-participar.risencrab2.chatgpt.site/#participar"
+DESTINATION = "https://pao-vivo-participar.risencrab2.chatgpt.site/"
 OUTPUT = ASSETS / "qr-code-acesso-clicavel.pdf"
 
 canvas = Canvas(str(OUTPUT), pagesize=(720, 500), invariant=True)
