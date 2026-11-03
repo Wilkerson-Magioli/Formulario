@@ -1,12 +1,12 @@
 .donation-landing {
-  --orange: #d36a38;
-  --cream: #fff4ef;
+  --orange: #f39a23;
+  --cream: #fff7e8;
   background: #fff;
   border-top: 6px solid var(--orange);
 }
 .donation-landing .header-link {
-  color: #a74520;
-  border-color: #e0a184;
+  color: #925000;
+  border-color: #e7bf78;
 }
 .donation-landing .hero {
   background: var(--orange);
@@ -22,7 +22,7 @@
   color: #2d1c14;
 }
 .donation-landing .hero-copy h1 em {
-  color: #fff;
+  color: #4b2f0c;
 }
 .donation-landing .hero-copy > .eyebrow {
   color: #2d1c14;
@@ -64,7 +64,7 @@
   background: linear-gradient(90deg, #5a281918, transparent 45%);
 }
 .donation-landing .section-intro .eyebrow {
-  color: #ae4922;
+  color: #925000;
 }
 .donation-landing .section-intro {
   display: block;
@@ -83,51 +83,51 @@
   border-top: 3px solid var(--orange);
 }
 .donation-landing .step {
-  border-color: #efc3ae;
-  background: #fff4ef;
-  color: #a4431f;
+  border-color: #f0d1a0;
+  background: #fff7e8;
+  color: #925000;
 }
 .donation-landing input[type="checkbox"],
 .donation-landing input[type="radio"] {
-  accent-color: #b74d23;
+  accent-color: #925000;
 }
 .donation-landing .choice:has(:checked) {
   border-color: var(--orange);
-  background: #fff4ef;
+  background: #fff7e8;
 }
 .donation-landing input:focus-visible {
-  outline-color: #b74d23;
+  outline-color: #925000;
 }
 .donation-landing .choice-icon {
-  color: #a4431f;
+  color: #925000;
 }
 .donation-landing .submit {
-  background: #b74d23;
-  color: #fff;
+  background: var(--orange);
+  color: #2d210e;
 }
 .donation-landing .submit:hover {
-  background: #963c19;
+  background: #df8613;
 }
 .donation-landing .donation-card {
-  background: #fff7f2;
-  border-color: #efcdbd;
+  background: #fff9ed;
+  border-color: #f0d1a0;
   border-top: 4px solid var(--orange);
 }
 .donation-landing .copy {
-  background: #d36a38;
+  background: #f39a23;
   color: #24170f;
 }
 .donation-landing .copy:hover {
-  background: #e17b49;
+  background: #e98b16;
 }
 .donation-landing .qr-block {
-  border-color: #efcdbd;
+  border-color: #f0d1a0;
 }
 .donation-landing .receipt {
-  background: #fce6d9;
+  background: #ffedc9;
 }
 .donation-landing .closing > span {
-  color: #b74d23;
+  color: #925000;
 }
 .donation-landing footer {
   border-top: 3px solid var(--orange);
@@ -135,22 +135,22 @@
 .transfer-bank-details {
   margin: -7px 0 22px;
   padding: 12px 15px;
-  background: #fff7f2;
-  border-left: 2px solid #d36a38;
+  background: #fff9ed;
+  border-left: 2px solid #f39a23;
   border-radius: 0 6px 6px 0;
   font-size: 12px;
-  color: #675447;
+  color: #675638;
 }
 .boleto-fields {
   padding: 18px;
   margin: 0 0 22px;
-  border: 1px solid #efcdbd;
+  border: 1px solid #f0d1a0;
   border-radius: 10px;
-  background: #fff7f2;
+  background: #fff9ed;
 }
 .boleto-fields legend {
   padding: 0 6px;
-  color: #83513b;
+  color: #805017;
   font-size: 13px;
   font-weight: 700;
 }
@@ -162,7 +162,7 @@
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.7px;
-  color: #83513b;
+  color: #805017;
   margin-bottom: 5px;
 }
 .transfer-bank-details > div {
@@ -172,12 +172,12 @@
 }
 .transfer-bank-details b {
   font-weight: 600;
-  color: #4b3a30;
+  color: #4b391e;
 }
 .participation-card-section {
   margin: 0 0 32px;
-  border: 1px solid #eddfd7;
-  border-top: 3px solid #d36a38;
+  border: 1px solid #eee0c7;
+  border-top: 3px solid #f39a23;
   border-radius: 14px;
   padding: 26px;
   background: #fff;
@@ -199,7 +199,7 @@
   width: 100%;
   max-width: 450px;
   height: auto;
-  border: 1px solid #eee5df;
+  border: 1px solid #eee0c7;
   border-radius: 8px;
   margin: 20px auto;
 }
@@ -210,11 +210,11 @@
   margin-top: 18px;
 }
 .donation-landing #share-card {
-  background: #b74d23;
-  color: #fff;
+  background: var(--orange);
+  color: #2d210e;
 }
 .donation-landing #share-card:hover {
-  background: #963c19;
+  background: #df8613;
 }
 .card-actions:has(> button[hidden]) {
   display: none;
@@ -225,12 +225,12 @@
   font-size: 11px;
   font-weight: 500;
   color: #24170f;
-  background: #fff4ee;
-  border: 1px solid #eaded5;
+  background: #fff7e8;
+  border: 1px solid #eee0c7;
   border-radius: 6px;
 }
 .card-download:hover {
-  background: #fbe7db;
+  background: #ffedc9;
 }
 .card-download:disabled {
   opacity: 0.55;
@@ -242,15 +242,15 @@
 .donation-landing .registration-whatsapp,
 .donation-landing .finish-actions .dark,
 .donation-landing .finish-view .dark {
-  background: #b74d23;
-  color: #fff;
+  background: var(--orange);
+  color: #2d210e;
 }
 .finish-actions {
   margin: 28px 0 0;
   padding: 24px;
-  border: 1px solid #eddfd7;
+  border: 1px solid #eee0c7;
   border-radius: 12px;
-  background: #fff7f2;
+  background: #fff9ed;
 }
 .finish-actions h2 {
   font-size: 20px;
@@ -270,8 +270,8 @@
   margin: 50px auto;
   text-align: center;
   padding: 42px 24px;
-  border: 1px solid #eddfd7;
-  border-top: 4px solid #d36a38;
+  border: 1px solid #eee0c7;
+  border-top: 4px solid #f39a23;
   border-radius: 16px;
   background: #fff;
 }
@@ -295,10 +295,10 @@
   place-items: center;
   width: 68px;
   height: 68px;
-  background: #fff0e7;
+  background: #fff1d6;
   border-radius: 50%;
   font-size: 32px;
-  color: #b74d23;
+  color: #925000;
 }
 @media (max-width: 540px) {
   .finish-view {

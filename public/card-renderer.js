@@ -25,8 +25,8 @@ window.renderParticipationCard = (() => {
     canvas.width = 1080;
     const ctx = canvas.getContext("2d");
     const ink = "#302b22",
-      muted = "#786b61",
-      orange = "#b74d23";
+      muted = "#786d56",
+      orange = "#925000";
     const font = (size, weight = 500) =>
       `${weight} ${size}px Manrope, Arial, sans-serif`;
     const operations = [];
@@ -52,7 +52,7 @@ window.renderParticipationCard = (() => {
       w,
       h,
       fill = "#ffffff",
-      stroke = "#eadfd7",
+      stroke = "#eee0c7",
       radius = 22,
     ) {
       operations.push(() => {
@@ -103,7 +103,7 @@ window.renderParticipationCard = (() => {
       return 31 + lines.length * 37 + 24;
     }
     function sectionTitle(number, title, y) {
-      box(72, y - 24, 40, 36, "#fff0e7", null, 10);
+      box(72, y - 24, 40, 36, "#fff1d6", null, 10);
       text(number, 92, y, 16, orange, 800, "center");
       text(title, 130, y, 20, orange, 800);
     }
@@ -146,7 +146,7 @@ window.renderParticipationCard = (() => {
     const participantBottom = y - 4;
     // Desenha o fundo antes dos textos já planejados.
     const fieldsOperations = operations.splice(participantBox);
-    box(72, 382, 936, participantBottom - 382, "#fff", "#eadfd7");
+    box(72, 382, 936, participantBottom - 382, "#fff", "#eee0c7");
     operations.push(...fieldsOperations);
 
     y = participantBottom + 62;
@@ -157,7 +157,7 @@ window.renderParticipationCard = (() => {
     ]
       .filter(Boolean)
       .join("  +  ");
-    box(72, y + 23, 936, 84, "#fff4ee", null);
+    box(72, y + 23, 936, 84, "#fff7e8", null);
     text(participation, 104, y + 77, 29, orange, 700);
     y += 170;
 
@@ -180,7 +180,7 @@ window.renderParticipationCard = (() => {
         426,
       );
       const amountTop = y + 60 + Math.max(frequencyHeight, methodHeight);
-      box(96, amountTop, 888, 124, "#fff0e7", null, 14);
+      box(96, amountTop, 888, 124, "#fff1d6", null, 14);
       text("VALOR DA OFERTA", 122, amountTop + 35, 17, orange, 700);
       text(
         Number(data.valor).toLocaleString("pt-BR", {
@@ -217,7 +217,7 @@ window.renderParticipationCard = (() => {
       text(line, 72, y + 34 + i * 31, 21, muted),
     );
     y += 34 + consentLines.length * 31 + 54;
-    box(72, y, 936, 2, "#eadfd7", null, 0);
+    box(72, y, 936, 2, "#eee0c7", null, 0);
     text(
       "Fé que alimenta. Amor que alcança.",
       540,
@@ -230,7 +230,7 @@ window.renderParticipationCard = (() => {
     canvas.height = y + 92;
     ctx.fillStyle = "#fff";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#d36a38";
+    ctx.fillStyle = "#f39a23";
     ctx.fillRect(0, 0, canvas.width, 12);
     operations.forEach((operation) => operation());
     return new Promise((resolve, reject) =>

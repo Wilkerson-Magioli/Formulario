@@ -89,4 +89,4 @@ O Ministério emite o boleto manualmente pelo banco e envia ao WhatsApp informad
 
 A página `/acesso` oferece o link “Toque aqui para participar e doar” abaixo do QR Code e o download da versão clicável em PDF. O PDF está em `public/assets/qr-code-acesso-clicavel.pdf`; tanto o código quanto o botão abrem o início da página inicial. Para enviar pelo WhatsApp com os links preservados, anexe o PDF como documento. Uma imagem PNG ou uma captura de tela não preserva links clicáveis.
 
-Para regenerar o PDF, use `python scripts/create-clickable-qr.py` com ReportLab instalado. A arte-base está em `public/assets/qr-code-divulgacao.png`.
+Para regenerar o PDF, use `python scripts/create-clickable-qr.py` com ReportLab instalado. O PDF usa elementos vetoriais e os arquivos originais do logotipo, fotografia e QR Code em `public/assets/`. A paleta atual usa laranja `#F39A23`, tons suaves de pêssego e texto escuro nos botões para facilitar a leitura.
