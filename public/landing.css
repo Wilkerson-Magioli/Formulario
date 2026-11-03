@@ -141,6 +141,22 @@
   font-size: 12px;
   color: #675447;
 }
+.boleto-fields {
+  padding: 18px;
+  margin: 0 0 22px;
+  border: 1px solid #efcdbd;
+  border-radius: 10px;
+  background: #fff7f2;
+}
+.boleto-fields legend {
+  padding: 0 6px;
+  color: #83513b;
+  font-size: 13px;
+  font-weight: 700;
+}
+.boleto-fields > label + label {
+  margin-top: 16px;
+}
 .transfer-bank-details > strong {
   display: block;
   font-size: 10px;

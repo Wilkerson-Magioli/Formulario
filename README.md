@@ -79,6 +79,12 @@ npm run build
 
 Os testes cobrem valores, máscaras, conteúdo e destinatário do WhatsApp, oração, contribuição, confirmação antes de finalizar, limpeza ao sair, download e cancelamento de gerações antigas da ficha. Usam interface e navegador simulados, sem enviar mensagens ou realizar pagamentos. A inspeção visual em navegador real continua necessária para mudanças de layout.
 
+## Contribuição por boleto
+
+Ao escolher Boleto bancário, o doador informa se é pessoa física ou jurídica. CPF ou CNPJ é obrigatório e recebe máscara e validação dos dígitos verificadores; CNPJs numéricos e alfanuméricos são aceitos. Para pessoa jurídica, a razão social também é obrigatória. Esses dados entram na mensagem do WhatsApp e na ficha PNG somente para boleto. Trocar para Pix, transferência ou somente oração exclui esses campos do cadastro preparado.
+
+O Ministério emite o boleto manualmente pelo banco e envia ao WhatsApp informado. O site não gera boleto bancário nem código de barras de cobrança. A finalização de boleto orienta aguardar a emissão, sem declarar pagamento realizado. O PDF de acesso continua levando ao início da página inicial.
+
 ## QR Code com link clicável
 
 A página `/acesso` oferece o link “Toque aqui para participar e doar” abaixo do QR Code e o download da versão clicável em PDF. O PDF está em `public/assets/qr-code-acesso-clicavel.pdf`; tanto o código quanto o botão abrem o início da página inicial. Para enviar pelo WhatsApp com os links preservados, anexe o PDF como documento. Uma imagem PNG ou uma captura de tela não preserva links clicáveis.

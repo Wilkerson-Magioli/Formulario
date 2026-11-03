@@ -54,6 +54,7 @@
   function readParticipation(formData) {
     const text = (name) => String(formData.get(name) ?? "").trim();
     const contribuindo = formData.has("contribuindo");
+    const boleto = contribuindo && text("metodo") === "Boleto bancário";
     return {
       nome: text("nome"),
       endereco: text("endereco"),
@@ -65,6 +66,12 @@
       frequencia: contribuindo ? text("frequencia") : null,
       metodo: contribuindo ? text("metodo") : null,
       valor: contribuindo ? parseOfferAmount(text("valor")) : null,
+      tipoPessoa: boleto ? text("tipoPessoa") : null,
+      documento: boleto
+        ? formatTaxDocument(text("documento"), text("tipoPessoa"))
+        : null,
+      razaoSocial:
+        boleto && text("tipoPessoa") === "PJ" ? text("razaoSocial") : null,
     };
   }
 
@@ -75,6 +82,60 @@
     ]
       .filter(Boolean)
       .join(" e ");
+  }
+
+  function isBoleto(data) {
+    return data.contribuindo && data.metodo === "Boleto bancário";
+  }
+
+  function normalizeTaxDocument(value) {
+    return String(value)
+      .toUpperCase()
+      .replace(/[^A-Z0-9]/g, "");
+  }
+
+  function formatTaxDocument(value, personType) {
+    const groups = personType === "PJ" ? [2, 3, 3, 4, 2] : [3, 3, 3, 2];
+    const separators =
+      personType === "PJ" ? [".", ".", "/", "-"] : [".", ".", "-"];
+    const raw =
+      personType === "PJ"
+        ? normalizeTaxDocument(value).slice(0, 14)
+        : digitsOnly(value).slice(0, 11);
+    let offset = 0;
+    return groups
+      .map((length, index) => {
+        const part = raw.slice(offset, offset + length);
+        offset += length;
+        return part ? (index ? separators[index - 1] : "") + part : "";
+      })
+      .join("");
+  }
+
+  function validateTaxDocument(value, personType) {
+    if (!value) return ""; // O campo required trata o documento vazio.
+    const raw = normalizeTaxDocument(value);
+    const cnpj = personType === "PJ";
+    const pattern = cnpj ? /^[A-Z0-9]{12}[0-9]{2}$/ : /^[0-9]{11}$/;
+    const error = cnpj ? "Informe um CNPJ válido." : "Informe um CPF válido.";
+    if (!pattern.test(raw) || /^(.)\1+$/.test(raw)) return error;
+    const weights = cnpj
+      ? [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
+      : [10, 9, 8, 7, 6, 5, 4, 3, 2];
+    const digit = (base, factors) => {
+      // Receita Federal: também aceita CNPJ alfanumérico (ASCII menos 48).
+      const sum = Array.from(base).reduce(
+        (total, char, index) =>
+          total + (char.charCodeAt(0) - 48) * factors[index],
+        0,
+      );
+      const remainder = sum % 11;
+      return String(remainder < 2 ? 0 : 11 - remainder);
+    };
+    const base = raw.slice(0, -2);
+    const first = digit(base, weights);
+    const second = digit(base + first, [cnpj ? 6 : 11, ...weights]);
+    return raw.endsWith(first + second) ? "" : error;
   }
 
   function createWhatsAppMessage(data) {
@@ -88,6 +149,11 @@
       sections.push(
         `🎁 *CONTRIBUIÇÃO*\n*Frequência:* ${data.frequencia}\n*Forma:* ${data.metodo}\n*Valor: ${formatCurrency(data.valor)}*`,
       );
+    if (isBoleto(data)) {
+      sections.push(
+        `🧾 *SOLICITAÇÃO DE BOLETO*\nSolicito boleto para contribuição.\n*Tipo de pessoa:* ${data.tipoPessoa === "PJ" ? "Pessoa jurídica" : "Pessoa física"}\n*${data.tipoPessoa === "PJ" ? "CNPJ" : "CPF"}:* ${data.documento}${data.razaoSocial ? `\n*Razão social:* ${data.razaoSocial}` : ""}\nPor favor, envie o boleto para o WhatsApp informado no cadastro.`,
+      );
+    }
     sections.push(
       "✅ *AUTORIZAÇÃO*\nAutorizo o contato do Ministério Pão Vivo sobre minha participação.",
     );
@@ -99,6 +165,8 @@
   }
 
   function createSummary(data) {
+    if (isBoleto(data))
+      return `${data.nome}, você escolheu ${data.frequencia.toLowerCase()} de ${formatCurrency(data.valor)} por boleto bancário. O Ministério enviará seu boleto pelo WhatsApp após receber seu cadastro.`;
     return data.contribuindo
       ? `${data.nome}, você escolheu participar ${participationModes(data).toLowerCase()}, com ${data.frequencia.toLowerCase()} de ${formatCurrency(data.valor)}. Informe esse valor no aplicativo do banco.`
       : `${data.nome}, obrigado por se unir a esta obra em oração!`;
@@ -117,6 +185,9 @@
     createWhatsAppMessage,
     createWhatsAppUrl,
     createSummary,
+    isBoleto,
+    formatTaxDocument,
+    validateTaxDocument,
   };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.Participation = api;

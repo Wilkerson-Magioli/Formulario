@@ -3,7 +3,7 @@ const Participation = require("../public/participation.js");
 const fs = require("node:fs");
 const vm = require("node:vm");
 const assert = require("node:assert/strict");
-function scenario(contributing) {
+function scenario(contributing, method = "Pix", personType = "PF") {
   const nodes = new Map();
   function node(key) {
     if (!nodes.has(key))
@@ -36,7 +36,10 @@ function scenario(contributing) {
     whatsapp: "(51) 99999-0000",
     valor: "1,00",
     frequencia: "Oferta pontual",
-    metodo: "Pix",
+    metodo: method,
+    tipoPessoa: personType,
+    documento: personType === "PJ" ? "08.145.713/0001-55" : "529.982.247-25",
+    razaoSocial: "Empresa de Exemplo",
   };
   form.elements = {};
   for (const [key, value] of Object.entries(fields)) {
@@ -101,7 +104,20 @@ function scenario(contributing) {
     /TESTE DO FORMULÁRIO/,
   );
   assert.equal(cards[0].contribuindo, contributing);
-  if (contributing) {
+  if (contributing && method === "Boleto bancário") {
+    const message = new URL(opened[0]).searchParams.get("text");
+    assert.match(message, /SOLICITAÇÃO DE BOLETO/);
+    assert.ok(message.includes(fields.documento));
+    assert.equal(node("#payment-options").hidden, true);
+    assert.equal(node("#finish-donation").hidden, true);
+    assert.equal(node("#boleto-options").hidden, false);
+    assert.equal(node("#finish-boleto").hidden, false);
+    emit(node("#complete-boleto"), "click");
+    assert.equal(
+      node("#completion-title").textContent,
+      "Aguarde seu boleto pelo WhatsApp.",
+    );
+  } else if (contributing) {
     assert.match(new URL(opened[0]).searchParams.get("text"), /1,00/);
     assert.equal(cards[0].valor, 1);
     assert.equal(node("#complete-donation").disabled, true);
@@ -139,3 +155,8 @@ test("Contribuição: número oficial, confirmação obrigatória e limpeza ao s
   scenario(true));
 test("Oração: mensagem sem dados financeiros e finalização", () =>
   scenario(false));
+
+test("Boleto PF: CPF no WhatsApp, aguarda emissão e limpa os dados", () =>
+  scenario(true, "Boleto bancário"));
+test("Boleto PJ: CNPJ e razão social no cadastro", () =>
+  scenario(true, "Boleto bancário", "PJ"));

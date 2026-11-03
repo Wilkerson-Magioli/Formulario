@@ -7,11 +7,15 @@ const {
   readParticipation,
   createWhatsAppUrl,
   createSummary,
+  isBoleto,
+  formatTaxDocument,
+  validateTaxDocument,
 } = window.Participation;
 const form = document.querySelector("#participation-form");
 const contribution = document.querySelector("#contribuindo");
 const fields = document.querySelector("#contribution-fields");
 let submittedWithContribution = false;
+let submittedWithBoleto = false;
 document.querySelector("#pix-code").value = PIX;
 contribution.addEventListener("change", () => {
   fields.hidden = !contribution.checked;
@@ -21,9 +25,34 @@ const transferBankDetails = document.querySelector("#transfer-bank-details");
 function updateTransferBankDetails() {
   transferBankDetails.hidden =
     !contribution.checked || form.elements.metodo.value !== "Transferência";
+  updateBoletoFields();
+}
+function updateBoletoFields() {
+  const enabled =
+    contribution.checked && form.elements.metodo.value === "Boleto bancário";
+  const company = form.elements.tipoPessoa.value === "PJ";
+  const documentInput = form.elements.documento;
+  document.querySelector("#boleto-fields").hidden = !enabled;
+  document.querySelector("#boleto-fields").disabled = !enabled;
+  document.querySelector("#company-name-field").hidden = !company;
+  form.elements.razaoSocial.disabled = !enabled || !company;
+  document.querySelector("#document-label").textContent = company
+    ? "CNPJ *"
+    : "CPF *";
+  documentInput.maxLength = company ? 18 : 14;
+  documentInput.inputMode = company ? "text" : "numeric";
+  documentInput.placeholder = company ? "00.000.000/0000-00" : "000.000.000-00";
+  documentInput.setCustomValidity(
+    enabled
+      ? validateTaxDocument(documentInput.value, form.elements.tipoPessoa.value)
+      : "",
+  );
 }
 form.addEventListener("change", (event) => {
-  if (event.target.name === "metodo" || event.target.name === "contribuindo")
+  if (event.target.name === "tipoPessoa") {
+    form.elements.documento.value = "";
+  }
+  if (["metodo", "contribuindo", "tipoPessoa"].includes(event.target.name))
     updateTransferBankDetails();
 });
 updateTransferBankDetails();
@@ -37,6 +66,11 @@ function bindInputFormatter(input, formatter, validator = () => "") {
 bindInputFormatter(form.elements.valor, formatOfferInput, validateOfferAmount);
 bindInputFormatter(form.elements.cep, formatPostalCode);
 bindInputFormatter(form.elements.whatsapp, formatPhone);
+bindInputFormatter(
+  form.elements.documento,
+  (value) => formatTaxDocument(value, form.elements.tipoPessoa.value),
+  (value) => validateTaxDocument(value, form.elements.tipoPessoa.value),
+);
 for (const name of ["orando", "contribuindo"])
   form.elements[name].addEventListener("change", () => {
     document.querySelector("#participation-error").hidden = true;
@@ -65,17 +99,31 @@ function submitParticipation(event) {
     return;
   }
   const participation = readParticipation(new FormData(form));
+  if (isBoleto(participation)) {
+    const error = participation.documento
+      ? validateTaxDocument(participation.documento, participation.tipoPessoa)
+      : "Informe o CPF ou CNPJ do pagador.";
+    if (error) {
+      form.elements.documento.setCustomValidity(error);
+      form.elements.documento.reportValidity();
+      return;
+    }
+  }
   const whatsappUrl = createWhatsAppUrl(participation);
   document.querySelector("#registration-whatsapp").href = whatsappUrl;
   submittedWithContribution = contribution.checked;
+  submittedWithBoleto = isBoleto(participation);
   document.querySelector("#finish-donation").hidden =
-    !submittedWithContribution;
+    !submittedWithContribution || submittedWithBoleto;
   document.querySelector("#finish-prayer").hidden = submittedWithContribution;
+  document.querySelector("#finish-boleto").hidden = !submittedWithBoleto;
+  document.querySelector("#boleto-options").hidden = !submittedWithBoleto;
   document.querySelector("#confirm-donation").checked = false;
   document.querySelector("#complete-donation").disabled = true;
   document.querySelector("#participation-summary").textContent =
     createSummary(participation);
-  document.querySelector("#payment-options").hidden = !contribution.checked;
+  document.querySelector("#payment-options").hidden =
+    !contribution.checked || submittedWithBoleto;
   document.querySelector("#form-view").hidden = true;
   document.querySelector("#payment-view").hidden = false;
   window.scrollTo({ top: 0, behavior: "instant" });
@@ -105,18 +153,21 @@ document
 function showCompletion() {
   if (
     submittedWithContribution &&
+    !submittedWithBoleto &&
     !document.querySelector("#confirm-donation").checked
   )
     return;
   document.querySelector("#payment-view").hidden = true;
   document.querySelector("#closing-message").hidden = true;
   document.querySelector(".header-link").hidden = true;
-  document.querySelector("#completion-title").textContent =
-    submittedWithContribution
+  document.querySelector("#completion-title").textContent = submittedWithBoleto
+    ? "Aguarde seu boleto pelo WhatsApp."
+    : submittedWithContribution
       ? "Doação Realizada com sucesso"
       : "Participação concluída com sucesso";
-  document.querySelector("#completion-detail").textContent =
-    submittedWithContribution
+  document.querySelector("#completion-detail").textContent = submittedWithBoleto
+    ? "Após receber seu cadastro, o Ministério emitirá o boleto e enviará para o WhatsApp informado. Depois de pagar, envie o comprovante ao Ministério."
+    : submittedWithContribution
       ? "Conclusão informada por você. O Ministério fará a conferência do pagamento e do comprovante."
       : "Obrigado por se unir a esta obra em oração!";
   document.querySelector("#completion-view").hidden = false;
@@ -130,6 +181,9 @@ document
   .querySelector("#complete-prayer")
   .addEventListener("click", showCompletion);
 document
+  .querySelector("#complete-boleto")
+  .addEventListener("click", showCompletion);
+document
   .querySelector("#exit-flow")
   .addEventListener("click", exitParticipation);
 
@@ -137,12 +191,14 @@ function exitParticipation() {
   window.participationCard.clear();
   form.reset();
   form.elements.valor.setCustomValidity("");
+  form.elements.documento.setCustomValidity("");
   fields.hidden = true;
   fields.disabled = true;
   updateTransferBankDetails();
   document.querySelector("#registration-whatsapp").removeAttribute("href");
   document.querySelector("#participation-summary").textContent = "";
   submittedWithContribution = false;
+  submittedWithBoleto = false;
   document.querySelector("#completion-view").hidden = true;
   document.querySelector("#farewell-view").hidden = false;
   window.scrollTo({ top: 0, behavior: "instant" });

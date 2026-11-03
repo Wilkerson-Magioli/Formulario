@@ -187,6 +187,13 @@
                   ><label
                     ><input type="radio" name="metodo" value="Transferência" />
                     Transferência</label
+                  ><label
+                    ><input
+                      type="radio"
+                      name="metodo"
+                      value="Boleto bancário"
+                    />
+                    Boleto bancário</label
                   >
                 </div>
                 <div
@@ -202,6 +209,65 @@
                     ><span>C/C <b>15152-1</b></span>
                   </div>
                 </div>
+                <fieldset
+                  id="boleto-fields"
+                  class="boleto-fields"
+                  hidden
+                  disabled
+                >
+                  <legend>Dados para emissão do boleto</legend>
+                  <p class="help">
+                    O Ministério enviará seu boleto pelo WhatsApp após receber
+                    seu cadastro.
+                  </p>
+                  <div
+                    class="radio-row"
+                    role="group"
+                    aria-label="Tipo de pessoa"
+                  >
+                    <label
+                      ><input
+                        type="radio"
+                        name="tipoPessoa"
+                        value="PF"
+                        checked
+                      />
+                      Pessoa física</label
+                    >
+                    <label
+                      ><input type="radio" name="tipoPessoa" value="PJ" />
+                      Pessoa jurídica</label
+                    >
+                  </div>
+                  <label
+                    ><span id="document-label">CPF *</span>
+                    <input
+                      name="documento"
+                      required
+                      inputmode="numeric"
+                      autocomplete="off"
+                      maxlength="14"
+                      placeholder="000.000.000-00"
+                      aria-describedby="document-help"
+                    />
+                  </label>
+                  <label id="company-name-field" hidden
+                    >Razão social *
+                    <input
+                      name="razaoSocial"
+                      required
+                      disabled
+                      maxlength="160"
+                      autocomplete="organization"
+                      placeholder="Nome da empresa para emissão do boleto"
+                    />
+                  </label>
+                  <p id="document-help" class="help">
+                    Informe o documento do pagador para a emissão do boleto pelo
+                    Ministério. Ele será incluído no cadastro enviado pelo
+                    WhatsApp.
+                  </p>
+                </fieldset>
                 <label
                   >Valor da oferta (R$) *<input
                     name="valor"
@@ -289,6 +355,25 @@
           >
             Baixar ficha em imagem ↓
           </button>
+        </section>
+        <section
+          id="boleto-options"
+          class="donation-card"
+          hidden
+          aria-labelledby="boleto-heading"
+        >
+          <div class="eyebrow">CONTRIBUIÇÃO POR BOLETO</div>
+          <h2 id="boleto-heading">Aguarde seu boleto pelo WhatsApp.</h2>
+          <p>
+            Após receber seu cadastro, o Ministério Pão Vivo emitirá o boleto
+            bancário com código de barras e enviará o documento para o WhatsApp
+            informado.
+          </p>
+          <p class="help">
+            O boleto não é emitido por este site. Após recebê-lo e realizar o
+            pagamento, envie o comprovante ao Ministério pelo WhatsApp (51)
+            99346-3773.
+          </p>
         </section>
         <div id="payment-options">
           <section class="donation-card" aria-labelledby="donation-title">
@@ -385,6 +470,11 @@
             disabled
           >
             Finalizar participação ↗
+          </button>
+        </section>
+        <section id="finish-boleto" class="finish-actions" hidden>
+          <button id="complete-boleto" class="button dark" type="button">
+            Já enviei meu cadastro. Aguardar boleto ↗
           </button>
         </section>
         <section id="finish-prayer" class="finish-actions" hidden>

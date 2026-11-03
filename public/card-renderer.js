@@ -132,6 +132,17 @@ window.renderParticipationCard = (() => {
     const rightHeight = field("WHATSAPP", data.whatsapp, 550, y, 426);
     y += Math.max(leftHeight, rightHeight);
     y += field("E-MAIL", data.email, 104, y, 872);
+    if (data.contribuindo && data.metodo === "Boleto bancário") {
+      y += field(
+        data.tipoPessoa === "PJ" ? "CNPJ DO PAGADOR" : "CPF DO PAGADOR",
+        data.documento,
+        104,
+        y,
+        872,
+      );
+      if (data.tipoPessoa === "PJ")
+        y += field("RAZÃO SOCIAL", data.razaoSocial, 104, y, 872);
+    }
     const participantBottom = y - 4;
     // Desenha o fundo antes dos textos já planejados.
     const fieldsOperations = operations.splice(participantBox);

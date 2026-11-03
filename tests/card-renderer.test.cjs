@@ -80,4 +80,15 @@ test("PNG acomoda respostas longas e omite contribuição na ficha de oração",
   texts.length = 0;
   await window.renderParticipationCard({ ...data, contribuindo: false });
   assert.ok(!texts.some(({ value }) => value === "VALOR DA OFERTA"));
+  texts.length = 0;
+  await window.renderParticipationCard({
+    ...data,
+    metodo: "Boleto bancário",
+    tipoPessoa: "PJ",
+    documento: "08.145.713/0001-55",
+    razaoSocial: "Empresa Exemplo",
+  });
+  assert.ok(texts.some(({ value }) => value === "CNPJ DO PAGADOR"));
+  assert.ok(texts.some(({ value }) => value === "08.145.713/0001-55"));
+  assert.ok(texts.some(({ value }) => value === "Empresa Exemplo"));
 });
