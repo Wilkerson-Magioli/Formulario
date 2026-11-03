@@ -78,3 +78,9 @@ npm run build
 `npm run format` padroniza HTML, CSS e JavaScript. Os scripts do navegador usam `defer` na ordem declarada no HTML. O objeto `Participation` reúne as regras compartilhadas; a mesma ficha normalizada alimenta o texto e a imagem.
 
 Os testes cobrem valores, máscaras, conteúdo e destinatário do WhatsApp, oração, contribuição, confirmação antes de finalizar, limpeza ao sair, download e cancelamento de gerações antigas da ficha. Usam interface e navegador simulados, sem enviar mensagens ou realizar pagamentos. A inspeção visual em navegador real continua necessária para mudanças de layout.
+
+## QR Code com link clicável
+
+A página `/acesso` oferece o link “Toque aqui para participar e doar” abaixo do QR Code e o download da versão clicável em PDF. O PDF está em `public/assets/qr-code-acesso-clicavel.pdf`; tanto o código quanto o botão abrem o formulário público na seção de participação. Para enviar pelo WhatsApp com os links preservados, anexe o PDF como documento. Uma imagem PNG ou uma captura de tela não preserva links clicáveis.
+
+Para regenerar o PDF, use `python scripts/create-clickable-qr.py` com ReportLab instalado. A arte-base está em `public/assets/qr-code-divulgacao.png`.

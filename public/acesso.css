@@ -115,6 +115,39 @@
   width: 100%;
   height: auto;
 }
+.access-donation-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-top: 8px;
+  color: #a14722;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-underline-offset: 4px;
+}
+.access-donation-link:hover,
+.access-document a:hover {
+  color: #783215;
+}
+.access-donation-link:focus-visible,
+.access-document a:focus-visible {
+  outline: 3px solid var(--access-orange);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+.access-document {
+  text-align: center;
+  margin: 24px 0 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.access-document a {
+  color: #a14722;
+  text-underline-offset: 3px;
+}
 .participation-note {
   display: flex;
   align-items: center;
