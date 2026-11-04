@@ -14,6 +14,7 @@ const {
 const form = document.querySelector("#participation-form");
 const contribution = document.querySelector("#contribuindo");
 const fields = document.querySelector("#contribution-fields");
+let submittedParticipation = null;
 let submittedWithContribution = false;
 let submittedWithBoleto = false;
 document.querySelector("#pix-code").value = PIX;
@@ -127,7 +128,7 @@ function submitParticipation(event) {
   document.querySelector("#payment-view").hidden = false;
   window.scrollTo({ top: 0, behavior: "instant" });
   document.querySelector("#payment-heading").focus({ preventScroll: true });
-  window.participationCard.generate(participation);
+  submittedParticipation = participation;
   // Abre o texto pronto. O envio permanece sob confirmação do doador no WhatsApp.
   window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 }
@@ -136,6 +137,7 @@ document
   .addEventListener("click", editParticipation);
 
 function editParticipation() {
+  submittedParticipation = null;
   document.querySelector("#payment-view").hidden = true;
   document.querySelector("#form-view").hidden = false;
   window.participationCard.clear();
@@ -149,6 +151,7 @@ document
       !event.target.checked;
   });
 function showCompletion() {
+  if (!submittedParticipation) return;
   if (
     submittedWithContribution &&
     !submittedWithBoleto &&
@@ -169,6 +172,7 @@ function showCompletion() {
       ? "Conclusão informada por você. O Ministério fará a conferência do pagamento e do comprovante."
       : "Obrigado por se unir a esta obra em oração!";
   document.querySelector("#completion-view").hidden = false;
+  window.participationCard.generate(submittedParticipation);
   window.scrollTo({ top: 0, behavior: "instant" });
   document.querySelector("#completion-title").focus({ preventScroll: true });
 }
@@ -194,6 +198,7 @@ function exitParticipation() {
   fields.disabled = true;
   updateTransferBankDetails();
   document.querySelector("#participation-summary").textContent = "";
+  submittedParticipation = null;
   submittedWithContribution = false;
   submittedWithBoleto = false;
   document.querySelector("#completion-view").hidden = true;

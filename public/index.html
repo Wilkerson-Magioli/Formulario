@@ -318,34 +318,6 @@
           </button>
         </div>
         <section
-          id="participation-card-section"
-          class="participation-card-section"
-          aria-labelledby="card-heading"
-          hidden
-        >
-          <div class="eyebrow">UMA CÓPIA PARA VOCÊ</div>
-          <h2 id="card-heading">Guarde sua ficha de participação.</h2>
-          <p>Baixe a imagem com suas respostas para guardar com você.</p>
-          <p id="card-status" class="help" role="status" aria-live="polite"></p>
-          <img
-            id="participation-card-image"
-            class="participation-card-preview"
-            alt="Ficha de participação com as respostas preenchidas no formulário"
-            hidden
-          />
-          <p class="help card-receipt-note">
-            O comprovante bancário deve ser enviado separadamente após a doação.
-          </p>
-          <button
-            id="download-card"
-            class="button card-download"
-            type="button"
-            disabled
-          >
-            Baixar ficha em imagem ↓
-          </button>
-        </section>
-        <section
           id="boleto-options"
           class="donation-card"
           hidden
@@ -483,10 +455,40 @@
           Doação Realizada com sucesso
         </h1>
         <p id="completion-detail"></p>
-        <p>Clique no botão abaixo para sair.</p>
-        <button id="exit-flow" class="button dark" type="button">
-          Sair ↗
-        </button>
+        <section
+          id="participation-card-section"
+          class="participation-card-section"
+          aria-labelledby="card-heading"
+          hidden
+        >
+          <div class="eyebrow">UMA CÓPIA PARA VOCÊ</div>
+          <h2 id="card-heading">Guarde sua ficha de participação.</h2>
+          <p>Baixe a imagem com suas respostas para guardar com você.</p>
+          <p id="card-status" class="help" role="status" aria-live="polite"></p>
+          <img
+            id="participation-card-image"
+            class="participation-card-preview"
+            alt="Ficha de participação com as respostas preenchidas no formulário"
+            hidden
+          />
+          <p class="help card-receipt-note">
+            O comprovante bancário deve ser enviado separadamente após a doação.
+          </p>
+          <button
+            id="download-card"
+            class="button card-download"
+            type="button"
+            disabled
+          >
+            Baixar ficha em imagem ↓
+          </button>
+        </section>
+        <div class="completion-exit">
+          <p>Clique no botão abaixo para sair.</p>
+          <button id="exit-flow" class="button dark" type="button">
+            Sair ↗
+          </button>
+        </div>
       </section>
       <section
         id="farewell-view"

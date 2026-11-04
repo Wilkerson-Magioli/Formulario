@@ -3,7 +3,12 @@ const Participation = require("../public/participation.js");
 const fs = require("node:fs");
 const vm = require("node:vm");
 const assert = require("node:assert/strict");
-function scenario(contributing, method = "Pix", personType = "PF") {
+function scenario(
+  contributing,
+  method = "Pix",
+  personType = "PF",
+  editBeforeCompletion = false,
+) {
   const nodes = new Map();
   function node(key) {
     if (!nodes.has(key))
@@ -103,7 +108,30 @@ function scenario(contributing, method = "Pix", personType = "PF") {
     new URL(opened[0]).searchParams.get("text"),
     /TESTE DO FORMULÁRIO/,
   );
-  assert.equal(cards[0].contribuindo, contributing);
+  assert.equal(
+    cards.length,
+    0,
+    "A ficha não deve ser gerada na etapa de pagamento",
+  );
+  if (editBeforeCompletion) {
+    emit(node("#edit-form"), "click");
+    assert.equal(node("#payment-view").hidden, true);
+    assert.equal(node("#form-view").hidden, false);
+    assert.deepEqual(cards, ["cleared"]);
+    emit(node("#complete-prayer"), "click");
+    assert.deepEqual(cards, ["cleared"], "Editar invalida o cadastro anterior");
+    fields.nome = "Cadastro revisado";
+    form.elements.nome.value = fields.nome;
+    emit(form, "submit");
+    assert.equal(opened.length, 2);
+    assert.match(
+      new URL(opened[1]).searchParams.get("text"),
+      /Cadastro revisado/,
+    );
+    cards.length = 0;
+  }
+  // Alterações posteriores nos campos não devem modificar o cadastro já enviado.
+  form.elements.nome.value = "Nome alterado depois de enviar";
   if (contributing && method === "Boleto bancário") {
     const message = new URL(opened[0]).searchParams.get("text");
     assert.match(message, /SOLICITAÇÃO DE BOLETO/);
@@ -119,10 +147,10 @@ function scenario(contributing, method = "Pix", personType = "PF") {
     );
   } else if (contributing) {
     assert.match(new URL(opened[0]).searchParams.get("text"), /1,00/);
-    assert.equal(cards[0].valor, 1);
     assert.equal(node("#complete-donation").disabled, true);
     emit(node("#complete-donation"), "click");
     assert.equal(node("#payment-view").hidden, false);
+    assert.equal(cards.length, 0, "Sem confirmação, não deve haver ficha");
     node("#confirm-donation").checked = true;
     emit(node("#confirm-donation"), "change");
     assert.equal(node("#complete-donation").disabled, false);
@@ -144,11 +172,27 @@ function scenario(contributing, method = "Pix", personType = "PF") {
       "Participação concluída com sucesso",
     );
   }
+  assert.equal(cards.length, 1, "A ficha deve ser gerada apenas na conclusão");
+  assert.equal(cards[0].contribuindo, contributing);
+  assert.equal(
+    cards[0].nome,
+    fields.nome,
+    "Usa os dados enviados, não campos alterados depois",
+  );
+  if (contributing) assert.equal(cards[0].valor, 1);
+  assert.equal(node("#completion-view").hidden, false);
   emit(node("#exit-flow"), "click");
   assert.equal(node("#completion-view").hidden, true);
   assert.equal(node("#farewell-view").hidden, false);
   assert.equal(form.elements.nome.value, "");
   assert.equal(cards.at(-1), "cleared");
+  const generatedCount = cards.length;
+  emit(node("#complete-prayer"), "click");
+  assert.equal(
+    cards.length,
+    generatedCount,
+    "Sair descarta os dados usados para gerar a ficha",
+  );
 }
 test("Contribuição: número oficial, confirmação obrigatória e limpeza ao sair", () =>
   scenario(true));
@@ -159,3 +203,8 @@ test("Boleto PF: CPF no WhatsApp, aguarda emissão e limpa os dados", () =>
   scenario(true, "Boleto bancário"));
 test("Boleto PJ: CNPJ e razão social no cadastro", () =>
   scenario(true, "Boleto bancário", "PJ"));
+
+test("Transferência: ficha disponível somente após a confirmação", () =>
+  scenario(true, "Transferência"));
+test("Editar o cadastro descarta a ficha antiga e usa os dados revisados", () =>
+  scenario(true, "Pix", "PF", true));

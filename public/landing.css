@@ -375,3 +375,29 @@
     object-position: 50% 20%;
   }
 }
+
+/* Ficha e saída na etapa de conclusão. */
+.finish-view .participation-card-section {
+  margin: 28px 0;
+  text-align: left;
+}
+.finish-view .participation-card-section > p {
+  max-width: none;
+  margin: 12px 0;
+  font-size: 13px;
+}
+.finish-view .participation-card-section > p.help {
+  font-size: 11px;
+}
+.finish-view .participation-card-section .card-receipt-note {
+  margin-top: 16px;
+}
+.finish-view .card-download {
+  margin-top: 2px;
+  min-width: 0;
+}
+.completion-exit {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid #eee0c7;
+}

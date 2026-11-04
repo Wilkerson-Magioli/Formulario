@@ -1,6 +1,6 @@
 # Ministério Pão Vivo — formulário de participação e doação
 
-Ao finalizar, o navegador gera uma ficha PNG com as respostas, identidade visual do Ministério e autorização de contato. A ficha é criada localmente, não é enviada ao servidor e pode ser baixada. A imagem fica disponível apenas para download pelo doador. A ficha não é um comprovante bancário. Ao finalizar, o navegador abre o WhatsApp com o cadastro em texto; o doador precisa confirmar o envio no WhatsApp.
+Após concluir a etapa de participação, o navegador gera uma ficha PNG com as respostas, identidade visual do Ministério e autorização de contato. A ficha é criada localmente, não é enviada ao servidor e pode ser baixada. A imagem fica disponível apenas para download pelo doador. A ficha não é um comprovante bancário. Ao finalizar, o navegador abre o WhatsApp com o cadastro em texto; o doador precisa confirmar o envio no WhatsApp.
 
 Projeto local em português (Brasil), com HTML, CSS e JavaScript, sem dependências de execução no navegador.
 
@@ -90,3 +90,7 @@ O Ministério emite o boleto manualmente pelo banco e envia ao WhatsApp informad
 A página `/acesso` oferece o link “Toque aqui para participar e doar” abaixo do QR Code e o download da versão clicável em PDF. O PDF está em `public/assets/qr-code-acesso-clicavel.pdf`; tanto o código quanto o botão abrem o início da página inicial. Para enviar pelo WhatsApp com os links preservados, anexe o PDF como documento. Uma imagem PNG ou uma captura de tela não preserva links clicáveis.
 
 Para regenerar o PDF, use `python scripts/create-clickable-qr.py` com ReportLab instalado. O PDF usa formato vertical de 390 × 780 pontos, com elementos empilhados e ampliados para celular. Ele usa elementos vetoriais e os arquivos originais do logotipo, fotografia e QR Code em `public/assets/`. A paleta atual usa laranja `#F39A23`, tons suaves de pêssego e texto escuro nos botões para facilitar a leitura.
+
+## Ficha após a conclusão
+
+A ficha preenchida e seu download aparecem somente na tela de conclusão, abaixo da mensagem de conferência. Antes disso, o doador vê as orientações e a confirmação para finalizar. A frase de saída e o botão Sair ficam abaixo da ficha. A imagem usa os dados enviados no cadastro; editar invalida essa cópia e sair limpa os dados e libera a imagem. O fluxo de boleto mantém a orientação de aguardar a emissão, sem declarar pagamento realizado.
