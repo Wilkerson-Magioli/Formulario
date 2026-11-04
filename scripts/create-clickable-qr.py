@@ -20,6 +20,9 @@ INK = HexColor("#2d210e")
 canvas = Canvas(str(OUTPUT), pagesize=(PAGE_WIDTH, PAGE_HEIGHT), invariant=True)
 canvas.setTitle("Ministério Pão Vivo - Participe desta obra")
 canvas.setAuthor("Ministério Pão Vivo")
+# Abre com a página inteira visível, evitando ampliação excessiva no desktop.
+# O leitor de PDF pode substituir essa preferência pelas configurações locais.
+canvas._doc.Catalog.OpenAction = canvas.bookmarkPage("inicio", fit="Fit")
 canvas.setFillColor(white)
 canvas.rect(0, 0, PAGE_WIDTH, PAGE_HEIGHT, fill=1, stroke=0)
 canvas.drawImage(str(ASSETS / "logo-oficial.png"), 95, 690, 200, 66.5, mask="auto")
