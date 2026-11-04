@@ -110,7 +110,6 @@ function submitParticipation(event) {
     }
   }
   const whatsappUrl = createWhatsAppUrl(participation);
-  document.querySelector("#registration-whatsapp").href = whatsappUrl;
   submittedWithContribution = contribution.checked;
   submittedWithBoleto = isBoleto(participation);
   document.querySelector("#finish-donation").hidden =
@@ -140,7 +139,6 @@ function editParticipation() {
   document.querySelector("#payment-view").hidden = true;
   document.querySelector("#form-view").hidden = false;
   window.participationCard.clear();
-  document.querySelector("#registration-whatsapp").removeAttribute("href");
   document.querySelector("#participar").scrollIntoView();
 }
 
@@ -195,7 +193,6 @@ function exitParticipation() {
   fields.hidden = true;
   fields.disabled = true;
   updateTransferBankDetails();
-  document.querySelector("#registration-whatsapp").removeAttribute("href");
   document.querySelector("#participation-summary").textContent = "";
   submittedWithContribution = false;
   submittedWithBoleto = false;

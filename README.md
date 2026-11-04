@@ -1,6 +1,6 @@
 # Ministério Pão Vivo — formulário de participação e doação
 
-Ao finalizar, o navegador gera uma ficha PNG com as respostas, identidade visual do Ministério e autorização de contato. A ficha é criada localmente, não é enviada ao servidor e pode ser baixada. A imagem fica disponível apenas para download pelo doador. A ficha não é um comprovante bancário. Ao finalizar, o navegador abre o WhatsApp com o cadastro em texto; o doador precisa confirmar o envio no WhatsApp. Há um link alternativo se a abertura for bloqueada.
+Ao finalizar, o navegador gera uma ficha PNG com as respostas, identidade visual do Ministério e autorização de contato. A ficha é criada localmente, não é enviada ao servidor e pode ser baixada. A imagem fica disponível apenas para download pelo doador. A ficha não é um comprovante bancário. Ao finalizar, o navegador abre o WhatsApp com o cadastro em texto; o doador precisa confirmar o envio no WhatsApp.
 
 Projeto local em português (Brasil), com HTML, CSS e JavaScript, sem dependências de execução no navegador.
 

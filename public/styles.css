@@ -841,7 +841,7 @@ footer a {
   margin: 35px auto;
 }
 .payment-intro {
-  padding: 0 0 35px;
+  padding: 0 0 24px;
 }
 .payment-intro h1 {
   font-size: 38px;
@@ -870,7 +870,7 @@ footer a {
 }
 .back-button {
   display: block;
-  margin-top: 22px;
+  margin-top: 12px;
   padding: 8px 0;
   background: transparent;
   border: 0;

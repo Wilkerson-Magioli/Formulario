@@ -148,7 +148,6 @@ function scenario(contributing, method = "Pix", personType = "PF") {
   assert.equal(node("#completion-view").hidden, true);
   assert.equal(node("#farewell-view").hidden, false);
   assert.equal(form.elements.nome.value, "");
-  assert.equal(node("#registration-whatsapp").href, undefined);
   assert.equal(cards.at(-1), "cleared");
 }
 test("Contribuição: número oficial, confirmação obrigatória e limpeza ao sair", () =>
