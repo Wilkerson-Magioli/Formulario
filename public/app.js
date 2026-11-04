@@ -167,9 +167,9 @@ function showCompletion() {
       ? "Doação Realizada com sucesso"
       : "Participação concluída com sucesso";
   document.querySelector("#completion-detail").textContent = submittedWithBoleto
-    ? "Após receber seu cadastro, o Ministério emitirá o boleto e enviará para o WhatsApp informado. Depois de pagar, envie o comprovante ao Ministério."
+    ? "Após receber seu cadastro, o Ministério Pão Vivo emitirá o boleto e enviará para o WhatsApp informado. Depois de pagar, envie o comprovante ao Ministério Pão Vivo."
     : submittedWithContribution
-      ? "Conclusão informada por você. O Ministério fará a conferência do pagamento e do comprovante."
+      ? "Conclusão informada por você. O Ministério Pão Vivo fará a conferência do pagamento e do comprovante."
       : "Obrigado por se unir a esta obra em oração!";
   document.querySelector("#completion-view").hidden = false;
   window.participationCard.generate(submittedParticipation);

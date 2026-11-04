@@ -166,7 +166,7 @@
 
   function createSummary(data) {
     if (isBoleto(data))
-      return `${data.nome}, você escolheu ${data.frequencia.toLowerCase()} de ${formatCurrency(data.valor)} por boleto bancário. O Ministério enviará seu boleto pelo WhatsApp após receber seu cadastro.`;
+      return `${data.nome}, você escolheu ${data.frequencia.toLowerCase()} de ${formatCurrency(data.valor)} por boleto bancário. O Ministério Pão Vivo enviará seu boleto pelo WhatsApp após receber seu cadastro.`;
     return data.contribuindo
       ? `${data.nome}, você escolheu participar ${participationModes(data).toLowerCase()}, com ${data.frequencia.toLowerCase()} de ${formatCurrency(data.valor)}. Informe esse valor no aplicativo do banco.`
       : `${data.nome}, obrigado por se unir a esta obra em oração!`;
