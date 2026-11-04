@@ -94,3 +94,11 @@ Para regenerar o PDF, use `python scripts/create-clickable-qr.py` com ReportLab 
 ## Ficha após a conclusão
 
 A ficha preenchida e seu download aparecem somente na tela de conclusão, abaixo da mensagem de conferência. Antes disso, o doador vê as orientações e a confirmação para finalizar. A frase de saída e o botão Sair ficam abaixo da ficha. A imagem usa os dados enviados no cadastro; editar invalida essa cópia e sair limpa os dados e libera a imagem. O fluxo de boleto mantém a orientação de aguardar a emissão, sem declarar pagamento realizado.
+
+## Migração para Vercel
+
+A configuração `vercel.json` prepara a publicação estática com o preset Other, comando `npm run build`, diretório de saída `dist` e URLs sem extensão, incluindo `/acesso`. Não é necessário criar backend, funções ou banco de dados. A pasta local `.vercel/` não é versionada.
+
+Para concluir a migração, importe o repositório `Wilkerson-Magioli/Formulario` na conta Vercel e publique a branch `main`. Depois de confirmar o endereço de produção, atualize as URLs em `scripts/style-access-qr.py` e `scripts/create-clickable-qr.py`, regenere os QR Codes e o PDF e publique os arquivos gerados. Não utilize o endereço temporário de uma prévia nos materiais de divulgação.
+
+Durante a transição, a publicação no Sites permanece ativa para atender aos links e QR Codes já distribuídos. A configuração da Vercel não remove nem substitui automaticamente essa hospedagem.
