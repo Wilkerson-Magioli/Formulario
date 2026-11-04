@@ -38,14 +38,14 @@ Paleta consultada no site oficial: creme `#FFF6E5`, dourado `#F9BF51`, laranja `
 
 ## Validação
 
-`npm run check` verifica a sintaxe do JavaScript. O site pode ser hospedado como arquivos estáticos a partir de `public/`, usando HTTPS. O projeto usa publicação estática pelo Sites, com configuração em `.openai/hosting.json`. Execute `npm run build` para preparar `dist/`.
+`npm run check` verifica a sintaxe do JavaScript. O site pode ser hospedado como arquivos estáticos a partir de `public/`, usando HTTPS. O projeto usa publicação estática na Vercel, com configuração em `vercel.json`. A configuração antiga do Sites permanece em `.openai/hosting.json` para referência durante a transição. Execute `npm run build` para preparar `dist/`.
 
 Na entrega, foram verificados no Chrome: visualização em desktop e celular (390 px), ausência de rolagem horizontal, máscaras de CEP e telefone, validação de participação, fluxo apenas de oração, oferta mensal, desativação dos campos financeiros, mensagem e destinatário do WhatsApp, alternativa de cópia manual do Pix e ausência de erros JavaScript. Nenhuma mensagem ou doação foi enviada durante os testes.
 
 ## QR Code de acesso e endereço público
 
-- Formulário: https://pao-vivo-participar.risencrab2.chatgpt.site/
-- Página para baixar e divulgar o QR Code 1: https://pao-vivo-participar.risencrab2.chatgpt.site/acesso.html
+- Formulário: https://ministerio-pao-vivo-doacoes.vercel.app/
+- Página para baixar e divulgar o QR Code 1: https://ministerio-pao-vivo-doacoes.vercel.app/acesso.html
 - Arquivo de imagem: `public/assets/qr-code-acesso.png`.
 
 O QR Code 1 leva ao formulário público. O QR Code 2 é o Pix original e aparece depois do preenchimento para quem escolheu contribuir. O cadastro fica em memória apenas durante o preenchimento e deve ser enviado pelo visitante no WhatsApp. Ainda não há persistência de cadastros ou migração para Next.js nesta versão.
@@ -95,10 +95,10 @@ Para regenerar o PDF, use `python scripts/create-clickable-qr.py` com ReportLab 
 
 A ficha preenchida e seu download aparecem somente na tela de conclusão, abaixo da mensagem de conferência. Antes disso, o doador vê as orientações e a confirmação para finalizar. A frase de saída e o botão Sair ficam abaixo da ficha. A imagem usa os dados enviados no cadastro; editar invalida essa cópia e sair limpa os dados e libera a imagem. O fluxo de boleto mantém a orientação de aguardar a emissão, sem declarar pagamento realizado.
 
-## Migração para Vercel
+## Publicação na Vercel
 
-A configuração `vercel.json` prepara a publicação estática com o preset Other, comando `npm run build`, diretório de saída `dist` e URLs sem extensão, incluindo `/acesso`. Não é necessário criar backend, funções ou banco de dados. A pasta local `.vercel/` não é versionada.
+A hospedagem principal é `https://ministerio-pao-vivo-doacoes.vercel.app/`. A configuração `vercel.json` usa o preset Other, comando `npm run build`, diretório de saída `dist` e URLs sem extensão, incluindo `/acesso`. O GitHub publica a branch `main` na Vercel. Não há backend, funções ou banco de dados. A pasta local `.vercel/` não é versionada.
 
-Para concluir a migração, importe o repositório `Wilkerson-Magioli/Formulario` na conta Vercel e publique a branch `main`. Depois de confirmar o endereço de produção, atualize as URLs em `scripts/style-access-qr.py` e `scripts/create-clickable-qr.py`, regenere os QR Codes e o PDF e publique os arquivos gerados. Não utilize o endereço temporário de uma prévia nos materiais de divulgação.
+Para atualizar os materiais após uma mudança de endereço, altere as URLs em `scripts/style-access-qr.py` e `scripts/create-clickable-qr.py`, execute esses scripts nessa ordem e publique os arquivos gerados. O primeiro gera o QR simples; o segundo gera o PDF vertical com links clicáveis. As imagens de divulgação em `public/assets/qr-code-acesso.png` e `public/assets/qr-code-divulgacao.png` são renderizações da página desse PDF. Não use URLs temporárias de prévia nos materiais de divulgação.
 
-Durante a transição, a publicação no Sites permanece ativa para atender aos links e QR Codes já distribuídos. A configuração da Vercel não remove nem substitui automaticamente essa hospedagem.
+O endereço antigo `https://pao-vivo-participar.risencrab2.chatgpt.site/` permanece ativo durante a transição, pois materiais distribuídos antes da migração ainda apontam para ele. A configuração histórica do Sites continua em `.openai/hosting.json`.

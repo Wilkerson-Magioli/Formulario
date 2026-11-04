@@ -12,7 +12,7 @@ from reportlab.pdfgen.canvas import Canvas
 ROOT = Path(__file__).resolve().parent.parent
 ASSETS = ROOT / "public" / "assets"
 OUTPUT = ASSETS / "qr-code-acesso-clicavel.pdf"
-DESTINATION = "https://pao-vivo-participar.risencrab2.chatgpt.site/"
+DESTINATION = "https://ministerio-pao-vivo-doacoes.vercel.app/"
 PAGE_WIDTH, PAGE_HEIGHT = 390, 780
 ORANGE = HexColor("#f39a23")
 INK = HexColor("#2d210e")
