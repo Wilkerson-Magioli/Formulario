@@ -19,3 +19,24 @@ O esquema `ministerio` não concede acesso ao papel público do PostgreSQL. As c
 Os campos ausentes na planilha podem ficar nulos. CPF e CNPJ são opcionais, armazenados como texto sem pontuação e únicos por tipo. A migração verifica o formato. A validação dos dígitos verificadores cabe à importação e à API.
 
 Uma participação registra uma intenção. Os rótulos históricos `regular` e `nao_regular` ficam separados de `mensal` e `pontual`. Pagamentos têm registros próprios e aguardam conferência por padrão. Os valores são armazenados em centavos para preservar a precisão.
+
+## Etapa 2
+
+Com Python e `openpyxl`, execute na raiz do projeto:
+
+```powershell
+python -B banco/importar_parceiros.py "LISTA DE PARCEIROS CADASTRADOS PELA FICHA.xlsx" --gerar-sql
+```
+
+Sem `--gerar-sql`, o programa exibe apenas a prévia e os números das linhas em revisão. A geração exige a versão exata da planilha aprovada. O SQL gerado em `output/importacao-parceiros.sql` contém dados pessoais e fica fora do Git. Execute o arquivo apenas no banco autorizado.
+
+O primeiro lote inclui 290 doadores e 290 participações. O telefone antigo fica em `telefone_legado`, separado do WhatsApp informado no formulário. Nenhum pagamento é lançado. A execução é transacional. Reaplicar o mesmo arquivo preserva os registros existentes e não duplica o lote. Um CPF já associado a outro código interrompe a carga para revisão.
+
+Depois de executar o arquivo no Neon, confira as quantidades:
+
+```sql
+SELECT
+    (SELECT count(*) FROM ministerio.doadores WHERE origem = 'excel') AS doadores_excel,
+    (SELECT count(*) FROM ministerio.participacoes WHERE origem = 'excel') AS participacoes_excel,
+    (SELECT count(*) FROM ministerio.doacoes_recebidas) AS pagamentos;
+```
