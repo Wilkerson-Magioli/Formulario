@@ -38,7 +38,7 @@ Paleta consultada no site oficial: creme `#FFF6E5`, dourado `#F9BF51`, laranja `
 
 ## Validação
 
-`npm run check` verifica a sintaxe do JavaScript. O site pode ser hospedado como arquivos estáticos a partir de `public/`, usando HTTPS. O projeto usa publicação estática na Vercel, com configuração em `vercel.json`. A configuração antiga do Sites permanece em `.openai/hosting.json` para referência durante a transição. Execute `npm run build` para preparar `dist/`.
+`npm run check` verifica a sintaxe do JavaScript. O site pode ser hospedado como arquivos estáticos a partir de `public/`, usando HTTPS. O projeto usa publicação estática na Vercel, com configuração em `vercel.json`. Execute `npm run build` para preparar `dist/`.
 
 Na entrega, foram verificados no Chrome: visualização em desktop e celular (390 px), ausência de rolagem horizontal, máscaras de CEP e telefone, validação de participação, fluxo apenas de oração, oferta mensal, desativação dos campos financeiros, mensagem e destinatário do WhatsApp, alternativa de cópia manual do Pix e ausência de erros JavaScript. Nenhuma mensagem ou doação foi enviada durante os testes.
 
@@ -100,5 +100,3 @@ A ficha preenchida e seu download aparecem somente na tela de conclusão, abaixo
 A hospedagem principal é `https://ministerio-pao-vivo-doacoes.vercel.app/`. A configuração `vercel.json` usa o preset Other, comando `npm run build`, diretório de saída `dist` e URLs sem extensão, incluindo `/acesso`. O GitHub publica a branch `main` na Vercel. Não há backend, funções ou banco de dados. A pasta local `.vercel/` não é versionada.
 
 Para atualizar os materiais após uma mudança de endereço, altere as URLs em `scripts/style-access-qr.py` e `scripts/create-clickable-qr.py`, execute esses scripts nessa ordem e publique os arquivos gerados. O primeiro gera o QR simples; o segundo gera o PDF vertical com links clicáveis. As imagens de divulgação em `public/assets/qr-code-acesso.png` e `public/assets/qr-code-divulgacao.png` são renderizações da página desse PDF. Não use URLs temporárias de prévia nos materiais de divulgação.
-
-O endereço antigo `https://pao-vivo-participar.risencrab2.chatgpt.site/` permanece ativo durante a transição, pois materiais distribuídos antes da migração ainda apontam para ele. A configuração histórica do Sites continua em `.openai/hosting.json`.
