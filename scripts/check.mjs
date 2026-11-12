@@ -2,7 +2,7 @@ import { readdir } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
 
 const files = ["server.mjs"];
-for (const directory of ["api", "public", "scripts", "tests"]) {
+for (const directory of ["api", "lib", "public", "scripts", "tests"]) {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     if (entry.isFile() && /\.(?:js|mjs|cjs)$/.test(entry.name))
       files.push(`${directory}/${entry.name}`);

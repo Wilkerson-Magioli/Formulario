@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Doadores | Ministério Pão Vivo</title>
+    <link rel="stylesheet" href="/admin.css" />
+    <script src="/admin.js" defer></script>
+  </head>
+  <body>
+    <header class="topo">
+      <a href="/" aria-label="Ministério Pão Vivo, página inicial">
+        <img src="/assets/logo-oficial.png" alt="Ministério Pão Vivo" />
+      </a>
+      <button id="sair" class="secundario" type="button" hidden>Sair</button>
+    </header>
+    <main>
+      <section
+        id="acesso"
+        class="painel acesso"
+        aria-labelledby="titulo-acesso"
+      >
+        <h1 id="titulo-acesso">Área administrativa</h1>
+        <form id="login">
+          <label
+            >Senha de acesso
+            <input
+              name="senha"
+              type="password"
+              autocomplete="current-password"
+              required
+              maxlength="256"
+            />
+          </label>
+          <button>Entrar</button>
+        </form>
+        <p id="status-login" role="status"></p>
+      </section>
+
+      <section id="cadastros" hidden aria-labelledby="titulo-cadastros">
+        <div class="cabecalho">
+          <h1 id="titulo-cadastros" tabindex="-1">Doadores</h1>
+          <button id="exportar" type="button">
+            Exportar para Excel <span aria-hidden="true">↓</span>
+          </button>
+        </div>
+        <div class="painel">
+          <form id="filtros">
+            <label class="busca"
+              >Buscar doador
+              <input
+                type="search"
+                name="busca"
+                maxlength="160"
+                placeholder="Nome, e-mail, documento ou telefone"
+              />
+            </label>
+            <label
+              >Origem
+              <select name="origem">
+                <option value="">Todas</option>
+                <option value="formulario">Formulário</option>
+                <option value="excel">Excel</option>
+              </select>
+            </label>
+            <label
+              >Frequência
+              <select name="frequencia">
+                <option value="">Todas</option>
+                <option value="mensal">Mensal</option>
+                <option value="pontual">Pontual</option>
+                <option value="regular">Regular (Excel)</option>
+                <option value="nao_regular">Não regular (Excel)</option>
+              </select>
+            </label>
+            <label
+              >Forma
+              <select name="forma">
+                <option value="">Todas</option>
+                <option value="pix">Pix</option>
+                <option value="transferencia">Transferência</option>
+                <option value="boleto">Boleto</option>
+              </select>
+            </label>
+            <button>Filtrar</button>
+            <button id="limpar" type="button" class="secundario">Limpar</button>
+          </form>
+          <div
+            class="tabela"
+            tabindex="0"
+            role="region"
+            aria-label="Lista de doadores"
+          >
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Doador</th>
+                  <th scope="col">E-mail</th>
+                  <th scope="col">WhatsApp</th>
+                  <th scope="col">Telefone legado</th>
+                  <th scope="col">Origem</th>
+                </tr>
+              </thead>
+              <tbody id="linhas"></tbody>
+            </table>
+          </div>
+          <p id="status-lista" role="status"></p>
+          <nav class="paginacao" aria-label="Páginas de doadores">
+            <button id="anterior" type="button" class="secundario" disabled>
+              Anterior
+            </button>
+            <span id="pagina"></span>
+            <button id="proxima" type="button" class="secundario" disabled>
+              Próxima
+            </button>
+          </nav>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="detalhes" aria-labelledby="detalhes-titulo">
+      <div class="cabecalho">
+        <h2 id="detalhes-titulo">Histórico do doador</h2>
+        <form method="dialog"><button class="secundario">Fechar</button></form>
+      </div>
+      <div id="detalhes-conteudo" aria-live="polite"></div>
+    </dialog>
+  </body>
+</html>

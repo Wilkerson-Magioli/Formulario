@@ -1,0 +1,201 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #2d210e;
+  background: #faf8f4;
+  --laranja: #f39a23;
+  --borda: #e5d9c8;
+}
+* {
+  box-sizing: border-box;
+}
+[hidden] {
+  display: none !important;
+}
+body {
+  margin: 0;
+}
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem max(1rem, calc((100% - 72rem) / 2));
+  background: white;
+  border-top: 0.35rem solid var(--laranja);
+  border-bottom: 1px solid var(--borda);
+}
+.topo img {
+  display: block;
+  width: 10rem;
+  height: auto;
+}
+main {
+  width: min(72rem, calc(100% - 2rem));
+  margin: 2.5rem auto;
+}
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.18;
+}
+h1 {
+  font-size: clamp(1.65rem, 4vw, 2.5rem);
+}
+.painel,
+dialog {
+  padding: clamp(1rem, 3vw, 1.75rem);
+  background: white;
+  border: 1px solid var(--borda);
+  border-radius: 1rem;
+}
+.acesso {
+  width: min(100%, 28rem);
+  margin: 4rem auto;
+}
+.acesso form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+label {
+  display: grid;
+  gap: 0.45rem;
+  font-size: 0.875rem;
+  font-weight: 650;
+}
+input,
+select,
+button {
+  font: inherit;
+}
+input,
+select {
+  min-width: 0;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #a99a84;
+  border-radius: 0.5rem;
+  background: white;
+  color: inherit;
+}
+button {
+  padding: 0.65rem 0.85rem;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  color: #2d210e;
+  background: var(--laranja);
+  font-weight: 650;
+  cursor: pointer;
+}
+button.secundario {
+  background: white;
+  border-color: #a99a84;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+:focus-visible {
+  outline: 3px solid #965000;
+  outline-offset: 3px;
+}
+.cabecalho,
+.paginacao {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+#cadastros > .cabecalho {
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+#filtros {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: end;
+  margin-bottom: 1.3rem;
+}
+.busca {
+  flex: 1 1 17rem;
+}
+.tabela {
+  overflow: auto;
+  border: 1px solid var(--borda);
+  border-radius: 0.6rem;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+th,
+td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--borda);
+}
+th {
+  background: #ffedce;
+  white-space: nowrap;
+}
+tr:nth-child(even) {
+  background: #faf8f4;
+}
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+.nome {
+  color: #754000;
+  background: transparent;
+  text-align: left;
+  padding: 0;
+  text-decoration: underline;
+}
+.paginacao {
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+dialog {
+  width: min(50rem, calc(100% - 2rem));
+  max-height: 90vh;
+  color: inherit;
+}
+dialog::backdrop {
+  background: #25170799;
+}
+dialog h3 {
+  margin: 1.5rem 0 0.6rem;
+}
+dialog dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 0.8rem;
+}
+dialog dt {
+  color: #6a5540;
+  font-size: 0.85rem;
+}
+dialog dd {
+  margin: 0.2rem 0 0;
+  overflow-wrap: anywhere;
+}
+#status-login:empty,
+#status-lista:empty {
+  display: none;
+}
+@media (max-width: 36rem) {
+  main {
+    margin-top: 1.5rem;
+  }
+  #filtros label {
+    flex: 1 1 8rem;
+  }
+  #filtros .busca {
+    flex-basis: 100%;
+  }
+  th,
+  td {
+    padding: 0.65rem;
+  }
+}

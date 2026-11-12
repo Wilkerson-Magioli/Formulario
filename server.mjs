@@ -2,6 +2,7 @@ import http from "node:http";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import participacao from "./api/participacao.mjs";
+import admin from "./api/admin.mjs";
 const root = path.resolve("public");
 const types = {
   ".html": "text/html; charset=utf-8",
@@ -19,9 +20,18 @@ http
         await participacao(req, res);
         return;
       }
+      if (name === "/api/admin") {
+        await admin(req, res);
+        return;
+      }
       const file = path.resolve(
         root,
-        "." + (name === "/" ? "/index.html" : name),
+        "." +
+          (name === "/"
+            ? "/index.html"
+            : name === "/admin"
+              ? "/admin.html"
+              : name),
       );
       if (!file.startsWith(root + path.sep)) {
         res.writeHead(403).end();

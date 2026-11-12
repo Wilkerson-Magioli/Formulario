@@ -51,3 +51,14 @@ SELECT
 O reenvio do mesmo formulário após uma falha reutiliza a chave de envio enquanto a página estiver aberta. Se o CPF ou CNPJ já existir, o banco vincula a participação ao cadastro correspondente e guarda os dados recebidos na participação. Sem documento, um envio novo cria outro cadastro, pois e-mail e telefone podem ser compartilhados.
 
 Para testar localmente com um banco de teste, forneça `MPV_DATABASE_URL` ao processo do servidor e rode `npm run dev`.
+
+## Etapa 4
+
+1. Execute `migracoes/003_consulta_administrativa.sql` na branch `production`, banco `neondb`. A migração cria três visões e um papel de leitura.
+2. Em uma sessão administrativa privada do `psql`, execute `CREATE ROLE mpv_admin_api LOGIN;` e `GRANT mpv_admin_leitura TO mpv_admin_api;`. No Windows, rode `\set HISTFILE NUL` antes de definir a senha com `ALTER ROLE mpv_admin_api WITH PASSWORD 'SUA_NOVA_SENHA';`.
+3. Na Vercel, em **Settings → Environments → Production**, cadastre dois segredos. Use `MPV_ADMIN_DATABASE_URL` para a conexão do login `mpv_admin_api` e `MPV_ADMIN_PASSWORD` para a senha de acesso à página. Gere a senha de acesso com um gerenciador de senhas, usando pelo menos 32 caracteres aleatórios e uma senha diferente da usada no banco.
+4. Após publicar, abra `/admin`. Entre, consulte um cadastro e baixe um Excel. O acesso expira após uma hora.
+
+O Excel contém os doadores dos filtros aplicados e seus históricos completos, em três abas. A exportação inclui dados pessoais. Use os filtros para reduzir o arquivo quando uma aba ultrapassar 10.000 linhas de dados ou o arquivo passar de 4 MB.
+
+Para testar localmente, defina `MPV_ADMIN_DATABASE_URL` e `MPV_ADMIN_PASSWORD` no processo que inicia `npm run dev`. Abra `http://127.0.0.1:5173/admin`.
