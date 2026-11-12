@@ -17,6 +17,8 @@ const fields = document.querySelector("#contribution-fields");
 let submittedParticipation = null;
 let submittedWithContribution = false;
 let submittedWithBoleto = false;
+let registrationAttempt;
+let savingRegistration = false;
 document.querySelector("#pix-code").value = PIX;
 contribution.addEventListener("change", () => {
   fields.hidden = !contribution.checked;
@@ -91,15 +93,17 @@ async function copyPix() {
 }
 form.addEventListener("submit", submitParticipation);
 
-function submitParticipation(event) {
+async function submitParticipation(event) {
   event.preventDefault();
+  if (savingRegistration) return;
   if (!form.elements.orando.checked && !contribution.checked) {
     const error = document.querySelector("#participation-error");
     error.hidden = false;
     form.elements.orando.focus();
     return;
   }
-  const participation = readParticipation(new FormData(form));
+  const data = new FormData(form);
+  const participation = readParticipation(data);
   if (isBoleto(participation)) {
     const error = participation.documento
       ? validateTaxDocument(participation.documento, participation.tipoPessoa)
@@ -111,7 +115,48 @@ function submitParticipation(event) {
     }
   }
   const whatsappUrl = createWhatsAppUrl(participation);
-  submittedWithContribution = contribution.checked;
+  const snapshot = JSON.stringify({
+    ...participation,
+    consentimento: data.has("consentimento"),
+  });
+  if (registrationAttempt?.snapshot !== snapshot)
+    registrationAttempt = { snapshot, chave: crypto.randomUUID() };
+  const status = document.querySelector("#registration-status");
+  const button = form.querySelector("button[type=submit]");
+  const popup = window.open("about:blank", "_blank");
+  if (popup) popup.opener = null;
+  savingRegistration = true;
+  button.disabled = true;
+  status.textContent = "Salvando seu cadastro…";
+  try {
+    const response = await fetch("/api/participacao", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chave: registrationAttempt.chave,
+        participacao: JSON.parse(snapshot),
+      }),
+      signal: AbortSignal.timeout(15000),
+    });
+    if (response.status !== 204) {
+      status.textContent =
+        response.status === 422
+          ? "Confira os campos do formulário e tente novamente."
+          : "Não foi possível salvar o cadastro. Tente novamente.";
+      popup?.close();
+      return;
+    }
+  } catch {
+    popup?.close();
+    status.textContent =
+      "Não foi possível confirmar o cadastro. Tente novamente.";
+    return;
+  } finally {
+    savingRegistration = false;
+    button.disabled = false;
+  }
+  status.textContent = "";
+  submittedWithContribution = participation.contribuindo;
   submittedWithBoleto = isBoleto(participation);
   document.querySelector("#finish-donation").hidden =
     !submittedWithContribution || submittedWithBoleto;
@@ -123,14 +168,21 @@ function submitParticipation(event) {
   document.querySelector("#participation-summary").textContent =
     createSummary(participation);
   document.querySelector("#payment-options").hidden =
-    !contribution.checked || submittedWithBoleto;
+    !submittedWithContribution || submittedWithBoleto;
   document.querySelector("#form-view").hidden = true;
   document.querySelector("#payment-view").hidden = false;
   window.scrollTo({ top: 0, behavior: "instant" });
   document.querySelector("#payment-heading").focus({ preventScroll: true });
   submittedParticipation = participation;
-  // Abre o texto pronto. O envio permanece sob confirmação do doador no WhatsApp.
-  window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+  const link = document.querySelector("#registration-whatsapp");
+  link.href = whatsappUrl;
+  link.hidden = Boolean(popup && !popup.closed);
+  if (!link.hidden) return;
+  try {
+    popup.location.replace(whatsappUrl);
+  } catch {
+    link.hidden = false;
+  }
 }
 document
   .querySelector("#edit-form")
@@ -138,6 +190,7 @@ document
 
 function editParticipation() {
   submittedParticipation = null;
+  document.querySelector("#registration-whatsapp").removeAttribute("href");
   document.querySelector("#payment-view").hidden = true;
   document.querySelector("#form-view").hidden = false;
   window.participationCard.clear();
@@ -198,6 +251,8 @@ function exitParticipation() {
   fields.disabled = true;
   updateTransferBankDetails();
   document.querySelector("#participation-summary").textContent = "";
+  document.querySelector("#registration-whatsapp").removeAttribute("href");
+  registrationAttempt = undefined;
   submittedParticipation = null;
   submittedWithContribution = false;
   submittedWithBoleto = false;

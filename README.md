@@ -24,11 +24,12 @@ Abra http://127.0.0.1:5173. Para editar no VS Code, abra esta pasta ou execute `
 - `public/participation-card.js`: prévia, download e descarte da imagem.
 - `tests/`: testes automatizados com o executor nativo do Node.js.
 - `public/assets/`: logotipo e QR Code extraídos do PDF fornecido.
-- `server.mjs`: servidor local usando apenas recursos do Node.js.
+- `api/participacao.mjs`: validação e gravação dos cadastros no Neon.
+- `server.mjs`: servidor local para o formulário e a API.
 
 ## Funcionamento
 
-O formulário valida os campos e mostra uma etapa final com as orientações. Quem contribui vê o QR Code Pix, o valor de referência e os dados bancários. O cadastro em texto é preparado para o número oficial (51) 99346-3773. O envio no WhatsApp exige confirmação do doador. A ficha PNG fica somente para download e uso pessoal do doador. O comprovante deve ser anexado manualmente na conversa. Não há banco de dados, upload, cobrança ou confirmação bancária nesta versão. Os dados não são guardados pelo projeto nem em localStorage.
+O formulário valida os campos, grava o cadastro no Neon e então abre o WhatsApp com a mensagem preparada para o número oficial (51) 99346-3773. O envio da mensagem exige confirmação do doador. Quem contribui vê as orientações de pagamento. A ficha PNG fica disponível para download e o comprovante deve ser anexado manualmente na conversa.
 
 Quem escolhe apenas oração não precisa preencher os campos financeiros. Oração e contribuição podem ser selecionadas juntas. A oferta mensal não cadastra débito ou recorrência automática.
 
@@ -38,7 +39,7 @@ Paleta consultada no site oficial: creme `#FFF6E5`, dourado `#F9BF51`, laranja `
 
 ## Validação
 
-`npm run check` verifica a sintaxe do JavaScript. O site pode ser hospedado como arquivos estáticos a partir de `public/`, usando HTTPS. O projeto usa publicação estática na Vercel, com configuração em `vercel.json`. Execute `npm run build` para preparar `dist/`.
+`npm run check` verifica a sintaxe do JavaScript. Execute `npm run build` para preparar os arquivos estáticos em `dist/`.
 
 Na entrega, foram verificados no Chrome: visualização em desktop e celular (390 px), ausência de rolagem horizontal, máscaras de CEP e telefone, validação de participação, fluxo apenas de oração, oferta mensal, desativação dos campos financeiros, mensagem e destinatário do WhatsApp, alternativa de cópia manual do Pix e ausência de erros JavaScript. Nenhuma mensagem ou doação foi enviada durante os testes.
 
@@ -48,7 +49,7 @@ Na entrega, foram verificados no Chrome: visualização em desktop e celular (39
 - Página para baixar e divulgar o QR Code 1: https://ministerio-pao-vivo-doacoes.vercel.app/acesso.html
 - Arquivo de imagem: `public/assets/qr-code-acesso.png`.
 
-O QR Code 1 leva ao formulário público. O QR Code 2 é o Pix original e aparece depois do preenchimento para quem escolheu contribuir. O cadastro fica em memória apenas durante o preenchimento e deve ser enviado pelo visitante no WhatsApp. Ainda não há persistência de cadastros ou migração para Next.js nesta versão.
+O QR Code 1 leva ao formulário público. O QR Code 2 é o Pix original e aparece depois do cadastro para quem escolheu contribuir.
 
 O QR Code de acesso usa o logotipo, moldura dourada e fundo creme, sem o título "Ministério Pão Vivo - Doações" e sem o cabeçalho "QR CODE 1 — ACESSO AO FORMULÁRIO". Os módulos usam o marrom escuro `#523F1B` e preservam margem branca de quatro módulos. A arte pode ser regenerada por `scripts/style-access-qr.py` com Pillow e ReportLab. O QR Code Pix original não foi alterado.
 
@@ -97,6 +98,6 @@ A ficha preenchida e seu download aparecem somente na tela de conclusão, abaixo
 
 ## Publicação na Vercel
 
-A hospedagem principal é `https://ministerio-pao-vivo-doacoes.vercel.app/`. A configuração `vercel.json` usa o preset Other, comando `npm run build`, diretório de saída `dist` e URLs sem extensão, incluindo `/acesso`. O GitHub publica a branch `main` na Vercel. Não há backend, funções ou banco de dados. A pasta local `.vercel/` não é versionada.
+A hospedagem principal é `https://ministerio-pao-vivo-doacoes.vercel.app/`. A Vercel publica a branch `main`, serve os arquivos em `dist/` e executa a função em `api/`. A configuração da conexão com o Neon está no [guia do banco](banco/README.md#etapa-3).
 
 Para atualizar os materiais após uma mudança de endereço, altere as URLs em `scripts/style-access-qr.py` e `scripts/create-clickable-qr.py`, execute esses scripts nessa ordem e publique os arquivos gerados. O primeiro gera o QR simples; o segundo gera o PDF vertical com links clicáveis. As imagens de divulgação em `public/assets/qr-code-acesso.png` e `public/assets/qr-code-divulgacao.png` são renderizações da página desse PDF. Não use URLs temporárias de prévia nos materiais de divulgação.

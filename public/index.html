@@ -286,13 +286,15 @@
             <div class="submit-area">
               <label class="consent"
                 ><input type="checkbox" name="consentimento" required /><span
-                  >Autorizo o envio dos meus dados ao Ministério Pão Vivo pelo
-                  WhatsApp para contato sobre minha participação. *</span
+                  >Autorizo o Ministério Pão Vivo a registrar meus dados e a
+                  entrar em contato sobre minha participação pelo WhatsApp.
+                  *</span
                 ></label
               >
               <button class="button dark submit" type="submit">
                 Finalizar formulário <span aria-hidden="true">↗</span>
               </button>
+              <p id="registration-status" class="help center" role="status"></p>
               <p class="help center">
                 Ao finalizar, o WhatsApp será aberto com seu cadastro em texto.
                 Toque em Enviar e depois retorne a esta página.
@@ -313,6 +315,14 @@
             Sua participação faz a diferença.
           </h1>
           <p id="participation-summary"></p>
+          <a
+            id="registration-whatsapp"
+            class="back-button"
+            target="_blank"
+            rel="noopener noreferrer"
+            hidden
+            >Continuar no WhatsApp ↗</a
+          >
           <button id="edit-form" class="back-button" type="button">
             ← Voltar e editar meus dados
           </button>

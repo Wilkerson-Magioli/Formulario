@@ -40,3 +40,14 @@ SELECT
     (SELECT count(*) FROM ministerio.participacoes WHERE origem = 'excel') AS participacoes_excel,
     (SELECT count(*) FROM ministerio.doacoes_recebidas) AS pagamentos;
 ```
+
+## Etapa 3
+
+1. No SQL Editor do Neon, selecione a branch `production` e o banco `neondb`. Execute `migracoes/002_registrar_participacao.sql` com a conta que aplicou a etapa 1.
+2. Em uma sessão administrativa do `psql` conectada ao mesmo banco, crie o login com `CREATE ROLE mpv_formulario_api LOGIN;` e conceda o papel com `GRANT mpv_formulario TO mpv_formulario_api;`. No Windows, use `\set HISTFILE NUL` antes de definir a senha com `ALTER ROLE mpv_formulario_api WITH PASSWORD 'SUA_NOVA_SENHA';`. Execute em uma sessão privada. Esse login pode chamar a função de cadastro e fica sem acesso direto às tabelas.
+3. No projeto da Vercel, abra **Settings → Environments → Production**. Em **Environment Variables**, crie `MPV_DATABASE_URL` como **Secret**, com a conexão do login restrito. Mantenha a configuração de TLS indicada pelo Neon. A variável deve estar configurada antes de publicar a integração.
+4. Após a publicação, confira o cadastro e a abertura do WhatsApp. Um cadastro gera uma participação, sem lançar um pagamento. O envio da mensagem continua sendo confirmado pelo participante no aplicativo.
+
+O reenvio do mesmo formulário após uma falha reutiliza a chave de envio enquanto a página estiver aberta. Se o CPF ou CNPJ já existir, o banco vincula a participação ao cadastro correspondente e guarda os dados recebidos na participação. Sem documento, um envio novo cria outro cadastro, pois e-mail e telefone podem ser compartilhados.
+
+Para testar localmente com um banco de teste, forneça `MPV_DATABASE_URL` ao processo do servidor e rode `npm run dev`.

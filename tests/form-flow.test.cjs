@@ -3,11 +3,13 @@ const Participation = require("../public/participation.js");
 const fs = require("node:fs");
 const vm = require("node:vm");
 const assert = require("node:assert/strict");
-function scenario(
+const { webcrypto } = require("node:crypto");
+async function scenario(
   contributing,
   method = "Pix",
   personType = "PF",
   editBeforeCompletion = false,
+  failFirstSave = false,
 ) {
   const nodes = new Map();
   function node(key) {
@@ -55,6 +57,8 @@ function scenario(
   form.elements.orando.checked = true;
   form.elements.contribuindo = node("#contribuindo");
   form.elements.contribuindo.checked = contributing;
+  form.elements.consentimento = { checked: true };
+  form.querySelector = node;
   form.reset = () => {
     for (const n of Object.values(form.elements)) {
       n.value = "";
@@ -62,11 +66,16 @@ function scenario(
     }
   };
   const opened = [],
-    cards = [];
+    cards = [],
+    requests = [];
   const window = {
     Participation,
     open(url) {
-      opened.push(url);
+      assert.equal(url, "about:blank");
+      return {
+        close() {},
+        location: { replace: (destination) => opened.push(destination) },
+      };
     },
     scrollTo() {},
     participationCard: {
@@ -96,12 +105,29 @@ function scenario(
     FormData,
     navigator: { clipboard: { writeText: async () => {} } },
     URL,
+    crypto: webcrypto,
+    AbortSignal,
+    async fetch(url, options) {
+      assert.equal(url, "/api/participacao");
+      assert.equal(options.method, "POST");
+      requests.push(JSON.parse(options.body));
+      assert.equal(requests.at(-1).participacao.consentimento, true);
+      return { status: failFirstSave && requests.length === 1 ? 503 : 204 };
+    },
   });
-  const emit = (n, type) => {
+  const emit = async (n, type) => {
     for (const fn of n.events[type] || [])
-      fn({ target: n, preventDefault() {} });
+      await fn({ target: n, preventDefault() {} });
   };
-  emit(form, "submit");
+  const submission = emit(form, "submit");
+  assert.equal(opened.length, 0, "WhatsApp aguarda o banco");
+  await submission;
+  if (failFirstSave) {
+    assert.equal(opened.length, 0);
+    assert.match(node("#registration-status").textContent, /Tente novamente/);
+    await emit(form, "submit");
+    assert.equal(requests[0].chave, requests[1].chave);
+  }
   assert.equal(opened.length, 1);
   assert.equal(new URL(opened[0]).pathname, "/5551993463773");
   assert.doesNotMatch(
@@ -122,7 +148,7 @@ function scenario(
     assert.deepEqual(cards, ["cleared"], "Editar invalida o cadastro anterior");
     fields.nome = "Cadastro revisado";
     form.elements.nome.value = fields.nome;
-    emit(form, "submit");
+    await emit(form, "submit");
     assert.equal(opened.length, 2);
     assert.match(
       new URL(opened[1]).searchParams.get("text"),
@@ -208,3 +234,5 @@ test("Transferência: ficha disponível somente após a confirmação", () =>
   scenario(true, "Transferência"));
 test("Editar o cadastro descarta a ficha antiga e usa os dados revisados", () =>
   scenario(true, "Pix", "PF", true));
+test("Falha ao salvar impede abertura do WhatsApp e mantém a chave na nova tentativa", () =>
+  scenario(true, "Pix", "PF", false, true));

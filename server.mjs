@@ -1,6 +1,7 @@
 import http from "node:http";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import participacao from "./api/participacao.mjs";
 const root = path.resolve("public");
 const types = {
   ".html": "text/html; charset=utf-8",
@@ -14,6 +15,10 @@ http
       const name = decodeURIComponent(
         new URL(req.url, "http://localhost").pathname,
       );
+      if (name === "/api/participacao") {
+        await participacao(req, res);
+        return;
+      }
       const file = path.resolve(
         root,
         "." + (name === "/" ? "/index.html" : name),
