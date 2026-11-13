@@ -211,6 +211,7 @@ async function carregarDetalhes(id) {
           "Forma",
           "Valor de referência",
           "Ano no Excel",
+          "Data da participação",
         ],
         participacoes.map((p) => [
           rotulo(p.origem),
@@ -219,6 +220,7 @@ async function carregarDetalhes(id) {
           rotulo(p.forma),
           dinheiro(p.valor_declarado_centavos),
           p.ano_informado_excel,
+          dia(p.data_participacao),
         ]),
         "Nenhuma participação registrada.",
       ),

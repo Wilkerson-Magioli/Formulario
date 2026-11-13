@@ -62,3 +62,9 @@ Para testar localmente com um banco de teste, forneça `MPV_DATABASE_URL` ao pro
 O Excel contém os doadores dos filtros aplicados e seus históricos completos, em três abas. A exportação inclui dados pessoais. Use os filtros para reduzir o arquivo quando uma aba ultrapassar 10.000 linhas de dados ou o arquivo passar de 4 MB.
 
 Para testar localmente, defina `MPV_ADMIN_DATABASE_URL` e `MPV_ADMIN_PASSWORD` no processo que inicia `npm run dev`. Abra `http://127.0.0.1:5173/admin`.
+
+## Histórico de doações e data da participação
+
+Rode `prever_doacoes_pontuais.sql` no Neon para conferir quantidade, total e registros sem ano. Após aprovar o lote, aplique `migracoes/004_doacoes_pontuais_excel.sql` e execute `importar_doacoes_pontuais.sql`. A carga vincula cada pagamento à participação original e pode ser repetida sem duplicação. Ofertas regulares permanecem como valores mensais de referência.
+
+Aplique também `migracoes/005_data_participacao.sql` antes de publicar o formulário com o campo de data. O painel e o Excel mostram a data declarada na participação. O Excel mostra a data de criação do doador apenas quando a origem é o formulário. Para pagamentos antigos, a data completa fica vazia e o ano aparece em coluna própria.

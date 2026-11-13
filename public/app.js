@@ -12,6 +12,9 @@ const {
   validateTaxDocument,
 } = window.Participation;
 const form = document.querySelector("#participation-form");
+const hoje = new Date();
+hoje.setMinutes(hoje.getMinutes() - hoje.getTimezoneOffset());
+form.elements.dataParticipacao.defaultValue = hoje.toISOString().slice(0, 10);
 const contribution = document.querySelector("#contribuindo");
 const fields = document.querySelector("#contribution-fields");
 let submittedParticipation = null;

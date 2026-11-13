@@ -36,6 +36,7 @@ async function scenario(
   }
   const form = node("#participation-form");
   const fields = {
+    dataParticipacao: "2026-11-12",
     nome: "Pessoa de Teste",
     endereco: "Rua Exemplo, 100",
     cep: "90000-000",
@@ -112,6 +113,7 @@ async function scenario(
       assert.equal(options.method, "POST");
       requests.push(JSON.parse(options.body));
       assert.equal(requests.at(-1).participacao.consentimento, true);
+      assert.equal(requests.at(-1).participacao.dataParticipacao, "2026-11-12");
       return { status: failFirstSave && requests.length === 1 ? 503 : 204 };
     },
   });
@@ -130,6 +132,7 @@ async function scenario(
   }
   assert.equal(opened.length, 1);
   assert.equal(new URL(opened[0]).pathname, "/5551993463773");
+  assert.match(new URL(opened[0]).searchParams.get("text"), /12\/11\/2026/);
   assert.doesNotMatch(
     new URL(opened[0]).searchParams.get("text"),
     /TESTE DO FORMULÁRIO/,

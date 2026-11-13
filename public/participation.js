@@ -56,6 +56,7 @@
     const contribuindo = formData.has("contribuindo");
     const boleto = contribuindo && text("metodo") === "Boleto bancário";
     return {
+      dataParticipacao: text("dataParticipacao"),
       nome: text("nome"),
       endereco: text("endereco"),
       cep: text("cep"),
@@ -143,7 +144,7 @@
       "🧡 *MINISTÉRIO PÃO VIVO*\n*Ficha de participação*",
       "Olá! Quero fazer parte desta obra.",
       `👤 *DADOS DO PARTICIPANTE*\n*Nome:* ${data.nome}\n*Endereço:* ${data.endereco}\n*CEP:* ${data.cep}\n*E-mail:* ${data.email}\n*WhatsApp:* ${data.whatsapp}`,
-      `🤝 *MINHA PARTICIPAÇÃO*\n${participationModes(data)}`,
+      `🤝 *MINHA PARTICIPAÇÃO*\n${participationModes(data)}${data.dataParticipacao ? "\\n*Data da participação:* " + data.dataParticipacao.split("-").reverse().join("/") : ""}`,
     ];
     if (data.contribuindo)
       sections.push(
