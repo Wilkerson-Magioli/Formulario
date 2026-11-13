@@ -62,7 +62,7 @@ function validar(dados) {
   const dataParticipacao = texto("dataParticipacao", 10);
   const data = new Date(dataParticipacao + "T00:00:00Z");
   if (
-    !/^\\d{4}-\\d{2}-\\d{2}$/.test(dataParticipacao) ||
+    !/^\d{4}-\d{2}-\d{2}$/.test(dataParticipacao) ||
     !Number.isFinite(data.getTime()) ||
     data.toISOString().slice(0, 10) !== dataParticipacao
   )
