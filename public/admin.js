@@ -8,6 +8,7 @@ const exportar = elemento("exportar");
 const anterior = elemento("anterior");
 const proxima = elemento("proxima");
 const rotulos = {
+  orando: "Orando",
   mensal: "Mensal",
   pontual: "Pontual",
   regular: "Regular",
@@ -31,6 +32,8 @@ const dia = (valor) => (valor ? data.format(new Date(valor)) : "—");
 const texto = (valor) => (valor == null || valor === "" ? "—" : String(valor));
 const rotulo = (valor) =>
   Object.hasOwn(rotulos, valor) ? rotulos[valor] : "—";
+const resumo = (valores, orando) =>
+  [...(valores ?? []), ...(orando ? ["orando"] : [])].map(rotulo).join(", ");
 const simNao = (valor) => (valor == null ? "—" : valor ? "Sim" : "Não");
 let filtrosAtivos = {};
 let pagina = 1;
@@ -95,6 +98,8 @@ function linhaDoador(doador) {
     doador.whatsapp,
     doador.telefone_legado,
     rotulo(doador.origem),
+    resumo(doador.frequencias, doador.orando),
+    resumo(doador.formas, doador.orando),
   ])
     linha.insertCell().textContent = texto(valor);
   return linha;

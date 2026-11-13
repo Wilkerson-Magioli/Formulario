@@ -66,8 +66,8 @@ async function corpo(req) {
 function filtrosValidos(dados) {
   const opcoes = {
     origem: ["excel", "formulario"],
-    frequencia: ["mensal", "pontual", "regular", "nao_regular"],
-    forma: ["pix", "transferencia", "boleto", "sem_forma"],
+    frequencia: ["mensal", "pontual", "regular", "nao_regular", "orando"],
+    forma: ["pix", "transferencia", "boleto", "sem_forma", "orando"],
   };
   return Object.entries(opcoes).every(
     ([campo, valores]) =>

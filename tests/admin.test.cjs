@@ -63,6 +63,9 @@ test("Excel preserva dados como texto e separa referência de pagamento", async 
       {
         id: "doador-1",
         nome: "=Exemplo",
+        frequencias: ["mensal"],
+        formas: ["pix"],
+        orando: true,
         cep: "01234000",
         documento: "01234567890",
         origem: "excel",
@@ -96,6 +99,8 @@ test("Excel preserva dados como texto e separa referência de pagamento", async 
   assert.equal(doadores.getCell("B2").value, "=Exemplo");
   assert.equal(doadores.getCell("E2").value, "01234000");
   assert.equal(doadores.getCell("I2").value, "01234567890");
+  assert.equal(doadores.getCell("K2").value, "Mensal, Orando");
+  assert.equal(doadores.getCell("L2").value, "Pix, Orando");
   assert.equal(doadores.views[0].state, "frozen");
   assert.ok(doadores.autoFilter);
   assert.equal(participacoes.getCell("G2").value, 19);
