@@ -259,8 +259,14 @@ elemento("sair").addEventListener("click", async () => {
 });
 filtros.addEventListener("submit", (evento) => {
   evento.preventDefault();
+  aplicarFiltros();
+});
+function aplicarFiltros() {
   filtrosAtivos = Object.fromEntries(new FormData(filtros));
   carregarLista(1);
+}
+filtros.addEventListener("change", (evento) => {
+  if (evento.target.tagName === "SELECT") aplicarFiltros();
 });
 elemento("limpar").addEventListener("click", () => {
   filtros.reset();

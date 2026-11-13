@@ -67,7 +67,7 @@ function filtrosValidos(dados) {
   const opcoes = {
     origem: ["excel", "formulario"],
     frequencia: ["mensal", "pontual", "regular", "nao_regular"],
-    forma: ["pix", "transferencia", "boleto"],
+    forma: ["pix", "transferencia", "boleto", "sem_forma"],
   };
   return Object.entries(opcoes).every(
     ([campo, valores]) =>
