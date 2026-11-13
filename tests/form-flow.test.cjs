@@ -10,6 +10,7 @@ async function scenario(
   personType = "PF",
   editBeforeCompletion = false,
   failFirstSave = false,
+  popupBlocked = false,
 ) {
   const nodes = new Map();
   function node(key) {
@@ -73,6 +74,7 @@ async function scenario(
     Participation,
     open(url) {
       assert.equal(url, "about:blank");
+      if (popupBlocked) return null;
       return {
         close() {},
         location: { replace: (destination) => opened.push(destination) },
@@ -129,6 +131,15 @@ async function scenario(
     assert.match(node("#registration-status").textContent, /Tente novamente/);
     await emit(form, "submit");
     assert.equal(requests[0].chave, requests[1].chave);
+  }
+  const link = node("#registration-whatsapp");
+  assert.equal(link.hidden, false);
+  assert.equal(new URL(link.href).pathname, "/5551993463773");
+  if (popupBlocked) {
+    assert.equal(opened.length, 0);
+    assert.equal(node("#payment-view").hidden, false);
+    assert.match(new URL(link.href).searchParams.get("text"), /Pessoa de Teste/);
+    return;
   }
   assert.equal(opened.length, 1);
   assert.equal(new URL(opened[0]).pathname, "/5551993463773");
@@ -223,6 +234,8 @@ async function scenario(
     "Sair descarta os dados usados para gerar a ficha",
   );
 }
+test("WhatsApp continua acessível quando a abertura automática é bloqueada", () =>
+  scenario(false, "Pix", "PF", false, false, true));
 test("Contribuição: número oficial, confirmação obrigatória e limpeza ao sair", () =>
   scenario(true));
 test("Oração: mensagem sem dados financeiros e finalização", () =>

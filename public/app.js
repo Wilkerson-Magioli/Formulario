@@ -179,12 +179,12 @@ async function submitParticipation(event) {
   submittedParticipation = participation;
   const link = document.querySelector("#registration-whatsapp");
   link.href = whatsappUrl;
-  link.hidden = Boolean(popup && !popup.closed);
-  if (!link.hidden) return;
+  link.hidden = false;
+  if (!popup || popup.closed) return;
   try {
     popup.location.replace(whatsappUrl);
   } catch {
-    link.hidden = false;
+    popup.close();
   }
 }
 document
