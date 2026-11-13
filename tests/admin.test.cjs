@@ -104,9 +104,11 @@ test("Excel preserva dados como texto e separa referência de pagamento", async 
   assert.equal(doadores.views[0].state, "frozen");
   assert.ok(doadores.autoFilter);
   assert.equal(participacoes.getCell("G2").value, 19);
+  assert.equal(participacoes.getCell("G3").value, 19);
   assert.equal(
     doacoes.getCell("C2").value.toISOString(),
     "2026-11-11T00:00:00.000Z",
   );
   assert.equal(doacoes.getCell("D2").value, 5);
+  assert.equal(doacoes.getCell("D3").value, 5);
 });

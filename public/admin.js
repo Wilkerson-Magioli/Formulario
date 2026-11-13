@@ -57,6 +57,7 @@ async function chamar(acao, dados = {}, arquivo = false) {
 }
 
 function mostrarAcesso(mensagem = "") {
+  elemento("total-confirmado").textContent = "—";
   sessao++;
   elemento("acesso").hidden = false;
   elemento("cadastros").hidden = true;
@@ -120,6 +121,9 @@ async function carregarLista(destino) {
     });
     if (!vigente()) return;
     pagina = resultado.pagina;
+    elemento("total-confirmado").textContent = dinheiro(
+      resultado.totalConfirmadoCentavos,
+    );
     const totalPaginas = Math.max(
       1,
       Math.ceil(resultado.total / resultado.porPagina),
