@@ -226,7 +226,7 @@ async function carregarDetalhes(id) {
         "Doações recebidas",
         ["Data", "Valor recebido", "Forma", "Conferência"],
         doacoes.map((d) => [
-          dia(d.data_pagamento),
+          d.data_pagamento ? dia(d.data_pagamento) : d.ano_pagamento,
           dinheiro(d.valor_recebido_centavos),
           rotulo(d.forma),
           rotulo(d.situacao),
