@@ -103,7 +103,7 @@ export default async function admin(req, res) {
   }
 
   const senha = process.env.MPV_ADMIN_PASSWORD;
-  if (!senha || senha.length < 32)
+  if (!senha || senha.length < 16)
     return json(503, { mensagem: "Área administrativa indisponível." });
   if (dados.acao === "entrar") {
     if (typeof dados.senha !== "string" || !iguais(dados.senha, senha))

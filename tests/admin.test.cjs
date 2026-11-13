@@ -4,7 +4,7 @@ const ExcelJS = require("exceljs");
 
 test("Admin exige sessão válida e remove o cookie ao sair", async () => {
   const { default: admin } = await import("../api/admin.mjs");
-  const senha = "senha-ficticia-de-teste-com-mais-de-32-caracteres";
+  const senha = "Abc0123456789!xy";
   const anterior = process.env.MPV_ADMIN_PASSWORD;
   process.env.MPV_ADMIN_PASSWORD = senha;
   async function pedir(acao, extras = {}, cookie) {
@@ -26,6 +26,13 @@ test("Admin exige sessão válida e remove o cookie ao sair", async () => {
     return resultado;
   }
   try {
+    const curta = senha.slice(0, 15);
+    process.env.MPV_ADMIN_PASSWORD = curta;
+    assert.equal((await pedir("entrar", { senha: curta })).status, 503);
+    const longa = senha.repeat(2);
+    process.env.MPV_ADMIN_PASSWORD = longa;
+    assert.equal((await pedir("entrar", { senha: longa })).status, 200);
+    process.env.MPV_ADMIN_PASSWORD = senha;
     assert.equal((await pedir("listar")).status, 401);
     assert.equal((await pedir("historico")).status, 401);
     assert.equal((await pedir("exportar")).status, 401);
