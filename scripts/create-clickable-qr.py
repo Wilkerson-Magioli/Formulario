@@ -14,7 +14,7 @@ ASSETS = ROOT / "public" / "assets"
 OUTPUT = ASSETS / "qr-code-acesso-clicavel.pdf"
 DESTINATION = "https://ministerio-pao-vivo-doacoes.vercel.app/"
 PAGE_WIDTH, PAGE_HEIGHT = 390, 780
-ORANGE = HexColor("#f39a23")
+ORANGE = HexColor("#d36a38")
 INK = HexColor("#2d210e")
 
 canvas = Canvas(str(OUTPUT), pagesize=(PAGE_WIDTH, PAGE_HEIGHT), invariant=True)

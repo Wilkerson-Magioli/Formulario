@@ -1,5 +1,5 @@
 .access-page {
-  --access-orange: #f39a23;
+  --access-orange: #d36a38;
   margin: 0;
   background: #fff;
   color: #392b25;
@@ -283,7 +283,7 @@
 }
 @media print {
   .access-page {
-    border-top: 6px solid #f39a23;
+    border-top: 6px solid #d36a38;
   }
   .access-header {
     padding: 20px;
