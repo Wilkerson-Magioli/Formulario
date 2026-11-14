@@ -1,9 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap");
+
 :root {
-  font-family: system-ui, sans-serif;
+  font-family: "DM Sans", system-ui, sans-serif;
   color: #2d210e;
   background: #faf8f4;
   --laranja: #f39a23;
   --borda: #e5d9c8;
+  --largura-painel: 76rem;
 }
 * {
   box-sizing: border-box;
@@ -30,7 +33,7 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1rem max(1rem, calc((100% - 72rem) / 2));
+  padding: 1rem max(1rem, calc((100% - var(--largura-painel)) / 2));
   background: white;
   border-top: 0.35rem solid var(--laranja);
   border-bottom: 1px solid var(--borda);
@@ -41,7 +44,7 @@ body {
   height: auto;
 }
 main {
-  width: min(72rem, calc(100% - 2rem));
+  width: min(var(--largura-painel), calc(100% - 2rem));
   margin: 2.5rem auto;
 }
 h1,
@@ -51,7 +54,11 @@ h3 {
   line-height: 1.18;
 }
 h1 {
-  font-size: clamp(1.65rem, 4vw, 2.5rem);
+  font:
+    800 clamp(1.65rem, 4vw, 2.75rem) / 1.15 "Manrope",
+    system-ui,
+    sans-serif;
+  letter-spacing: -0.04em;
 }
 .painel,
 dialog {
@@ -61,8 +68,32 @@ dialog {
   border-radius: 1rem;
 }
 .acesso {
-  width: min(100%, 28rem);
-  margin: 4rem auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-radius: 1.4rem;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 12px 42px #35220e14;
+}
+.acesso-foto {
+  min-height: 22rem;
+  display: flex;
+  align-items: end;
+  padding: 2rem;
+  color: white;
+  background:
+    linear-gradient(0deg, #20150ef5, transparent 85%),
+    url("/assets/favela.jpg") center / cover;
+}
+.acesso-foto p {
+  margin: 0;
+  font:
+    italic clamp(1.4rem, 3vw, 2rem) / 1.15 Georgia,
+    serif;
+}
+.acesso-conteudo {
+  padding: clamp(1.5rem, 5vw, 4rem);
+  align-self: center;
 }
 .acesso form {
   display: grid;
@@ -102,6 +133,9 @@ button.secundario {
   background: white;
   border-color: #a99a84;
 }
+button:not(:disabled):hover {
+  box-shadow: inset 0 0 0 2px #75400040;
+}
 button:disabled {
   opacity: 0.5;
   cursor: default;
@@ -120,6 +154,22 @@ button:disabled {
 #cadastros > .cabecalho {
   margin-bottom: 1rem;
   flex-wrap: wrap;
+  padding: clamp(1rem, 3vw, 1.65rem);
+  border-radius: 1.25rem;
+  background:
+    linear-gradient(90deg, #f0b45e 38%, #efaf50ec 73%, #d39144de),
+    url("/assets/favela.jpg") center 45% / cover;
+}
+#exportar {
+  background: #302015;
+  color: white;
+}
+#cadastros > .painel {
+  box-shadow: 0 8px 28px #35220e0d;
+}
+.acoes-filtros {
+  display: flex;
+  gap: 0.65rem;
 }
 #filtros {
   display: flex;
@@ -129,7 +179,7 @@ button:disabled {
   margin-bottom: 1.3rem;
 }
 .busca {
-  flex: 1 1 17rem;
+  flex: 1 1 12rem;
 }
 .tabela {
   overflow: auto;
@@ -156,6 +206,9 @@ tr:nth-child(even) {
 tbody tr:last-child td {
   border-bottom: 0;
 }
+tbody tr:hover {
+  background: #fff5e5;
+}
 .nome {
   color: #754000;
   background: transparent;
@@ -171,6 +224,7 @@ dialog {
   width: min(50rem, calc(100% - 2rem));
   max-height: 90vh;
   color: inherit;
+  border-top: 0.3rem solid var(--laranja);
 }
 dialog::backdrop {
   background: #25170799;
@@ -195,7 +249,19 @@ dialog dd {
 #status-lista:empty {
   display: none;
 }
-@media (max-width: 36rem) {
+@media (max-width: 42rem) {
+  .acesso {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .acesso-foto {
+    order: 1;
+    min-height: 9rem;
+    padding: 1.25rem;
+  }
+  #cadastros .total-doacoes {
+    order: 1;
+    width: 100%;
+  }
   main {
     margin-top: 1.5rem;
   }

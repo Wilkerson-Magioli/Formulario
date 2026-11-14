@@ -16,26 +16,27 @@
       <button id="sair" class="secundario" type="button" hidden>Sair</button>
     </header>
     <main>
-      <section
-        id="acesso"
-        class="painel acesso"
-        aria-labelledby="titulo-acesso"
-      >
-        <h1 id="titulo-acesso">Área administrativa</h1>
-        <form id="login">
-          <label
-            >Senha de acesso
-            <input
-              name="senha"
-              type="password"
-              autocomplete="current-password"
-              required
-              maxlength="256"
-            />
-          </label>
-          <button>Entrar</button>
-        </form>
-        <p id="status-login" role="status"></p>
+      <section id="acesso" class="acesso" aria-labelledby="titulo-acesso">
+        <div class="acesso-foto">
+          <p>Plantando igrejas.<br />Transformando vidas.</p>
+        </div>
+        <div class="acesso-conteudo">
+          <h1 id="titulo-acesso">Área administrativa</h1>
+          <form id="login">
+            <label
+              >Senha de acesso
+              <input
+                name="senha"
+                type="password"
+                autocomplete="current-password"
+                required
+                maxlength="256"
+              />
+            </label>
+            <button>Entrar</button>
+          </form>
+          <p id="status-login" role="status"></p>
+        </div>
       </section>
 
       <section id="cadastros" hidden aria-labelledby="titulo-cadastros">
@@ -90,8 +91,12 @@
                 <option value="boleto">Boleto</option>
               </select>
             </label>
-            <button>Filtrar</button>
-            <button id="limpar" type="button" class="secundario">Limpar</button>
+            <div class="acoes-filtros">
+              <button>Filtrar</button>
+              <button id="limpar" type="button" class="secundario">
+                Limpar
+              </button>
+            </div>
           </form>
           <p>
             Nos cadastros do Excel, a frequência aparece como Regular ou Não
