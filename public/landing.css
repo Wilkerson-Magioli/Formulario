@@ -1,5 +1,5 @@
 .donation-landing {
-  --orange: #d36a38;
+  --orange: #f39a23;
   --cream: #fff7e8;
   background: #fff;
   border-top: 6px solid var(--orange);
@@ -106,7 +106,7 @@
   color: #2d210e;
 }
 .donation-landing .submit:hover {
-  background: #d36a38;
+  background: #df8613;
 }
 .donation-landing .donation-card {
   background: #fff9ed;
@@ -114,7 +114,7 @@
   border-top: 4px solid var(--orange);
 }
 .donation-landing .copy {
-  background: #d36a38;
+  background: #f39a23;
   color: #24170f;
 }
 .donation-landing .copy:hover {
@@ -136,7 +136,7 @@
   margin: -7px 0 22px;
   padding: 12px 15px;
   background: #fff9ed;
-  border-left: 2px solid #d36a38;
+  border-left: 2px solid #f39a23;
   border-radius: 0 6px 6px 0;
   font-size: 12px;
   color: #675638;
@@ -177,7 +177,7 @@
 .participation-card-section {
   margin: 0 0 32px;
   border: 1px solid #eee0c7;
-  border-top: 3px solid #d36a38;
+  border-top: 3px solid #f39a23;
   border-radius: 14px;
   padding: 26px;
   background: #fff;
@@ -214,7 +214,7 @@
   color: #2d210e;
 }
 .donation-landing #share-card:hover {
-  background: #d36a38;
+  background: #df8613;
 }
 .card-actions:has(> button[hidden]) {
   display: none;
@@ -270,7 +270,7 @@
   text-align: center;
   padding: 42px 24px;
   border: 1px solid #eee0c7;
-  border-top: 4px solid #d36a38;
+  border-top: 4px solid #f39a23;
   border-radius: 16px;
   background: #fff;
 }

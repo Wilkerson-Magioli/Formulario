@@ -4,7 +4,7 @@
   font-family: "DM Sans", system-ui, sans-serif;
   color: #2d210e;
   background: #faf8f4;
-  --laranja: #d36a38;
+  --laranja: #f39a23;
   --borda: #e5d9c8;
   --largura-painel: 76rem;
 }
@@ -157,7 +157,7 @@ button:disabled {
   padding: clamp(1rem, 3vw, 1.65rem);
   border-radius: 1.25rem;
   background:
-    linear-gradient(90deg, var(--laranja) 38%, #d36a38ec 73%, #d36a38de),
+    linear-gradient(90deg, #f0b45e 38%, #efaf50ec 73%, #d39144de),
     url("/assets/favela.jpg") center 45% / cover;
 }
 #exportar {

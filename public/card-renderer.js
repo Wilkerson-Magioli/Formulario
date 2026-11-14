@@ -230,7 +230,7 @@ window.renderParticipationCard = (() => {
     canvas.height = y + 92;
     ctx.fillStyle = "#fff";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#d36a38";
+    ctx.fillStyle = "#f39a23";
     ctx.fillRect(0, 0, canvas.width, 12);
     operations.forEach((operation) => operation());
     return new Promise((resolve, reject) =>
